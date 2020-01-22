@@ -1,5 +1,5 @@
 {
-  "name": "react-app",
+  "name": "studique",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -17,7 +17,7 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": "react-app"
+    "extends": "studique"
   },
   "browserslist": {
     "production": [
