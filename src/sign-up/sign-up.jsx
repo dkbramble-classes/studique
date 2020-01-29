@@ -18,6 +18,9 @@ class SignUp extends Component {
                 <div>
                         <button onClick={() => this.doSignUp()}>Sign-Up</button>
                 </div>
+                <div>
+                    <button onClick={() => this.doGoogleSignUp()}>Sign-Up with Google</button>
+                </div>
             </div>
         </div>
         );

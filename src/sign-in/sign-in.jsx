@@ -18,6 +18,9 @@ class SignIn extends Component {
                 <div>
                         <button onClick={() => this.doSignIn()}>Sign-In</button>
                 </div>
+                <div>
+                        <button onClick={() => this.doGoogleSignIn()}>Sign-In with Google</button>
+                </div>
             </div>
         </div>
         );
@@ -34,6 +37,8 @@ class SignIn extends Component {
     updateFormData(ev){
         this.setState({[ev.target.name]: ev.target.value});
     }
+
+    
     
 }
 export default SignIn;
