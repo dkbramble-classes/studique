@@ -27,14 +27,13 @@
   }
   
   #mainNav .navbar-nav .nav-item:hover {
-    color: fade(white, 80%);
     outline: none;
-    background-color: transparent;
+    /* background-color: transparent; */
   }
   
   #mainNav .navbar-nav .nav-item:active, #mainNav .navbar-nav .nav-item:focus {
     outline: none;
-    background-color: transparent;
+    /* background-color: transparent; */
   }
   
   @media (min-width: 992px) {
@@ -46,13 +45,15 @@
       transition: background-color 0.3s ease-in-out;
     }
     #mainNav .navbar-brand {
+      font-family: 'Varela Round';
       padding: .5rem 0;
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(255, 255, 255);
     }
     #mainNav .nav-link {
+      font-family: 'Varela Round';
       transition: none;
       padding: 2rem 1.5rem;
-      color: rgba(255, 255, 255, 0.5);
+      color: rgba(255, 255, 255);
     }
     #mainNav .nav-link:hover {
       color: rgba(255, 255, 255, 0.75);
@@ -97,20 +98,16 @@
     background-size: cover;
   }
 
-  .title-h1 {
-    font-family: 'Baloo Bhai';
+  h1 {
+    font-family: 'Varela Round';
   }
 
-  .title-h3 {
-    font-family: 'Baloo Bhai';
-  }
-
-  .title-navbar{
-    font-family: 'Baloo Bhai';
+  h3 {
+    font-family: 'Varela Round';
   }
   
   .masthead h1 {
-    font-family: 'Baloo Bhai';
+    font-family: 'Varela Round';
     font-size: 2.5rem;
     line-height: 2.5rem;
     letter-spacing: 0.8rem;
@@ -150,7 +147,7 @@
   .btn {
     box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
     padding: 1.25rem 2rem;
-    font-family: 'Baloo Bhai';
+    font-family: 'Varela Round';
     font-size: 80%;
     text-transform: uppercase;
     letter-spacing: .15rem;
@@ -222,13 +219,14 @@
     background-repeat: no-repeat;
     background-attachment: scroll;
     background-size: cover;
+    height: 100%;
   }
   
   .signup-section .form-inline input {
     box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
     padding: 1.25rem 2rem;
     height: auto;
-    font-family: 'Baloo Bhai';
+    font-family: 'Varela Round';
     font-size: 80%;
     letter-spacing: 0.15rem;
     border: 0;
@@ -245,7 +243,7 @@
   
   .contact-section .card h4 {
     font-size: 0.8rem;
-    font-family: 'Baloo Bhai';
+    font-family: 'Varela Round';
     text-transform: uppercase;
     letter-spacing: 0.15rem;
   }
@@ -279,8 +277,13 @@
   }
   
   body {
-    font-family: 'Baloo Bhai';
+    height: 100%;
+    font-family: 'Varela Round';
     letter-spacing: 0.0625em;
+  }
+
+  html {
+    height: 100%;
   }
   
   a {
@@ -305,5 +308,6 @@
   }
   
   footer {
-    padding: 5rem 0;
+    font-family: 'Varela Round';
+    letter-spacing: 0.0625em;
   }
