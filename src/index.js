@@ -5,9 +5,6 @@ import App from './frontpage';
 import * as serviceWorker from './serviceWorker';
 import './shared/css/bootstrap.min.css';
 import './shared/css/style.css';
-//import questionCards from './question-cards/questionCards';
-//import './shared/css/grayscale.css';
-//import './shared/css/grayscale.min.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
