@@ -1,6 +1,7 @@
 import React from 'react';
 //import logo from './shared/icons/logo.svg';
 import Qlist from './question-list/Qlist';
+import './shared/css/style.css';
 
 function App() {
   return (

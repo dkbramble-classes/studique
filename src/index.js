@@ -4,8 +4,7 @@ import './index.css';
 import App from './frontpage';
 import * as serviceWorker from './serviceWorker';
 import './shared/css/bootstrap.min.css';
-import './shared/css/grayscale.css';
-import './shared/css/grayscale.min.css';
+import './shared/css/style.css';
 //import Qcard from './question-cards/Qcards';
 
 ReactDOM.render(<App />, document.getElementById('root'));
