@@ -5,7 +5,7 @@ import App from './frontpage';
 import * as serviceWorker from './serviceWorker';
 import './shared/css/bootstrap.min.css';
 import './shared/css/style.css';
-//import Qcard from './question-cards/Qcards';
+//import questionCards from './question-cards/questionCards';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
