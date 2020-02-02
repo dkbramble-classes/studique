@@ -1,1 +1,4 @@
 *.code-workspace
+.cache
+
+yarn.lock
