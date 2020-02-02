@@ -26,13 +26,13 @@ function App() {
               {/* <button type="button" class="btn btn-outline-info border border-info">Info</button> */}
               <Popup modal trigger={
               <button type="submit" className=" btn nav-link text-font">Sign In</button>}>
-                <SignIn></SignIn>
+                <SignIn className="popup-primary"></SignIn>
               </Popup>
               </li>
               <li className="nav-item">
               <Popup modal trigger={
                 <button className="nav-link btn text-font">Sign up</button>}>
-                  <SignUp></SignUp>
+                  <SignUp className="popup-primary"></SignUp>
                 </Popup>
               </li>
             </ul>

@@ -3,24 +3,28 @@ import "./sign-up.css";
 class SignUp extends Component {
     render(){
         return (
-        <div className = "background">
-            <h2>Sign-Up</h2>
+        <div className = "popup">
+            <h2 className = "title">Sign-Up</h2>
             <div>
-                <label className = "label">Email: </label>
-                <input type="text" 
+                <div>
+                {/* <label className="label">Email: </label> */}
+                <input className="input" type="text" 
                 value={this.state.userEmail}
                 name = "userEmail"
-                onChange={(e) => this.addFormData(e)}></input>
-                <label className = "label">Password: </label>
-                <input type="password" 
+                placeholder = "Email"
+                onChange={(e) => this.addFormData(e)}></input></div>
+                <div>
+                {/* <label className="label">Password: </label> */}
+                <input className="input" type="password" 
                 value = {this.state.userPassword}
                 name = "userPassword"
-                onChange={(e) => this.addFormData(e)}></input>
+                placeholder = "Password"
+                onChange={(e) => this.addFormData(e)}></input></div>
                 <div>
-                        <button onClick={() => this.doSignUp()}>Sign-Up</button>
+                        <button className="btn btn-primary mx-auto" onClick={() => this.doSignUp()}>Sign-Up</button>
                 </div>
                 <div>
-                    <button onClick={() => this.doGoogleSignUp()}>Sign-Up with Google</button>
+                    <button className="btn-google" onClick={() => this.doGoogleSignUp()}>Sign-Up with Google</button>
                 </div>
             </div>
         </div>

@@ -2,24 +2,26 @@ import React, {Component} from "react";
 class SignIn extends Component {
     render(){
         return (
-        <div>
-            <h2>Sign-In</h2>
+        <div className = "popup">
+            <h2 className = "title">Sign-In</h2>
             <div>
-                <label>Email: </label>
-                <input type="text" 
+                <div>
+                <input classname = "input" type="text" 
                 value={this.state.userEmail}
                 name = "userEmail"
-                onChange={(e) => this.updateFormData(e)}></input>
-                <label>Password: </label>
-                <input type="password" 
+                placeholder = "Email"
+                onChange={(e) => this.updateFormData(e)}></input></div>
+                <div>
+                <input classname = "input" type="password" 
                 value = {this.state.userPassword}
                 name = "userPassword"
-                onChange={(e) => this.updateFormData(e)}></input>
+                placeholder = "Password"
+                onChange={(e) => this.updateFormData(e)}></input></div>
                 <div>
-                        <button onClick={() => this.doSignIn()}>Sign-In</button>
+                        <button className="btn btn-primary mx-auto" onClick={() => this.doSignIn()}>Sign-In</button>
                 </div>
                 <div>
-                        <button onClick={() => this.doGoogleSignIn()}>Sign-In with Google</button>
+                        <button className="btn-google" onClick={() => this.doGoogleSignIn()}>Sign-In with Google</button>
                 </div>
             </div>
         </div>
