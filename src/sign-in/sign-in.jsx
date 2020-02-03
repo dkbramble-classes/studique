@@ -6,13 +6,13 @@ class SignIn extends Component {
             <h2 className = "title">Sign-In</h2>
             <div>
                 <div>
-                <input classname = "input" type="text" 
+                <input className = "input" type="text" 
                 value={this.state.userEmail}
                 name = "userEmail"
                 placeholder = "Email"
                 onChange={(e) => this.updateFormData(e)}></input></div>
                 <div>
-                <input classname = "input" type="password" 
+                <input className = "input" type="password" 
                 value = {this.state.userPassword}
                 name = "userPassword"
                 placeholder = "Password"
