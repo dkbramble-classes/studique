@@ -1,51 +1,66 @@
 import React from 'react';
 import './shared/css/style.css';
+import logo from "./shared/images/logo.png";
 
 function App() {
   return (
-    <div className="App">
-
-    <head>
+    <div className="App bg-image">
+      <head>
         <link href="./bootstrap.min.css" rel="stylesheet"></link>
         <link href="./shared/css/style.css" rel="stylesheet"></link>
         <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai&display=swap" rel="stylesheet"></link>
-    </head>
+      </head>
+  
+      <nav className="navbar navbar-expand-sm navbar-light fixed-top" id="mainNav">
+        <div className="container">
+          <a className="navbar-brand text-font" href="#page-top">
+            <img className="brand-logo mr-2" src={logo} alt="LogoBrand" width="20px"/>
+            Studique</a>
+          <div className="collapse navbar-collapse" id="navbarResponsive">
+            <ul className="navbar-nav ml-auto">
+                <li className="nav-item">
+               {/* <button type="button" class="btn btn-outline-info border border-info">Info</button> */}
+               <button className="title-navbar btn text-font">Sign In</button>
+               </li>
+               <li className="nav-item">
+                 <button className="title-navbar btn text-font">Sign up</button>
+               </li>
+             </ul>
+           </div>
+         </div>
+       </nav>
 
-    <nav className="navbar navbar-expand-sm navbar-light fixed-top" id="mainNav">
-      <div className="container">
-        <a className=" title-navbar navbar-brand js-scroll-trigger" href="#page-top">Studique</a>
-        <div className="collapse navbar-collapse" id="navbarResponsive">
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <a className="title-navbar nav-link js-scroll-trigger" href="#about">Sign in</a>
-            </li>
-            <li className="nav-item">
-              <a className="title-navbar nav-link js-scroll-trigger" href="#projects">Sign up</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
-  
-    <section id="frontpage" className="frontpage-section">
-      <div className="container">
-        <div className="row">
-          <div className="col-md-5 col-lg-8 mx-auto text-center">
-            <h1 className="title-h1 text-white mb-4">Studique</h1>
-            <h3 className="title-h3 text-white mb-5">Crowdsourcing The College Experience</h3>
-            
-            <form className="form-inline d-flex">
-              <input type="text" className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputText" placeholder="ASK A QUESTION"/>
-             <button type="submit" className="title-h3 btn btn-primary mx-auto">Search</button>*/}
-            </form>
-  
+      {/* <div className="jumbotron mt-10"></div> */}
+      <section id="frontpage" className="frontpage-section">
+        {/* <div className="jumbotron jumbotron-fluid rounded mt-10">
+        <div className="container-fluid"> */}
+          <div className="row">
+            <div className="col-md-5 col-lg-8 mx-auto text-center">
+              <h1 className="text-white mb-4">Studique</h1>
+              <h3 className="text-white mb-5">Crowdsourcing The College Experience</h3>
+                {/* <div className="media">
+                <img className="logo mr-3" src={logo} alt="LogoPage"/>
+                <div className="media-body mx-auto">
+                  <h1 className="text-white">Studique</h1>
+                  <h3 className="text-white mb-5">Crowdsourcing The College Experience</h3>
+                </div>
+              </div> */}
+              <form className="form-inline d-flex">
+                <input type="text" className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputText" placeholder="ASK A QUESTION"/>
+                <button type="submit" className="btn btn-primary mx-auto">Search</button>
+              </form>
+            </div>
           </div>
-        </div>
-      </div>
-    </section>
-  
+        {/* </div>
+        </div> */}
+      </section> 
+
     </div>
   );
 }
 
 export default App;
+  
+      
+
+
