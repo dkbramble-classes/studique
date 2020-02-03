@@ -9,6 +9,8 @@ function App() {
         <link href="./bootstrap.min.css" rel="stylesheet"></link>
         <link href="./font-awesome.min.css" rel="stylesheet"></link>
         <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet"></link>
+        <script src="https://cdn.jsdelivr.net/npm/algoliasearch@3/dist/algoliasearchLite.min.js"></script>
+
 
       <nav className="navbar navbar-expand-sm navbar-light" id="mainNav">
         <div className="container">
