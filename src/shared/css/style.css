@@ -95,37 +95,12 @@ p {
     transition: none;
     padding: 2rem 1.5rem;
 }
+.btn{padding:1.25rem 2rem;font-family:'Varela Round';font-size:80%;text-transform:uppercase;letter-spacing:.15rem;border:0}
+.btn-primary{background-color:#64a19d}.btn-primary-outline{background-color:transparent; box-shadow:none}.btn-primary:hover{background-color:#4f837f}
+.btn-primary:focus{background-color:#4f837f;color:#fff}
+.btn-primary:active{background-color:#467370!important}
 
-.btn {
-    padding: 1.25rem 2rem;
-    font-family: 'Varela Round';
-    font-size: 80%;
-    text-transform: uppercase;
-    letter-spacing: .15rem;
-    border: 0
-}
 
-.btn-primary {
-    background-color: #64a19d
-}
-
-.btn-primary-outline {
-    background-color: transparent;
-    box-shadow: none
-}
-
-.btn-primary:active {
-    background-color: #467370!important
-}
-
-.btn-primary:hover {
-    background-color: #4f837f;
-}
-
-.btn-primary:focus {
-    background-color: #4f837f;
-    color: white;
-}
 
 @media (min-width:992px) {
     .featured-text {

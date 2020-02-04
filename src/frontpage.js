@@ -5,7 +5,7 @@ import logo from "./shared/images/logo.png";
 function App() {
   return (
     <div className="App bg-image">
-       <link href="./style.css" rel="stylesheet"></link>
+      <link href="./style.css" rel="stylesheet"></link>
       <link href="./bootstrap.min.css" rel="stylesheet"></link>
       {/* <link href="./font-awesome.min.css" rel="stylesheet"></link> */}
       <link
