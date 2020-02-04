@@ -114,15 +114,6 @@ p {
     box-shadow: none
 }
 
-.btn-primary:hover {
-    background-color: #4f837f
-}
-
-.btn-primary:focus {
-    background-color: #4f837f;
-    color: #fff
-}
-
 .btn-primary:active {
     background-color: #467370!important
 }
