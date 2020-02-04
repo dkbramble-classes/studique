@@ -4,42 +4,181 @@
  * Licensed under MIT (https://github.com/BlackrockDigital/startbootstrap-grayscale/blob/master/LICENSE)
  */
 
- h1, h2, h3, h4, p {font-family:'Varela Round';}
- body{font-family:Nunito;letter-spacing:.0625em}
- a{color:#64a19d}
- a:focus,a:hover{text-decoration:none;color:#3c6360}
+h1,
+h2,
+h3,
+h4,
+p {
+  font-family: "Varela Round";
+}
+body {
+  font-family: Nunito;
+  letter-spacing: 0.0625em;
+}
+a {
+  color: #64a19d;
+}
+a:focus,
+a:hover {
+  text-decoration: none;
+  color: #3c6360;
+}
 
- .bg-black{background-color:#161616!important}
- .bg-image{background:url(../images/gv.jpg);background-position:center;background-repeat:no-repeat;background-attachment:scroll;background-size:none; height: 704px;overflow:hidden;overflow-y: hidden}
- .brand-logo{width: 10%}
- .btn{padding:1.25rem 2rem;font-family:'Varela Round';font-size:80%;text-transform:uppercase;letter-spacing:.15rem;border:0}
- .btn-primary{background-color:#64a19d}.btn-primary-outline{background-color:transparent; box-shadow:none}.btn-primary:hover{background-color:#4f837f}.btn-primary:focus{background-color:#4f837f;color:#fff}
- .btn-primary:active{background-color:#467370!important}
- .form-inline input{box-shadow:0 .1875rem .1875rem 0 rgba(0,0,0,.1)!important;padding:1.25rem 2rem;height:auto;font-family:'Varela Round';font-size:80%;letter-spacing:.15rem;border:0}
- .jumbotron{background-color: #313335;}
- .logo {width:100px;}
- @media (min-width:992px){.featured-text{padding:0 0 0 2rem;border-left:.5rem solid #64a19d}}
- .nav-btn{transition:none;padding:2rem 1.5rem;}
- .signup-section{height: 100%; padding:8rem;}
- .signup-section-color{height: 100%; padding:1rem 0;background-color:#64a19d;background-position:center;background-repeat:no-repeat;background-attachment:scroll;background-size:cover}
- .text-primary{color:#64a19d!important}
- .text-font{font-family:'Varela Round';}
+.bg-black {
+  background-color: #161616 !important;
+}
+.bg-image {
+  background: url(../images/gv.jpg);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: none;
+  height: 704px;
+  overflow: hidden;
+  overflow-y: hidden;
+}
+.brand-logo {
+  width: 10%;
+}
+.btn {
+  padding: 1.25rem 2rem;
+  font-family: "Varela Round";
+  font-size: 80%;
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  border: 0;
+}
+.btn-primary {
+  background-color: #64a19d;
+}
+.btn-primary-outline {
+  background-color: transparent;
+  box-shadow: none;
+}
+.btn-primary:hover {
+  background-color: #4f837f;
+}
+.btn-primary:focus {
+  background-color: #4f837f;
+  color: #fff;
+}
+.btn-primary:active {
+  background-color: #467370 !important;
+}
+.form-inline input {
+  box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
+  padding: 1.25rem 2rem;
+  height: auto;
+  font-family: "Varela Round";
+  font-size: 80%;
+  letter-spacing: 0.15rem;
+  border: 0;
+}
+.jumbotron {
+  background-color: #313335;
+}
+.logo {
+  width: 100px;
+}
+@media (min-width: 992px) {
+  .featured-text {
+    padding: 0 0 0 2rem;
+    border-left: 0.5rem solid #64a19d;
+  }
+}
+.nav-btn {
+  transition: none;
+  padding: 2rem 1.5rem;
+}
+.signup-section {
+  height: 100%;
+  padding: 8rem;
+}
+.signup-section-color {
+  height: 100%;
+  padding: 1rem 0;
+  background-color: #64a19d;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: scroll;
+  background-size: cover;
+}
+.text-primary {
+  color: #64a19d !important;
+}
+.text-font {
+  font-family: "Varela Round";
+}
 
- #mainNavStdq{min-height:56px;background-color:#fff}
- #mainNavStdq .navbar-toggler{font-size:80%;padding:.75rem;color:#64a19d;border:1px solid #64a19d}
- #mainNavStdq .navbar-toggler:focus{outline:0}
- #mainNavStdq .navbar-brand{color:#161616;font-weight:700;padding:.9rem 0}
- #mainNavStdq .navbar-nav .nav-item:hover{outline:0;}
- #mainNavStdq .navbar-nav .nav-item:active,#mainNavStdq .navbar-nav .nav-item:focus{outline:0;background-color:#313335}
- @media (min-width:0px){#mainNavStdq{padding-top:0;padding-bottom:0;border-bottom:none;background-color:#313335;transition:background-color .3s ease-in-out}
- #mainNavStdq .navbar-brand{padding:.5rem 0;color:rgba(255,255,255)}
- #mainNavStdq .nav-link{transition:none;padding:2rem 1.5rem;color:rgba(255,255,255)}
- #mainNavStdq .nav-link:hover{color:rgba(255,255,255,.75)}
- #mainNavStdq .nav-link:active{color:#fff}
- #mainNavStdq.navbar-shrink{background-color:#fff}
- #mainNavStdq.navbar-shrink .navbar-brand{color:#161616}
- #mainNavStdq.navbar-shrink .nav-link{color:#161616;padding:1.5rem 1.5rem 1.25rem;border-bottom:.25rem solid transparent}
- #mainNavStdq.navbar-shrink .nav-link:hover{color:#64a19d}
- #mainNavStdq.navbar-shrink .nav-link:active{color:#467370}
- #mainNavStdq.navbar-shrink .nav-link.active{color:#64a19d;outline:0;border-bottom:.25rem solid #64a19d}}
-
+#mainNavStdq {
+  min-height: 56px;
+  background-color: #fff;
+}
+#mainNavStdq .navbar-toggler {
+  font-size: 80%;
+  padding: 0.75rem;
+  color: #64a19d;
+  border: 1px solid #64a19d;
+}
+#mainNavStdq .navbar-toggler:focus {
+  outline: 0;
+}
+#mainNavStdq .navbar-brand {
+  color: #161616;
+  font-weight: 700;
+  padding: 0.9rem 0;
+}
+#mainNavStdq .navbar-nav .nav-item:hover {
+  outline: 0;
+}
+#mainNavStdq .navbar-nav .nav-item:active,
+#mainNavStdq .navbar-nav .nav-item:focus {
+  outline: 0;
+  background-color: #313335;
+}
+@media (min-width: 0px) {
+  #mainNavStdq {
+    padding-top: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+    background-color: #313335;
+    transition: background-color 0.3s ease-in-out;
+  }
+  #mainNavStdq .navbar-brand {
+    padding: 0.5rem 0;
+    color: rgba(255, 255, 255);
+  }
+  #mainNavStdq .nav-link {
+    transition: none;
+    padding: 2rem 1.5rem;
+    color: rgba(255, 255, 255);
+  }
+  #mainNavStdq .nav-link:hover {
+    color: rgba(255, 255, 255, 0.75);
+  }
+  #mainNavStdq .nav-link:active {
+    color: #fff;
+  }
+  #mainNavStdq.navbar-shrink {
+    background-color: #fff;
+  }
+  #mainNavStdq.navbar-shrink .navbar-brand {
+    color: #161616;
+  }
+  #mainNavStdq.navbar-shrink .nav-link {
+    color: #161616;
+    padding: 1.5rem 1.5rem 1.25rem;
+    border-bottom: 0.25rem solid transparent;
+  }
+  #mainNavStdq.navbar-shrink .nav-link:hover {
+    color: #64a19d;
+  }
+  #mainNavStdq.navbar-shrink .nav-link:active {
+    color: #467370;
+  }
+  #mainNavStdq.navbar-shrink .nav-link.active {
+    color: #64a19d;
+    outline: 0;
+    border-bottom: 0.25rem solid #64a19d;
+  }
+}
