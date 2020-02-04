@@ -1,13 +1,11 @@
 import React from "react";
-import "./shared/css/style.css";
 import logo from "./shared/images/logo.png";
 
 function App() {
   return (
     <div className="App bg-image">
-      <link href="./style.css" rel="stylesheet"></link>
       <link href="./bootstrap.min.css" rel="stylesheet"></link>
-      {/* <link href="./font-awesome.min.css" rel="stylesheet"></link> */}
+      <link href="./font-awesome.min.css" rel="stylesheet"></link>
       <link
         href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap"
         rel="stylesheet"
