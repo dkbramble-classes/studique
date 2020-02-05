@@ -1,5 +1,5 @@
 import React from 'react';
-import Qcards from '../question-cards/Qcards';
+import questionCards from '../questionCards/questionCards';
 
 function Qlist() {
   return (
@@ -20,7 +20,7 @@ function Qlist() {
             </div>
           </div>
   
-        <Qcards></Qcards>
+        <questionCards></questionCards>
   
           <div className="col-md-4 mb-3 mb-md-0">
             <div className="card py-4 h-100">

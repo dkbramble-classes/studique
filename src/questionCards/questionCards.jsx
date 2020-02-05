@@ -1,6 +1,6 @@
 import React from 'react';
 
-function Qcards() {
+function questionCards() {
   return (
             <div className="col-md-4 mb-3 mb-md-0">
             <div className="card py-4 h-100">
@@ -17,4 +17,4 @@ function Qcards() {
   );
 }
 
-export default Qcards;
+export default questionCards;
