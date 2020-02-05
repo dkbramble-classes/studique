@@ -1,14 +1,8 @@
-import React from "react";
 import logo from "./shared/images/logo.png";
 import React from 'react';
-import logo from './shared/icons/logo.svg';
-//import './frontpage.css';
 import SignIn from './sign-in/sign-in';
 import SignUp from './sign-up/sign-up';
 import Popup from 'reactjs-popup';
-//import logo from "./shared/img/logo.png";
-//import logo from './shared/icons/logo.svg';
-//import Qlist from './question-list/Qlist';
 
 function App() {
   return (
