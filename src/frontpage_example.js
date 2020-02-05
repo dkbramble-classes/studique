@@ -8,8 +8,6 @@ function App() {
 
     <head>
         <link href="./bootstrap.min.css" rel="stylesheet"></link>
-        <link href="./font-awesome.min.css" rel="stylesheet"></link>
-        <link href="./grayscale.min.css" rel="stylesheet"></link>
     </head>
 
     <nav className="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">

@@ -1,2 +1,3 @@
 *.code-workspace
 .cache
+node_modules
