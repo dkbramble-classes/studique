@@ -1,5 +1,8 @@
-import React from "react";
 import logo from "./shared/images/logo.png";
+import React from 'react';
+import SignIn from './sign-in/sign-in';
+import SignUp from './sign-up/sign-up';
+import Popup from 'reactjs-popup';
 
 function App() {
   return (
@@ -20,13 +23,17 @@ function App() {
           <div className="collapse navbar-collapse" id="navbarResponsive">
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
-                {/* <button type="button" class="btn btn-outline-info border border-info">Info</button> */}
-                <button type="submit" className=" btn nav-link text-font">
-                  Sign In
-                </button>
+              {/* <button type="button" class="btn btn-outline-info border border-info">Info</button> */}
+              <Popup modal trigger={
+              <button type="submit" className=" btn nav-link text-font">Sign In</button>}>
+                <SignIn className="popup-primary"></SignIn>
+              </Popup>
               </li>
               <li className="nav-item">
-                <button className="nav-link btn text-font">Sign up</button>
+              <Popup modal trigger={
+                <button className="nav-link btn text-font">Sign up</button>}>
+                  <SignUp className="popup-primary"></SignUp>
+                </Popup>
               </li>
             </ul>
           </div>
