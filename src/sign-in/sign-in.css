@@ -1,0 +1,62 @@
+.popup {
+    background-color: #313335;
+    grid-template-columns: auto;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    border-radius: 5px;
+    border: 0;
+    text-align: center;
+}
+
+.label {
+    color: #313335;
+    text-align: left;
+}
+
+.title {
+    color: white;
+    text-align: center;
+}
+
+.input {
+    margin-bottom: 1.25rem;
+}
+
+.btn {
+    box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
+    padding: 1.25rem 2rem;
+    font-family: 'Varela Round';
+    font-size: 80%;
+    text-transform: uppercase;
+    letter-spacing: .15rem;
+    border: 0;
+  }
+  
+  .btn-primary {
+    background-color: #64a19d;
+    margin: 1.25rem;
+  }
+  
+  .btn-primary:hover {
+    background-color: #4f837f;
+  }
+  
+  .btn-primary:focus {
+    background-color: #4f837f;
+    color: white;
+  }
+  
+  .btn-primary:active {
+    background-color: #467370 !important;
+  }
+
+  .btn-google {
+    box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
+    padding: 1.25rem 2rem;
+    font-family: 'Varela Round';
+    font-size: 80%;
+    text-transform: uppercase;
+    letter-spacing: .15rem;
+    border: 0;
+    background-color: #ddeceb;
+    margin-bottom: 1.25rem;
+  }
