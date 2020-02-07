@@ -41,15 +41,19 @@ a:hover {
   width: 10%;
 }
 .btn {
+  box-shadow:none;
   padding: 1.25rem 2rem;
   font-family: "Varela Round";
   font-size: 80%;
   text-transform: uppercase;
   letter-spacing: 0.15rem;
   border: 0;
+  -webkit-box-shadow: none !important;
+  box-shadow: none  !important;
 }
 .btn-primary {
   background-color: #64a19d;
+  box-shadow: none;
 }
 .btn-primary-outline {
   background-color: transparent;
@@ -66,7 +70,7 @@ a:hover {
   background-color: #467370 !important;
 }
 .form-inline input {
-  box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
+
   padding: 1.25rem 2rem;
   height: auto;
   font-family: "Varela Round";
@@ -152,6 +156,7 @@ a:hover {
     transition: none;
     padding: 2rem 1.5rem;
     color: rgba(255, 255, 255);
+    border: solid transparent;
   }
   #mainNavStdq .nav-link:hover {
     color: rgba(255, 255, 255, 0.75);
@@ -168,7 +173,7 @@ a:hover {
   #mainNavStdq.navbar-shrink .nav-link {
     color: #161616;
     padding: 1.5rem 1.5rem 1.25rem;
-    border-bottom: 0.25rem solid transparent;
+
   }
   #mainNavStdq.navbar-shrink .nav-link:hover {
     color: #64a19d;
@@ -179,6 +184,8 @@ a:hover {
   #mainNavStdq.navbar-shrink .nav-link.active {
     color: #64a19d;
     outline: 0;
-    border-bottom: 0.25rem solid #64a19d;
+
   }
+
+  .ais-Hits { margin: 1em 0; background-color: #fff; font-family: 'Varela Round'; }
 }
