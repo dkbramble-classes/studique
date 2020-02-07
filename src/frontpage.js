@@ -3,6 +3,7 @@ import React from 'react';
 import SignIn from './sign-in/sign-in';
 import SignUp from './sign-up/sign-up';
 import Popup from 'reactjs-popup';
+import SimpleSearchBar from './components/simple_searchbar'
 
 function App() {
   return (
@@ -13,6 +14,8 @@ function App() {
         href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap"
         rel="stylesheet"
       ></link>
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.3.1/themes/reset-min.css" integrity="sha256-t2ATOGCtAIZNnzER679jwcFcKYfLlw01gli6F6oszk8=" crossOrigin="anonymous"></link>
+      <script src="https://polyfill.io/v3/polyfill.min.js?features=default%2CArray.prototype.find%2CArray.prototype.includes%2CPromise%2CObject.assign%2CObject.entries"></script>
 
       <nav className="navbar navbar-expand-sm navbar-light" id="mainNavStdq">
         <div className="container">
@@ -25,7 +28,7 @@ function App() {
               <li className="nav-item">
               {/* <button type="button" class="btn btn-outline-info border border-info">Info</button> */}
               <Popup modal trigger={
-              <button type="submit" className=" btn nav-link text-font">Sign In</button>}>
+              <button type="submit" className=" nav-btn btn nav-link text-font">Sign In</button>}>
                 <SignIn className="popup-primary"></SignIn>
               </Popup>
               </li>
@@ -56,17 +59,20 @@ function App() {
 <h3 className="text-white mb-5">Crowdsourcing The College Experience</h3>
 </div>
 </div> */}
-            <form className="form-inline d-flex">
+            {/* <form className="form-inline d-flex">
               <input
                 type="text"
                 className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0"
                 id="inputText"
                 placeholder="ASK A QUESTION"
               />
+                <SearchBar className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0"
+                id="inputText"></SearchBar>
               <button type="submit" className="btn btn-primary mx-auto">
                 Search
               </button>
-            </form>
+            </form> */}
+            <SimpleSearchBar></SimpleSearchBar>
           </div>
         </div>
         {/* </div>
