@@ -74,9 +74,6 @@ function App() {
               </button>
             </form> */}
             <SimpleSearchBar></SimpleSearchBar>
-              <script src="./web_hooks" type="module">
-                  getQuestions();
-              </script>
           </div>
         </div>
         {/* </div>
