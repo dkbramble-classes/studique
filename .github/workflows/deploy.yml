@@ -1,0 +1,26 @@
+name: CI
+
+on: 
+  push:
+    branches: 
+      - master
+      - deployment-test
+
+jobs:
+  firebase-deploy:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@deployment-test
+    - uses: actions/setup-node@deployment-test
+      with:
+        node-version: '10.x'
+    - run: npm install
+    - run: npm run build:prod
+    - name: Deploy to Firebase
+      uses: w9jds/firebase-action@deployment-test
+      with:
+        args: deploy --only hosting
+      env:
+        FIREBASE_TOKEN: ${{ secrets.FIREBASE_TOKEN }}
