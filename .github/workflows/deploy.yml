@@ -12,14 +12,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@deployment-test
-    - uses: actions/setup-node@deployment-test
+    - uses: actions/checkout@master
+    - uses: actions/setup-node@master
       with:
         node-version: '10.x'
     - run: npm install
     - run: npm run build:prod
     - name: Deploy to Firebase
-      uses: w9jds/firebase-action@deployment-test
+      uses: w9jds/firebase-action@master
       with:
         args: deploy --only hosting
       env:
