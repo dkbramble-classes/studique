@@ -24,38 +24,28 @@ function App() {
             <ul className="navbar-nav ml-auto">
               <li className="nav-item">
               {/* <button type="button" class="btn btn-outline-info border border-info">Info</button> */}
-              <Popup modal trigger={
+              <Popup className="modal" modal trigger={
               <button type="submit" className=" btn nav-link text-font">Sign In</button>}>
-                <SignIn className="popup-primary"></SignIn>
+                <SignIn ></SignIn>
               </Popup>
               </li>
               <li className="nav-item">
-              <Popup modal trigger={
+              <Popup className="modal" modal trigger={
                 <button className="nav-link btn text-font">Sign up</button>}>
-                  <SignUp className="popup-primary"></SignUp>
+                  <SignUp className="modal-content"></SignUp>
                 </Popup>
               </li>
             </ul>
           </div>
         </div>
       </nav>
-      {/* <div className="jumbotron mt-10"></div> */}
       <section id="signup" className="signup-section my-5 imgbox center-fit">
-        {/* <div className="jumbotron jumbotron-fluid rounded mt-10">
-<div className="container-fluid"> */}
         <div className="row">
           <div className="col-md-5 col-lg-8 mx-auto text-center">
             <h1 className="text-white mb-4">Studique</h1>
             <h3 className="text-white mb-5">
               Crowdsourcing The College Experience
             </h3>
-            {/* <div className="media">
-<img className="logo mr-3" src={logo} alt="LogoPage"/>
-<div className="media-body mx-auto">
-<h1 className="text-white">Studique</h1>
-<h3 className="text-white mb-5">Crowdsourcing The College Experience</h3>
-</div>
-</div> */}
             <form className="form-inline d-flex">
               <input
                 type="text"
@@ -69,8 +59,6 @@ function App() {
             </form>
           </div>
         </div>
-        {/* </div>
-</div> */}
       </section>
     </div>
   );
