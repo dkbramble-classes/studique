@@ -7,7 +7,7 @@ dotenv.config();
 
 // configure firebase
 firebase.initializeApp({
-  databaseURL: process.env.FIREBASE_DATABASE_URL,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
 });
 const database = firebase.database();
 
