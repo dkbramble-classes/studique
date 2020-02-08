@@ -4,7 +4,6 @@ on:
   push:
     branches: 
       - master
-      - deployment-test
 
 jobs:
   firebase-deploy:
@@ -12,14 +11,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@deployment-test
-    - uses: actions/setup-node@deployment-test
+    - uses: actions/checkout@v2
+    - uses: actions/setup-node@v1
       with:
         node-version: '10.x'
     - run: npm install
-    - run: npm run build:prod
+    - run: npm run build
     - name: Deploy to Firebase
-      uses: w9jds/firebase-action@deployment-test
+      uses: w9jds/firebase-action@master
       with:
         args: deploy --only hosting
       env:
