@@ -1,16 +1,18 @@
 // Firebase App (the core Firebase SDK) is always required and must be listed first
 const firebase = require("firebase/app");
+const dotenv = require('dotenv');
 require("firebase/database");
 require("firebase/auth");
 
+dotenv.config();
 const firebaseConfig = {
-    apiKey: "AIzaSyA8F9gI68PiVnWJ6-_PqcGL_XGpQEhX8pg",
+    apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
     authDomain: "studique-3179a.firebaseapp.com",
-    databaseURL: "https://studique-3179a.firebaseio.com",
+    databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
     projectId: "studique",
     storageBucket: "studique.appspot.com",
-    messagingSenderId: "559326264470",
-    appId: "1:559326264470:web:29267f7606276bfbc956b7"
+    messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGE_SENDER_ID,
+    appId: process.env.REACT_APP_FIREBASE_APP_ID
 };
 
 firebase.initializeApp(firebaseConfig);
