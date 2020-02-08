@@ -4,7 +4,6 @@ on:
   push:
     branches: 
       - master
-      - deployment-test
 
 jobs:
   firebase-deploy:
