@@ -50,15 +50,13 @@ function App() {
             <h3 className="text-white mb-5">
               Crowdsourcing The College Experience
             </h3>
-            <form className="form-inline d-flex">
+            {/* <form className="form-inline d-flex">
               <input
                 type="text"
                 className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0"
                 id="inputText"
                 placeholder="ASK A QUESTION"
               />
-                <SearchBar className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0"
-                id="inputText"></SearchBar>
               <button type="submit" className="btn btn-primary mx-auto">
                 Search
               </button>
