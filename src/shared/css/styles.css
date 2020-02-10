@@ -79,7 +79,7 @@ a:hover {
   border: 0;
 }
 .jumbotron {
-  background-color: #313335;
+  background-color: rgba(153,153,153,.90)
 }
 .logo {
   width: 100px;
@@ -138,14 +138,14 @@ a:hover {
 #mainNavStdq .navbar-nav .nav-item:active,
 #mainNavStdq .navbar-nav .nav-item:focus {
   outline: 0;
-  background-color: #313335;
+  background-color: rgba(153,153,153, .90);
 }
 @media (min-width: 0px) {
   #mainNavStdq {
     padding-top: 0;
     padding-bottom: 0;
     border-bottom: none;
-    background-color: #313335;
+    background-color: rgba(153,153,153, .90);
     transition: background-color 0.3s ease-in-out;
   }
   #mainNavStdq .navbar-brand {
