@@ -1,6 +1,15 @@
 import React, {Component} from "react";
 import "./signUp.css";
+import {signUpFirebase} from "./signUpHooks";
 class SignUp extends Component {
+    doSignUp()
+    {
+        console.log(this.state.userEmail.indexOf("mail.gvsu.edu"));
+        if(this.state.userEmail.indexOf("mail.gvsu.edu") != -1)
+        {
+            signUpFirebase(this.state.userEmail, this.state.userPassword);
+        }
+    }
     render(){
         return (
         <div className = "popup">
