@@ -1,8 +1,5 @@
 import React, {Component} from "react";
 import "./signUp.css";
-import  Dropdown from "react-simple-dropdown";
-import DropdownTrigger from "react-simple-dropdown";
-import DropdownContent from "react-simple-dropdown";
 class SignUp extends Component {
     render(){
         return (
@@ -33,24 +30,19 @@ class SignUp extends Component {
                 name = "userPassword"
                 placeholder = "Password"
                 onChange={(e) => this.addFormData(e)}></input></div>
-                 <Dropdown className="dropdown">
-                <DropdownTrigger className="dropdown--active">User Type</DropdownTrigger>
-                <DropdownContent className="dropdown__content">
-                    <ul>
-                        <li>
-                            <a href="student">Student</a>
-                        </li>
-                        <li>
-                            <a href="faculty">Faculty</a>
-                        </li>
-                    </ul>
-                </DropdownContent>
-            </Dropdown>
+                <div>
+                <h3>User Type:</h3>
+                <tbody>
+                    <td><input type="radio" name="faculty" />Faculty</td>
+                    <td><input type="radio" name="student"/>Student</td>
+                    </tbody>
+                </div>
+                    
                 <div>
                         <button className="btn btn-primary mx-auto" onClick={() => this.doSignUp()}>Sign-Up</button>
                 </div>
                 <div>
-                    <button className="btn-google" onClick={() => this.doGoogleSignUp()}>Sign-Up with Google</button>
+                    <button className="btn btn-secondary mx-auto" onClick={() => this.doGoogleSignUp()}>Sign-Up with Google</button>
                 </div>
             </div>
         </div>
