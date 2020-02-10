@@ -46,6 +46,7 @@ function App() {
       <section id="signup" className="signup-section my-5 imgbox center-fit">
         <div className="row">
           <div className="col-md-5 col-lg-8 mx-auto text-center">
+            <div className="jumbotron rounded">
             <h1 className="text-white mb-4">Studique</h1>
             <h3 className="text-white mb-5">
               Crowdsourcing The College Experience
@@ -62,6 +63,7 @@ function App() {
               </button>
             </form> */}
             <SimpleSearchBar></SimpleSearchBar>
+            </div>
           </div>
         </div>
       </section>
