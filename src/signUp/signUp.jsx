@@ -1,5 +1,8 @@
 import React, {Component} from "react";
 import "./signUp.css";
+import  Dropdown from "react-simple-dropdown";
+import DropdownTrigger from "react-simple-dropdown";
+import DropdownContent from "react-simple-dropdown";
 class SignUp extends Component {
     render(){
         return (
@@ -30,16 +33,19 @@ class SignUp extends Component {
                 name = "userPassword"
                 placeholder = "Password"
                 onChange={(e) => this.addFormData(e)}></input></div>
-                <div className="dd-wrapper">
-                <div className="dd-header">
-                    <div className="dd-header-title"></div>
-                </div>
-                <ul className="dd-list">
-                    <li className="dd-list-item"></li>
-                    <li className="dd-list-item"></li>
-                    <li className="dd-list-item"></li>
-                </ul>
-                </div>
+                 <Dropdown className="dropdown">
+                <DropdownTrigger className="dropdown--active">User Type</DropdownTrigger>
+                <DropdownContent className="dropdown__content">
+                    <ul>
+                        <li>
+                            <a href="student">Student</a>
+                        </li>
+                        <li>
+                            <a href="faculty">Faculty</a>
+                        </li>
+                    </ul>
+                </DropdownContent>
+            </Dropdown>
                 <div>
                         <button className="btn btn-primary mx-auto" onClick={() => this.doSignUp()}>Sign-Up</button>
                 </div>
