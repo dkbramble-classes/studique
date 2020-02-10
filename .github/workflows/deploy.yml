@@ -4,6 +4,7 @@ on:
   push:
     branches: 
       - master
+      - deployment-test
 
 jobs:
   firebase-deploy:
@@ -15,6 +16,8 @@ jobs:
     - uses: actions/setup-node@v1
       with:
         node-version: '10.x'
+    - name: Clean dependencies and current nodules
+      run: rm -rf package-lock.json node_modules
     - run: npm install
     - run: npm run build
     - name: Deploy to Firebase
