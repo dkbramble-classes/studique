@@ -1,0 +1,34 @@
+.popup {
+    background-color: #313335;
+    grid-template-columns: auto;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+    border-radius: 5px;
+    border: 0;
+    text-align: center;
+}
+
+.label {
+    color: #313335;
+    text-align: left;
+}
+
+.title {
+    color: black;
+    text-align: center;
+}
+
+#inputText {
+    margin-bottom: 1.25rem;
+}
+
+  .btn-google {
+    box-shadow: 0 0.1875rem 0.1875rem 0 rgba(0, 0, 0, 0.1) !important;
+    padding: 1.25rem 2rem;
+    font-family: 'Varela Round';
+    font-size: 80%;
+    text-transform: uppercase;
+    letter-spacing: .15rem;
+    border: 0;
+    background-color: #ddeceb;
+    margin-bottom: 1.25rem;
+  }
