@@ -1,6 +1,8 @@
 import React from 'react';
 import algoliasearch from 'algoliasearch/lite';
 
+import { Link } from "react-router-dom";
+
 const client = algoliasearch('2OXOHVVBM2', 'b8769b9a1270565298eb7e51af306c8b');
 const index = client.initIndex('Questions');
 
@@ -26,6 +28,7 @@ class SimpleSearchBar extends React.Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+
   handleChange(event) {
     this.setState({value: event.target.value});
   }
@@ -44,10 +47,15 @@ class SimpleSearchBar extends React.Component {
 
   render() {
     return (
+      
       <form className="form-inline d-flex" onSubmit={this.handleSubmit}>
-        <input type="text" className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputText" placeholder="ASK A QUESTION" value={this.state.value} onChange={this.handleChange} />
-        <input type="submit" className="btn btn-primary mx-auto" value="Submit" />
+        <input type="text" className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputText" 
+        placeholder="ASK A QUESTION" value={this.state.value} onChange={this.handleChange} />
+        <Link to="/results">
+          <input type="submit" className="btn btn-primary mx-auto" value="Submit" />
+        </Link>
       </form>
+
     );
   }
 }
