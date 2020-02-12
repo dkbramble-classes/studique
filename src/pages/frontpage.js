@@ -1,10 +1,10 @@
-import logo from "./shared/images/logo.png";
+import logo from "../images/logo.png";
 import React from 'react';
-import SignIn from './signIn/signIn';
-import SignUp from './signUp/signUp';
+import SignIn from '../components/signIn';
+import SignUp from '../components/signUp';
 import Popup from 'reactjs-popup';
-import SimpleSearchBar from './components/simple_searchbar'
-import {getQuestions} from './web_hooks'
+import SimpleSearchBar from '../components/simple_searchbar'
+import {getQuestions} from '../hooks/web_hooks'
 
 function App() {
     getQuestions();

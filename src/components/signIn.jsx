@@ -1,5 +1,14 @@
 import React, {Component} from "react";
+import "../css/signIn.css";
+import {signInFirebase} from "../hooks/signInHooks";
+
 class SignIn extends Component {
+
+    doSignIn()
+    {
+        signInFirebase(this.state.userEmail, this.state.userPassword);
+    }
+
     render(){
         return (
         <div className = "popup">

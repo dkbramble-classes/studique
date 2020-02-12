@@ -1,5 +1,5 @@
 import React from 'react';
-import questionCards from '../questionCards/questionCards';
+import questionCards from './questionCards';
 
 function Qlist() {
   return (
