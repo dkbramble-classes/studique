@@ -21,7 +21,7 @@ class SignUp extends Component {
                 style={{ width:"80%"}} 
                 id="inputText" type="text" 
                 value={this.state.displayName}
-                name = "displayName"
+                name = "userDisplayName"
                 placeholder = "Full Name"
                 onChange={(e) => this.updateFormData(e)}></input></div>
                 <div>
@@ -62,6 +62,7 @@ class SignUp extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      userDisplayName:"",
       userEmail: "",
       userPassword: ""
     };
