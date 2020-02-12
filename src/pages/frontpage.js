@@ -1,10 +1,10 @@
-import React from "react";
-import SimpleSearchBar from "./components/simple_searchbar";
-import { getQuestions } from "./web_hooks";
+import React from 'react';
+import SimpleSearchBar from '../components/simple_searchbar'
+import {getQuestions} from '../hooks/web_hooks'
 
-import questionList from './questionList/questionList';
-import profile from './profilePage/profilePage';
-import Nav from './components/nav';
+import questionList from '../components/questionList';
+import profile from '../pages/profilePage';
+import Nav from '../components/nav';
 
 import { BrowserRouter as Router, Route } from "react-router-dom";
 

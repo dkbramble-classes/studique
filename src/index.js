@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './frontpage';
+import App from './pages/frontpage';
 import * as serviceWorker from './serviceWorker';
-import './shared/css/bootstrap.min.css';
-import './shared/css/styles.css';
+import './css/bootstrap.min.css';
+import './css/styles.css';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 

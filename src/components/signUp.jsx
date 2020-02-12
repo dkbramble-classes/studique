@@ -1,11 +1,12 @@
-import React, { Component } from "react";
-import "./signUp.css";
-import {signUpFirebase} from "./signUpHooks";
+import React, {Component} from "react";
+import "../css/signUp.css";
+import {signUpFirebase} from "../hooks/signUpHooks";
+
 class SignUp extends Component {
     doSignUp()
     {
         console.log(this.state.userEmail.indexOf("mail.gvsu.edu"));
-        if(this.state.userEmail.indexOf("mail.gvsu.edu") != -1)
+        if(this.state.userEmail.indexOf("mail.gvsu.edu") !== -1)
         {
             signUpFirebase(this.state.userEmail, this.state.userPassword);
         }
@@ -21,7 +22,7 @@ class SignUp extends Component {
                 style={{ width:"80%"}} 
                 id="inputText" type="text" 
                 value={this.state.displayName}
-                name = "userDisplayName"
+                name = "displayName"
                 placeholder = "Full Name"
                 onChange={(e) => this.updateFormData(e)}></input></div>
                 <div>
@@ -55,21 +56,20 @@ class SignUp extends Component {
                 </div>
             </div>
         </div>
-      </div>
-    );
-  }
+        );
+    }
 
-  constructor(props) {
-    super(props);
-    this.state = {
-      userDisplayName:"",
-      userEmail: "",
-      userPassword: ""
-    };
-  }
+    constructor(props){
+        super(props);
+        this.state = {
+            userEmail: "",
+            userPassword: ""
+        }
+    }
 
-  addFormData(ev) {
-    this.setState({ [ev.target.name]: ev.target.value });
-  }
+    addFormData(ev){
+        this.setState({[ev.target.name]: ev.target.value});
+    }
+    
 }
 export default SignUp;

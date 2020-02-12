@@ -1,5 +1,5 @@
 import React from 'react';
-import './questionCards.css';
+import '../css/questionCards.css';
 
 function questionCards() {
   return (
