@@ -22,7 +22,7 @@ const index = client.initIndex('Questions');
 class SimpleSearchBar extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {value: ''};
+    this.state = {value: '', isEnabled: false};
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
@@ -31,6 +31,9 @@ class SimpleSearchBar extends React.Component {
 
   handleChange(event) {
     this.setState({value: event.target.value});
+    
+    let empty = event.target.value.length > 0;
+    this.setState({isEnabled: empty});
   }
 
   handleSubmit(event) {
@@ -39,6 +42,9 @@ class SimpleSearchBar extends React.Component {
       hitsPerPage: 10,
     }).then(({ hits }) => {
       console.log(hits)
+      if (hits.length === 0){
+        alert("There's no hits! Want to ask a question?");
+      }
       //alert('Hits: ' + hits);
     });
     //alert('A name was submitted: ' + this.state.value);
@@ -48,12 +54,14 @@ class SimpleSearchBar extends React.Component {
   render() {
     return (
       
-      <form className="form-inline d-flex" onSubmit={this.handleSubmit}>
-        <input type="text" className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputText" 
-        placeholder="ASK A QUESTION" value={this.state.value} onChange={this.handleChange} />
+      <form className="form-inline d-flex content-center" onSubmit={this.handleSubmit}>
+
+        <input type="text" className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputText" autoComplete="off" placeholder="ASK A QUESTION" value={this.state.value} onChange={this.handleChange} />
+        <div className="mx-auto">
         <Link to="/results">
-          <input type="submit" className="btn btn-primary mx-auto" value="Submit" />
+        <input type="submit" disabled={!this.state.isEnabled} className="btn btn-primary mx-auto" value="Submit" />
         </Link>
+        </div>
       </form>
 
     );

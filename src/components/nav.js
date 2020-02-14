@@ -9,12 +9,13 @@ function Nav() {
     <nav className="navbar navbar-expand-sm navbar-light" id="mainNavStdq">
     <div className="container">
       <a className="navbar-brand text-font" href="/">
-        <img className="brand-logo mr-2" src={logo} alt="LogoBrand" />
+        <img className="mr-2 " width="30" height="40" src={logo} alt="LogoBrand" />
         Studique
       </a>
-      <div className="collapse navbar-collapse" id="navbarResponsive">
-        <ul className="navbar-nav ml-auto">
-          <li className="nav-item">
+      <div className="" id="navbarResponsive">
+        <div className="navbar-nav ml-auto">
+    
+          <div className="nav-item">
             {/* <button type="button" class="btn btn-outline-info border border-info">Info</button> */}
             <Popup
               modal
@@ -28,8 +29,8 @@ function Nav() {
             >
               <SignIn className="popup-primary"></SignIn>
             </Popup>
-          </li>
-          <li className="nav-item">
+          </div>
+          <div className="nav-item">
             <Popup
               modal
               trigger={
@@ -38,8 +39,8 @@ function Nav() {
             >
               <SignUp className="popup-primary"></SignUp>
             </Popup>
-          </li>
-        </ul>
+          </div>
+        </div>
       </div>
     </div>
   </nav>
