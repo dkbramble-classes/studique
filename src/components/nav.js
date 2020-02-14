@@ -1,7 +1,7 @@
-import logo from "../shared/images/logo.png";
+import logo from "../images/logo.png";
 import React from 'react';
-import SignIn from "../signIn/signIn.jsx";
-import SignUp from "../signUp/signUp.jsx";
+import SignIn from "../components/signIn.jsx";
+import SignUp from "../components/signUp.jsx";
 import Popup from "reactjs-popup";
 
 function Nav() {

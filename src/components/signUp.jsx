@@ -1,6 +1,7 @@
 import React, {Component} from "react";
-import "./signUp.css";
-import {signUpFirebase} from "./signUpHooks";
+import "../css/signUp.css";
+import {signUpFirebase} from "../hooks/signUpHooks";
+
 class SignUp extends Component {
     doSignUp()
     {
