@@ -1,6 +1,7 @@
 import React from 'react';
 import SimpleSearchBar from '../components/simple_searchbar'
 import {getQuestions} from '../hooks/web_hooks'
+import { Link } from "react-router-dom";
 
 import questionList from '../components/questionList';
 import profile from '../pages/profilePage';
@@ -31,18 +32,22 @@ function App() {
 }
 
 const frontPage = () => (
-  <div className="App bg-image">
-    <section id="signup" className="signup-section my-5 imgbox center-fit">
-      <div className="row">
-        <div className="col-md-5 col-lg-8 mx-auto text-center">
+  <div className="App container">
+    <section id="signup" className="signup-section mt-5 justify-content-center d-flex h-100">
+        <div className="mx-auto text-center jumbotron">
           <h1 className="text-white mb-4">Studique</h1>
           <h3 className="text-white mb-5">
             Crowdsourcing The College Experience
           </h3>
-
           <SimpleSearchBar></SimpleSearchBar>
+          <div className="text-white text-font">
+            <div>
+            Want to help others? </div>
+            <Link to="/results/">
+             <input type="submit" className="btn mb-1 btn-primary" value="Share Your Knowledge" />
+            </Link>
+          </div>
         </div>
-      </div>
     </section>
   </div>
 );
