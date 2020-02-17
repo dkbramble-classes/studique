@@ -11,10 +11,6 @@ class SignUp extends Component {
             signUpFirebase(this.state.userEmail, this.state.userPassword);
         }
     }
-
-    close(){
-        this.setState({ showModal: false });
-    }
     render() {
         return (
             <div className="container mx-auto text-center pop-up">
@@ -74,7 +70,6 @@ class SignUp extends Component {
                         <button className="btn btn-primary mx-auto"
                             onClick={() =>{
                                 this.doSignUp();
-                                this.close();
                         }}>Sign-Up</button>
                         </div>
                     </Link>
@@ -86,7 +81,6 @@ class SignUp extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            showModal: true,
             userType: "student",
             displayName: "",
             userEmail: "",
