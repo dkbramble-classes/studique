@@ -1,13 +1,14 @@
 import React from 'react';
-import SimpleSearchBar from '../components/simple_searchbar'
-import {getQuestions} from '../hooks/web_hooks'
-import { Link } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link, useParams } from "react-router-dom";
 
+import {getQuestions} from '../hooks/web_hooks'
+
+import SimpleSearchBar from '../components/simple_searchbar'
+import SearchBarText from '../components/searchbar_text'
 import questionList from '../components/questionList';
-import profile from '../pages/profilePage';
 import Nav from '../components/nav';
 
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import profile from '../pages/profilePage';
 
 function App() {
   getQuestions();
@@ -23,8 +24,11 @@ function App() {
         
         <Nav />
         <Route path="/" exact component={frontPage} />
-        <Route path="/results" exact component={questionList} />
+        <Route path="/results/*" exact component={questionList}/>
         <Route path="/profile" exact component={profile} />
+        <Switch>
+          <Route path="/results/:id"> <RoutResults/></Route>
+        </Switch>
 
       </div>
     </Router>
@@ -39,7 +43,8 @@ const frontPage = () => (
           <h3 className="text-white mb-5">
             Crowdsourcing The College Experience
           </h3>
-          <SimpleSearchBar></SimpleSearchBar>
+          {/* <SimpleSearchBar/> */}
+          <SearchBarText/>
           <div className="text-white text-font">
             <div>
             Want to help others? </div>
@@ -51,5 +56,16 @@ const frontPage = () => (
     </section>
   </div>
 );
+
+function RoutResults() {
+  // access dynamic URL variables
+  let { id } = useParams();
+
+  return (
+    <div>
+      <h3>ID: {id}</h3>
+    </div>
+  );
+}
 
 export default App;
