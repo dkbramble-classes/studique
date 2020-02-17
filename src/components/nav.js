@@ -26,8 +26,9 @@ function Nav() {
                   Sign In
                 </button>
               }
+              className="popup-set"
             >
-              <SignIn className="popup-primary"></SignIn>
+              <SignIn></SignIn>
             </Popup>
           </div>
           <div className="nav-item">
@@ -36,6 +37,7 @@ function Nav() {
               trigger={
                 <button className="nav-link btn text-font">Sign up</button>
               }
+              className="popup-set"
             >
               <SignUp className="popup-primary"></SignUp>
             </Popup>

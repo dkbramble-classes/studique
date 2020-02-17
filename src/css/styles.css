@@ -141,6 +141,30 @@ html {
   color: #64a19d;
 }
 
+.pop-up{
+  background-color: rgba(153,153,153,.90);
+  padding-top: 2rem;
+}
+
+.popup-set-content{
+  position: relative;
+  background: rgb(255, 255, 255); 
+  width: 50%; 
+  margin: auto; 
+  border: 0px solid rgb(187, 187, 187); 
+  border-radius: 0.3rem;
+  padding: 0px;
+}
+
+.last{
+  margin-bottom: 0px;
+  padding-bottom: 2rem;
+}
+
+.input-medium{
+  margin-right: 10%;
+  margin-left:10%;
+}
 
 
 #mainNavStdq .navbar-toggler {
