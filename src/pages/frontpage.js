@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch, Link, useParams } from "react-r
 
 import {getQuestions} from '../hooks/web_hooks'
 
-import SimpleSearchBar from '../components/simple_searchbar'
+//import SimpleSearchBar from '../components/simple_searchbar'
 import SearchBarText from '../components/searchbar_text'
 import questionList from '../components/questionList';
 import Nav from '../components/nav';
@@ -46,8 +46,9 @@ const frontPage = () => (
           {/* <SimpleSearchBar/> */}
           <SearchBarText/>
           <div className="text-white text-font">
-            <div>
-            Want to help others? </div>
+            <div className="my-2">
+            Want to help others? 
+            </div>
             <Link to="/results/">
              <input type="submit" className="btn mb-1 btn-primary" value="Share Your Knowledge" />
             </Link>
