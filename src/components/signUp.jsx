@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {signUpFirebase} from "../hooks/signUpHooks";
 import { Link } from "react-router-dom";
-import Popup from "reactjs-popup";
+//import Popup from "reactjs-popup";
 
 
 class SignUp extends Component {
