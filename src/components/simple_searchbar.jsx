@@ -58,7 +58,7 @@ class SimpleSearchBar extends React.Component {
 
         <input type="text" className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputText" autoComplete="off" placeholder="ASK A QUESTION" value={this.state.value} onChange={this.handleChange} />
         <div className="mx-auto">
-        <Link to="/results">
+        <Link to={"/results/" + this.state.value}>
         <input type="submit" disabled={!this.state.isEnabled} className="btn btn-primary mx-auto" value="Submit" />
         </Link>
         </div>
