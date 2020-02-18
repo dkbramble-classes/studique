@@ -7,7 +7,7 @@ import SearchBarText from '../components/searchbar_text';
 class FrontPage extends React.Component {
   render(){
   return (
-  <div>
+  <div className="bg-image">
     {/* <img className="app-bg" src={appbg} alt="bg"/> */}
     <section id="signup" className="signup-section mt-5 justify-content-center d-flex h-100">
         <div className="mx-auto jumbotron">

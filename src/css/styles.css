@@ -30,20 +30,23 @@ a:hover {
 .bg-black {
   background-color: #161616 !important;
 }
-.bg-image {
-  background: transparent;
-  background-color: rgba(153,153,153,0)
-}
+
 body, html {
   height: 100%;
 }
-body { 
+/* #root {
   background: url(../images/gv.jpg) no-repeat center center fixed; 
   height:100%;
   -webkit-background-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+} */
+.bg-image{ 
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-image: url(../images/gv.jpg);
 }
 
 .brand-logo {
@@ -184,6 +187,9 @@ body {
   color: #161616;
   font-weight: 700;
 }
+.nav-item{
+  display: inline-block;
+}
 #mainNavStdq .navbar-nav .nav-item:hover {
   outline: 0;
 }
@@ -282,3 +288,34 @@ body {
   width: 126px;
   height: 18px;
 }
+@media (min-width: 0px) {
+  .jumbotron {
+    height:500px;
+  }
+
+  .bg-image{
+    overflow-y: scroll;
+  }
+
+  .nav-item {
+    margin: 0;
+  }
+
+}
+@media (min-width:460px) {
+  .jumbotron {
+    height:500px;
+  }
+}
+@media (min-width: 576px) {
+  .jumbotron {
+    height:400px;
+  }
+  .bg-image{
+    position: fixed;
+    overflow-y: hidden;
+  }
+}
+.navbar-nav {
+  display: inline-block;
+} 
