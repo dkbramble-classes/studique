@@ -40,8 +40,6 @@ class App extends React.Component {
 function RoutResults() {
   // access dynamic URL variables
   let { id } = useParams();
-  // document.body.style.backgroundImage = "url('../images/gv.jpg')";
-
   return (
     <div>
       <h3>ID: {id}</h3>

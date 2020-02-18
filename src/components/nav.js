@@ -6,16 +6,15 @@ import Popup from "reactjs-popup";
 
 function Nav() {
   return (
-    <nav className="navbar navbar-expand-sm navbar-light" id="mainNavStdq">
+    <nav className="navbar navbar-expand-md navbar-expand-lg navbar-light" id="mainNavStdq" aria-expanded="false" >
     <div className="container">
       <a className="navbar-brand text-font" href="/">
         <img className="mr-2 " width="30" height="40" src={logo} alt="LogoBrand" />
         Studique
       </a>
       <div className="" id="navbarResponsive">
-        <div className="navbar-nav ml-auto">
-    
-          <div className="nav-item">
+        <ul className="navbar-nav">
+          <li className="nav-item">
             {/* <button type="button" class="btn btn-outline-info border border-info">Info</button> */}
             <Popup
               modal
@@ -30,8 +29,8 @@ function Nav() {
             >
               <SignIn></SignIn>
             </Popup>
-          </div>
-          <div className="nav-item">
+          </li>
+          <li className="nav-item">
             <Popup
               modal
               trigger={
@@ -41,8 +40,8 @@ function Nav() {
             >
               <SignUp className="popup-primary"></SignUp>
             </Popup>
-          </div>
-        </div>
+          </li>
+        </ul>
       </div>
     </div>
   </nav>
