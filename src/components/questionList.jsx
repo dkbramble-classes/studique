@@ -4,10 +4,15 @@ import "../css/questionList.css";
 
 function questionList() {
   return (
-    <div>
+    <div className="qlistPage">
 
       <h1>Question list page:</h1>
       <div className="qlistList">
+      <QCards />
+      <QCards />
+      <QCards />
+      <QCards />
+      <QCards />
       <QCards />
       <QCards />
       </div>

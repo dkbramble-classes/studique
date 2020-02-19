@@ -1,15 +1,20 @@
 .qcard { 
     display: block;
     border-radius: 5px;
-    border: solid;
     padding: 10px;
     margin: 10px 0px;
+    background-color: white;
+    
 
     white-space: pre-wrap;      /* CSS3 */   
     white-space: -moz-pre-wrap; /* Firefox */    
     white-space: -pre-wrap;     /* Opera <7 */   
     white-space: -o-pre-wrap;   /* Opera 7 */    
     word-wrap: break-word;      /* IE */
+}
+
+.qcardTitle:hover {
+    cursor: pointer;
 }
 
 .qcardTop {
@@ -41,19 +46,23 @@
     border-radius: 50%;
     margin-right: 10px;
 }
-.answersLink {
+.moreLink {
+    margin-top: 10px;
     text-decoration: underline;
+}
+.moreLink:hover {
+    cursor: pointer;
 }
 .qcardDescription {
     padding: 0px 0px 10px 0px;
-    width: 60%;
+    width: 90%;
 }
 
 .qcardCommentsSection {
     display: flex;
 }
 .qcardComment {
-    width: 65%;
+    width: 90%;
 }
 
 .qcardAnswerSection {

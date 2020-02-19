@@ -25,7 +25,6 @@ class App extends React.Component {
         
         <Nav />
         <Route path="/" exact component={FrontPage}></Route>
-        <Route path="/results" exact component={questionList}/>
         <Route path="/results/*" exact component={questionList}/>
         <Route path="/profile" exact component={profile} />
         <Switch>
@@ -41,8 +40,6 @@ class App extends React.Component {
 function RoutResults() {
   // access dynamic URL variables
   let { id } = useParams();
-  // document.body.style.backgroundImage = "url('../images/gv.jpg')";
-
   return (
     <div>
       <h3>ID: {id}</h3>
