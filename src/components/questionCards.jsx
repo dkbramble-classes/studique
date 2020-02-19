@@ -57,27 +57,18 @@ function questionCards() {
 
         <Votes />
         <div className="qcardRightContent">
+
+        <span className="qcardComment">This is a comment. aiewjcpocaifnpoaiwenfoxaiejnfhe
+            
+          </span>
+
         <div className="qcardProfile">
             <img
               className="qcardProfileLogo"
               src={require("../images/louieLaker.jpg")}
               alt="profilePic"
             />
-            <span className="qcardComment">This is a comment. aiewjcpocaifnpoaiwenfoxaiejnfhe
-            wqejifnqweoxfnqeiowfunqpoeiufn;qoeif;qoweinfjq;oewijfn
-            poqsiefnpqiwehnfx;oqejf;qoeijfzoeinfpqoiwenfqxon;hfq
-            wqejifnqweoxfnqeiowfunqpoeiufnqxwejfqwnehfpzqwoiefnxefnpqojlfajwhl
-            fqiwuehbfxqilefhuinqefnqleh
-            xqwefjxxq;ofqwiehnfpqwiefhxpfhinqwuehnpix
-            -qwoxqliqrxiq
-            erg
-            evw
-            wqejifnqweoxfnqeiowfunqpoeiufnrrhtrth
-            dyjte
-            aowpeiuqpfongqruioc
-            wv
-            wvg
-          </span>
+            <span>Professor Peabody</span>
           </div>
 
         </div>
