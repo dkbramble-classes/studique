@@ -18,7 +18,14 @@ function questionCards() {
 
         <div className="qcardRightContent">
           
-          <Profile />
+        <div className="qcardProfile">
+            <img
+              className="qcardProfileLogo"
+              src={require("../images/louieLaker.jpg")}
+              alt="profilePic"
+            />
+            <span>Standard Student</span>
+          </div>
 
           <div className="qcardTitle">
             <h5>How do I create a Hello World in React?</h5>
@@ -39,7 +46,7 @@ function questionCards() {
             <div className="tags">CIS162</div>
             <div className="tags">computer science</div>
           </div>
-          {/* <span className="answersLink">Answers</span> */}
+          <span className="answersLink">Answers</span>
         </div>
 
       </div>
@@ -50,8 +57,13 @@ function questionCards() {
 
         <Votes />
         <div className="qcardRightContent">
-          <Profile />
-          <span className="qcardComment">This is a comment. aiewjcpocaifnpoaiwenfoxaiejnfhe
+        <div className="qcardProfile">
+            <img
+              className="qcardProfileLogo"
+              src={require("../images/louieLaker.jpg")}
+              alt="profilePic"
+            />
+            <span className="qcardComment">This is a comment. aiewjcpocaifnpoaiwenfoxaiejnfhe
             wqejifnqweoxfnqeiowfunqpoeiufn;qoeif;qoweinfjq;oewijfn
             poqsiefnpqiwehnfx;oqejf;qoeijfzoeinfpqoiwenfqxon;hfq
             wqejifnqweoxfnqeiowfunqpoeiufnqxwejfqwnehfpzqwoiefnxefnpqojlfajwhl
@@ -66,6 +78,8 @@ function questionCards() {
             wv
             wvg
           </span>
+          </div>
+
         </div>
       </div>
     
@@ -113,15 +127,15 @@ const Votes = () => (
 </div>
 );
 
-const Profile = () => (
-  <div className="qcardProfile">
-            <img
-              className="qcardProfileLogo"
-              src={require("../images/louieLaker.jpg")}
-              alt="profilePic"
-            />
-            <span>Standard Student</span>
-          </div>
-);
+// const Profile = () => (
+//   <div className="qcardProfile">
+//             <img
+//               className="qcardProfileLogo"
+//               src={require("../images/louieLaker.jpg")}
+//               alt="profilePic"
+//             />
+//             <span>Standard Student</span>
+//           </div>
+// );
 
 export default questionCards;

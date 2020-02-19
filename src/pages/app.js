@@ -25,6 +25,7 @@ class App extends React.Component {
         
         <Nav />
         <Route path="/" exact component={FrontPage}></Route>
+        <Route path="/results" exact component={questionList}/>
         <Route path="/results/*" exact component={questionList}/>
         <Route path="/profile" exact component={profile} />
         <Switch>
