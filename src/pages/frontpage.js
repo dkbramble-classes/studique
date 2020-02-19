@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 //import SimpleSearchBar from '../components/simple_searchbar'
 import SearchBarText from '../components/searchbar_text';
