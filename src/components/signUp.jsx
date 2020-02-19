@@ -6,9 +6,12 @@ import { Link } from "react-router-dom";
 
 class SignUp extends Component {
     doSignUp() {
-        console.log(this.state.userEmail.indexOf("mail.gvsu.edu"));
-        if (this.state.userEmail.indexOf("mail.gvsu.edu") !== -1) {
-            signUpFirebase(this.state.userEmail, this.state.userPassword);
+        if (this.state.userPassword.length < 6)
+        {
+            console.log("Password must be 6 characters long.")
+        }
+        else if (this.state.userEmail.indexOf("mail.gvsu.edu") !== -1) {
+            signUpFirebase(this.state.userEmail, this.state.userPassword, this.state.permission, this.state.displayName);
         }
     }
     render() {
@@ -52,13 +55,22 @@ class SignUp extends Component {
                     <div className="form-group">
                         <h4 className="text-white">User Type:</h4>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="userType" id="student" value="student" checked/>
-                            <label class="form-check-label" for="student">
+                            <input class="form-check-input" type="radio" name="userType" id="student"
+                                   value=
+                                    {
+                                        this.state.permission ="student"
+                                    }
+                                   checked/>
+                                   <label
+                                 class="form-check-label" for="student">
                                 Student
                             </label>
                         </div>
                         <div class="form-check">
-                            <input class="form-check-input" type="radio" name="userType" id="teacher" value="teacher"/>
+                            <input class="form-check-input" type="radio" name="userType" id="teacher" value=
+                                {
+                                    this.state.permission ="teacher"
+                                }/>
                             <label class="form-check-label" for="teacher">
                                 Teacher
                             </label>
@@ -84,7 +96,8 @@ class SignUp extends Component {
             userType: "student",
             displayName: "",
             userEmail: "",
-            userPassword: ""
+            userPassword: "",
+            permission: ""
         }
     }
 
