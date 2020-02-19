@@ -18,6 +18,20 @@ const firebaseConfig = {
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
 
+export function initializeUser(user, permission, displayName)
+{
+    user.updateProfile({
+        displayName: displayName,
+    }).then().catch(function(error) {
+        console.log(error.message)
+    });
+
+    firebase.database().ref('users/' + user.uid).set({
+        email: user.email,
+        permissions : permission
+    });
+}
+
 export function getQuestions()
 {
     database.ref('Questions/Q1').once('value').then(function (snapshot) {

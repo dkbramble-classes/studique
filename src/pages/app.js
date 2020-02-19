@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Switch, useParams } from "react-router-
 
 //import { BrowserHistory } from 'react-history'
 
-import {getQuestions} from '../hooks/web_hooks'
+import {getQuestions} from '../hooks/databaseHooks'
 import questionList from '../components/questionList';
 import Nav from '../components/nav';
 
