@@ -1,8 +1,11 @@
 // Firebase App (the core Firebase SDK) is always required and must be listed first
+import {getUserInfo} from "./profileHooks";
+
 const firebase = require("firebase/app");
 const dotenv = require('dotenv');
 require("firebase/database");
 require("firebase/auth");
+
 
 dotenv.config();
 const firebaseConfig = {
@@ -30,6 +33,32 @@ export function initializeUser(user, permission, displayName)
         email: user.email,
         permissions : permission
     });
+    let meta = {};
+    getUserInfo().then(function(result) {
+        meta = result;
+    });
+    setTimeout(() => { console.log(meta); }, 1000);
+}
+
+export function getUserMetadata(user)
+{
+    return database.ref('users/' + user.uid).once('value').then(function (snapshot) {
+        let info = snapshot.val();
+        let metadata = {};
+        metadata["permissions"] = info.permissions;
+        return metadata;
+    }).then(result => {return result}).then(result => {return result});
+    // let metadata = {};
+    // let data = await database.ref('users/' + user.uid).once('value').then(function (snapshot) {
+    //     let info = snapshot.val();
+    //     let metadata = {};
+    //     metadata["permissions"] = info.permissions;
+    //     return metadata;
+    // }).then(result => {return result}).then();
+    // console.log(data);
+    // console.log(metadata);
+    //
+    // return data;
 }
 
 export function getQuestions()
