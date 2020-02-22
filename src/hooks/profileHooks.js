@@ -7,7 +7,7 @@ require("firebase/auth");
 export async function getUserInfo()
 {
     let user = firebase.auth().currentUser;
-
+    console.log("In profile hooks: " + user.displayName + " " + user.email);
     let user_info = {
         "display name": user.displayName,
         "email": user.email

@@ -23,21 +23,31 @@ const database = firebase.database();
 
 export function initializeUser(user, permission, displayName)
 {
-    user.updateProfile({
-        displayName: displayName,
-    }).then().catch(function(error) {
-        console.log(error.message)
-    });
+    console.log("Display name: " + displayName);
+    if(user != null) {
+        user.updateProfile({
+            displayName: displayName,
+        }).then(function() {
+            console.log("Updated name sucessfully: " + user.displayName + " " + user.email);
+            let displayName = user.displayName;},
+            function(error) {
+            // An error happened
+        }).catch(function (error) {
+            console.log(error.message)
+        });
 
-    firebase.database().ref('users/' + user.uid).set({
-        email: user.email,
-        permissions : permission
-    });
-    let meta = {};
-    getUserInfo().then(function(result) {
-        meta = result;
-    });
-    setTimeout(() => { console.log(meta); }, 1000);
+        firebase.database().ref('users/' + user.uid).set({
+            email: user.email,
+            permissions: permission
+        });
+        let meta = {};
+        setTimeout(() => {getUserInfo().then(function (result) {
+            meta = result;
+        })}, 1000);
+        setTimeout(() => {
+            console.log(meta);
+        }, 1000);
+    }
 }
 
 export function getUserMetadata(user)
