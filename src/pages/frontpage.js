@@ -31,5 +31,5 @@ class FrontPage extends React.Component {
 );
   }
 }
-
+ 
 export default FrontPage;
