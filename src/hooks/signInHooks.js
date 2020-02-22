@@ -8,6 +8,4 @@ export function signInFirebase(email, password)
         console.log(error.code + ": " + email);
         console.log(error.message);
     });
-    let user = firebase.auth().currentUser;
-    console.log(user.email);
 }
