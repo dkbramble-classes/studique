@@ -1,0 +1,49 @@
+.profileImage {
+    height: 171px;
+    width: 180px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.profileCard { 
+    display: block;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px 0px;
+    background-color: white;
+    width: 70%;
+    
+
+    white-space: pre-wrap;      /* CSS3 */   
+    white-space: -moz-pre-wrap; /* Firefox */    
+    white-space: -pre-wrap;     /* Opera <7 */   
+    white-space: -o-pre-wrap;   /* Opera 7 */    
+    word-wrap: break-word;      /* IE */
+}
+
+.profile {
+    background-color: rgb(187, 187, 187);
+}
+
+.profileContainer {
+    text-align: center;
+}
+
+.userInfo {
+    width: 70%;
+    justify-content: center;
+    display: inline-block;
+    color: white;
+
+}
+
+.myQList{
+    width: 70%;
+    justify-content: center;
+    display: inline-block
+
+}
+
+.qListContainer {
+    text-align: center;
+}
