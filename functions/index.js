@@ -39,10 +39,12 @@ exports.makeUppercase = functions.database.ref('/messages/{pushId}/original')
     });
 
 exports.updateAlgolia = functions.database.ref('/Questions').onWrite((snapshot, context) => {
+    console.log("In the fucntion");
     const algolia = algoliasearch(
         process.env.ALGOLIA_APP_ID,
         process.env.ALGOLIA_API_KEY
     );
+    console.log("Did algolia search");
     const index = algolia.initIndex(process.env.ALGOLIA_INDEX_NAME);
     const questions = snapshot.after.val();
     console.log(questions);
