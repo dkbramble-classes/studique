@@ -37,48 +37,16 @@ exports.makeUppercase = functions.database.ref('/messages/{pushId}/original')
         // Setting an "uppercase" sibling in the Realtime Database returns a Promise.
         return snapshot.ref.parent.child('uppercase').set(uppercase);
     });
+const ALGOLIA_POSTS_INDEX_NAME = 'Questions';
+const client = algoliasearch(functions.config().algolia.app_id, functions.config().algolia.api_key);
 
-exports.updateAlgolia = functions.database.ref('/Questions').onWrite((snapshot, context) => {
-    console.log("In the fucntion");
-    const algolia = algoliasearch(
-        process.env.ALGOLIA_APP_ID,
-        process.env.ALGOLIA_API_KEY
-    );
-    console.log("Did algolia search");
-    const index = algolia.initIndex(process.env.ALGOLIA_INDEX_NAME);
-    const questions = snapshot.after.val();
-    console.log(questions);
-    const records = [];
-    for(let q_id in questions)
-    {
-        // get the key and data from the snapshot
-        const childKey = q_id;
-        console.log(q_id);
-        const childData = questions[q_id];
-        // We set the Algolia objectID as the Firebase .key
-        childData.objectID = childKey;
-        // Add object for indexing
-        records.push(childData);
-    }
-    // questions.forEach(question => {
-    //     // get the key and data from the snapshot
-    //     const childKey = question.key;
-    //     const childData = question.val();
-    //     // We set the Algolia objectID as the Firebase .key
-    //     childData.objectID = childKey;
-    //     // Add object for indexing
-    //     records.push(childData);
-    // });
+exports.updateAlgolia = functions.database.ref('/Questions/{q_id}/').onWrite(async (data, context) => {
+        const index = client.initIndex(ALGOLIA_POSTS_INDEX_NAME);
+        const firebaseObject = {
+            text: data.after.val().Text,
+            comments: data.after.val().Comments,
+            objectID: context.params.q_id
+        };
 
-    // Add or update new objects
-    index
-        .saveObjects(records)
-        .then(() => {
-            console.log('Questions imported into Algolia');
-            return;
-        })
-        .catch(error => {
-            console.error('Error when importing Questions into Algolia', error);
-            process.exit(1);
-        });
+        await index.saveObject(firebaseObject);
 });

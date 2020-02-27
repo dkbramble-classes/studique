@@ -3,7 +3,6 @@ import { BrowserRouter as Router, Route, Switch, useParams } from "react-router-
 
 //import { BrowserHistory } from 'react-history'
 
-import {getQuestions} from '../hooks/databaseHooks'
 import questionList from '../components/questionList';
 import Nav from '../components/nav';
 
@@ -12,7 +11,6 @@ import FrontPage from './frontpage';
 
 class App extends React.Component {
   render(){
-  getQuestions();
   return (
     <Router>
 
