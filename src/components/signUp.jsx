@@ -31,8 +31,14 @@ function SignUp (props){
             console.log("Password must be 6 characters long.")
         }
         else if (userEmail.indexOf("mail.gvsu.edu") !== -1) {
-            signed_up = await signUpFirebase(userEmail, userPassword, userPermission, userDisplay, props.handleName, props.handleAuthed, props.handleType);
-            
+            signed_up = await signUpFirebase(userEmail, userPassword, userPermission, userDisplay);
+
+            if (signed_up !== null){
+                //console.log(signed_up);
+                props.handleName(signed_up);
+                props.handleAuthed(true);
+                props.handleType(userPermission);
+            }
         }
         return signed_up
     }
@@ -85,11 +91,9 @@ function SignUp (props){
                             </label>
                         </div>
                     </div>
-                    <Link to="/profile">
                         <div className="form-group row last">
                             <input type="submit" className="btn btn-primary mx-auto" value="Sign Up"/>
                         </div>
-                    </Link>
                 </form>
             </div>
         );

@@ -15,11 +15,14 @@ function SignIn(props){
     }
 
     async function doSignIn() {
-        // if (userEmail !== "" && userPassword !== ""){
-        //     signInFirebase(userEmail, userPassword, props.handleAuthed, props.handleName, props.handleType);
-        // }
-        return await signInFirebase(this.state.userEmail, this.state.userPassword, props.handleAuthed, props.handleName, props.handleType).then(
+        return await signInFirebase(userEmail, userPassword, props.handleAuthed, props.handleName, props.handleType).then(
             function(displayName) {
+                if (displayName !== null){
+                    props.handleName(displayName);
+                    props.handleAuthed(true);
+                    //ALSO NEED USER PERMISSION
+                    //props.handleType(userPermission);
+                }
                 return displayName;
             }
         );
