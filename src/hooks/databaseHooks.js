@@ -39,16 +39,6 @@ export async function initializeUser(user, permission, displayName)
         }).catch(function (error) {
             console.log(error.message)
         });
-
-        // await firebase.database().ref('users/' + user.uid).set({
-        //     email: user.email,
-        //     permissions: permission
-        // });
-        //
-        // return getUserInfo().then(function (result) {
-        //     console.log(result);
-        //     return result["displayName"];
-        // });
     }
 }
 
@@ -58,15 +48,4 @@ export function getUserMetadata(user)
         let info = snapshot.val();
         return info.permissions;
     }).then(result => {return result});
-    // let metadata = {};
-    // let data = await database.ref('users/' + user.uid).once('value').then(function (snapshot) {
-    //     let info = snapshot.val();
-    //     let metadata = {};
-    //     metadata["permissions"] = info.permissions;
-    //     return metadata;
-    // }).then(result => {return result}).then();
-    // console.log(data);
-    // console.log(metadata);
-    //
-    // return data;
 }

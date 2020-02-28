@@ -15,7 +15,4 @@ export async function getUserInfo()
          user_info["permissions"] = permission;
          return user_info
      });
-    // setTimeout(() => { user_info["permissions"] = metadata["permissions"];
-    //     console.log(user_info);
-    //     return user_info; }, 1000);
 }

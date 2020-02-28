@@ -16,10 +16,4 @@ export function signUpFirebase(email, password, permission, displayName)
         console.log(error.code);
         console.log(error.message);
     });
-
-    //Need to have a slight delay to signing in for Firebase to create the full user
-    // console.log("Logging in");
-    // // let login = signInFirebase(email,password);
-    // console.log(login);
-    // setTimeout(() => { initializeUser(firebase.auth().currentUser, permission, displayName); }, 3000);
 }
