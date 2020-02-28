@@ -24,20 +24,22 @@ function SignUp (props){
     function handleDisplay(ev){
         setDisplay(ev.target.value);
     }
-    function doSignUp(ev) {
-        ev.preventDefault();
+    async function doSignUp(ev) {
+        let signed_up = Promise.resolve(null);
         if (userPassword.length < 6)
         {
             console.log("Password must be 6 characters long.")
         }
         else if (userEmail.indexOf("mail.gvsu.edu") !== -1) {
-            signUpFirebase(userEmail, userPassword, userPermission, userDisplay, props.handleName, props.handleAuthed, props.handleType);
+            signed_up = await signUpFirebase(userEmail, userPassword, userPermission, userDisplay, props.handleName, props.handleAuthed, props.handleType);
+            
         }
+        return signed_up
     }
         return (
             <div className="container mx-auto text-center pop-up">
                 <h2 className="title">Sign-Up</h2>
-                <form onSubmit={doSignUp}>
+                <form onSubmit={(e) => {doSignUp().then(function(display) {console.log("Signed in with name: " + display)}); e.preventDefault();}}>
                     <div className="form-group row">
                         <input className="form-control input-medium" id="inputText" type="text"
                             value={
@@ -84,9 +86,9 @@ function SignUp (props){
                         </div>
                     </div>
                     <Link to="/profile">
-                    <div className="form-group row last">
-                        <input type="submit" className="btn btn-primary mx-auto" value="Sign Up"/>
-                    </div>
+                        <div className="form-group row last">
+                            <input type="submit" className="btn btn-primary mx-auto" value="Sign Up"/>
+                        </div>
                     </Link>
                 </form>
             </div>
