@@ -29,7 +29,7 @@ export function initializeUser(user, permission, displayName)
             displayName: displayName,
         }).then(function() {
             console.log("Updated name sucessfully: " + user.displayName + " " + user.email);
-            let displayName = user.displayName;},
+            },
             function(error) {
             // An error happened
         }).catch(function (error) {
@@ -69,11 +69,4 @@ export function getUserMetadata(user)
     // console.log(metadata);
     //
     // return data;
-}
-
-export function getQuestions()
-{
-    database.ref('Questions/Q1').once('value').then(function (snapshot) {
-        console.log(snapshot.val());
-    });
 }

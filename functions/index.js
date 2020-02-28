@@ -1,5 +1,6 @@
 // The Cloud Functions for Firebase SDK to create Cloud Functions and setup triggers.
 const functions = require('firebase-functions');
+const algoliasearch = require('algoliasearch');
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions
@@ -36,3 +37,16 @@ exports.makeUppercase = functions.database.ref('/messages/{pushId}/original')
         // Setting an "uppercase" sibling in the Realtime Database returns a Promise.
         return snapshot.ref.parent.child('uppercase').set(uppercase);
     });
+const ALGOLIA_POSTS_INDEX_NAME = 'Questions';
+const client = algoliasearch(functions.config().algolia.app_id, functions.config().algolia.api_key);
+
+exports.updateAlgolia = functions.database.ref('/Questions/{q_id}/').onWrite(async (data, context) => {
+        const index = client.initIndex(ALGOLIA_POSTS_INDEX_NAME);
+        const firebaseObject = {
+            Text: data.after.val().Text,
+            Comments: data.after.val().Comments.Text,
+            objectID: context.params.q_id
+        };
+
+        await index.saveObject(firebaseObject);
+});
