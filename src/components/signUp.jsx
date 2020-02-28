@@ -5,14 +5,16 @@ import { Link } from "react-router-dom";
 
 
 class SignUp extends Component {
-    doSignUp() {
+    async doSignUp() {
+        let signed_up = Promise.resolve(null);
         if (this.state.userPassword.length < 6)
         {
             console.log("Password must be 6 characters long.")
         }
         else if (this.state.userEmail.indexOf("mail.gvsu.edu") !== -1) {
-            signUpFirebase(this.state.userEmail, this.state.userPassword, this.state.permission, this.state.displayName);
+            signed_up = await signUpFirebase(this.state.userEmail, this.state.userPassword, this.state.permission, this.state.displayName);
         }
+        return signed_up
     }
     render() {
         return (
@@ -81,7 +83,7 @@ class SignUp extends Component {
                     <div className="form-group row last">
                         <button className="btn btn-primary mx-auto"
                             onClick={() =>{
-                                this.doSignUp();
+                                this.doSignUp().then(function(display){console.log("Signed up with display: " + display)});
                         }}>Sign-Up</button>
                         </div>
                     </Link>

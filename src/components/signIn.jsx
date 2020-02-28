@@ -3,8 +3,10 @@ import {signInFirebase} from "../hooks/signInHooks";
 
 class SignIn extends Component {
 
-    doSignIn() {
-        signInFirebase(this.state.userEmail, this.state.userPassword);
+    async doSignIn() {
+        return await signInFirebase(this.state.userEmail, this.state.userPassword).then(function(displayName) {
+            return displayName;
+        });
     }
 
     render() {
@@ -42,7 +44,7 @@ class SignIn extends Component {
                     <div className="form-group row last">
                         <button className="btn btn-primary mx-auto"
                             onClick={
-                                () => this.doSignIn()
+                                (e) => {this.doSignIn().then(function(display) {console.log("Signed in with name: " + display)}); e.preventDefault();}
                         }>Sign-In</button>
                     </div>
                 </form>

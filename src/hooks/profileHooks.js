@@ -7,16 +7,15 @@ require("firebase/auth");
 export async function getUserInfo()
 {
     let user = firebase.auth().currentUser;
-    console.log("In profile hooks: " + user.displayName + " " + user.email);
     let user_info = {
-        "display name": user.displayName,
+        "displayName": user.displayName,
         "email": user.email
     };
-     let metadata = {};
-     getUserMetadata(user).then(function(result) {
-         metadata = result;
+     return await getUserMetadata(user).then(function(permission) {
+         user_info["permissions"] = permission;
+         return user_info
      });
-    setTimeout(() => { user_info["permissions"] = metadata["permissions"];
-        console.log(user_info);
-        return user_info; }, 1000);
+    // setTimeout(() => { user_info["permissions"] = metadata["permissions"];
+    //     console.log(user_info);
+    //     return user_info; }, 1000);
 }
