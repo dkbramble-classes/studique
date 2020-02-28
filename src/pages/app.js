@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Switch, useParams } from "react-router-dom";
 
 //import { BrowserHistory } from 'react-history'
@@ -11,10 +11,42 @@ import Profile from './profilePage';
 import FrontPage from './frontpage';
 
 function App () {
-  const [isAuthed, setAuthed] = useState(false);
-  const [displayName, setName] = useState("");
-  const [userType, setType] = useState("");
-  const [searchString, setSearch] = useState("");
+  //Whether or not the user is logged in
+  const [isAuthed, setAuthed] = useState(
+    sessionStorage.getItem('Authenticated') || ''
+  );
+  useEffect(() => {
+    sessionStorage.setItem('Authenticated', isAuthed);
+  }, [isAuthed]);
+
+  //The name of the logged in user
+  const [displayName, setName] = useState(
+    sessionStorage.getItem('DisplayName') || ''
+  );
+  useEffect(() => {
+    sessionStorage.setItem('DisplayName', displayName);
+  }, [displayName]);
+
+  //The Permissions of the logged in user
+  const [userType, setType] = useState(
+    sessionStorage.getItem('Permissions') || ''
+  );
+  useEffect(() => {
+    sessionStorage.setItem('Permissions', userType);
+  }, [userType]);
+
+  //The results of the last search
+  const [searchString, setSearch] = useState(
+    sessionStorage.getItem('SearchString') || ''
+  );
+  useEffect(() => {
+    sessionStorage.setItem('SearchString', searchString);
+  }, [searchString]);
+
+  // const [isAuthed, setAuthed] = useSessionStorage('Authenticated', isAuthed, setAuthed );
+  // const [displayName, setName] = useSessionStorage('DisplayName', displayName, setName );
+  // const [userType, setType] = useSessionStorage('Permissions', userType, setType );
+  // const [searchString, setSearch] = useSessionStorage('SearchString',searchString, setSearch );
 
   function handleAuthed(newVal) {
     setAuthed(newVal);

@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import {signUpFirebase} from "../hooks/signUpHooks";
-import { Link } from "react-router-dom";
+//import { Redirect } from "react-router";
 //import Popup from "reactjs-popup";
 
 
@@ -91,9 +91,9 @@ function SignUp (props){
                             </label>
                         </div>
                     </div>
-                        <div className="form-group row last">
-                            <input type="submit" className="btn btn-primary mx-auto" value="Sign Up"/>
-                        </div>
+                    <div className="form-group row last">
+                        <input type="submit" className="btn btn-primary mx-auto" value="Sign Up"/>
+                    </div>
                 </form>
             </div>
         );
