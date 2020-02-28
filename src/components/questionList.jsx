@@ -2,7 +2,7 @@ import React from 'react';
 import QCards from '../components/questionCards';
 import "../css/questionList.css";
 
-function questionList() {
+function QuestionList() {
   return (
     <div className="qlistPage">
 
@@ -20,4 +20,4 @@ function questionList() {
     );
     }
 
-  export default questionList;
+  export default QuestionList;
