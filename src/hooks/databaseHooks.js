@@ -70,3 +70,28 @@ export function getUserMetadata(user)
     //
     // return data;
 }
+
+export function createQuestion(title, body)
+{
+    const user = firebase.auth().currentUser;
+
+    const postData = {
+        author: user.displayName,
+        Text: body,
+        Title: title,
+        Comments: {}
+    };
+
+    // Get a key for a new Post.
+    const newPostKey = firebase.database().ref().child('Questions').push().key;
+    firebase.database().ref('Questions/' + newPostKey).update(postData);
+}
+
+export function uploadProfilePicture(filePath)
+{
+    const user = firebase.auth().currentUser;
+
+    var storageRef = firebase.storage().ref();
+
+    var mountainsRef = storageRef.child(user.uid + '/mountains.jpg');
+}
