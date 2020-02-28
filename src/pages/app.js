@@ -13,26 +13,26 @@ import FrontPage from './frontpage';
 function App () {
   //Whether or not the user is logged in
   const [isAuthed, setAuthed] = useState(
-    sessionStorage.getItem('Authenticated') || ''
+    localStorage.getItem('Authenticated') || ''
   );
   useEffect(() => {
-    sessionStorage.setItem('Authenticated', isAuthed);
+    localStorage.setItem('Authenticated', isAuthed);
   }, [isAuthed]);
 
   //The name of the logged in user
   const [displayName, setName] = useState(
-    sessionStorage.getItem('DisplayName') || ''
+    localStorage.getItem('DisplayName') || ''
   );
   useEffect(() => {
-    sessionStorage.setItem('DisplayName', displayName);
+    localStorage.setItem('DisplayName', displayName);
   }, [displayName]);
 
   //The Permissions of the logged in user
   const [userType, setType] = useState(
-    sessionStorage.getItem('Permissions') || ''
+    localStorage.getItem('Permissions') || ''
   );
   useEffect(() => {
-    sessionStorage.setItem('Permissions', userType);
+    localStorage.setItem('Permissions', userType);
   }, [userType]);
 
   //The results of the last search
