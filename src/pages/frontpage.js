@@ -14,8 +14,8 @@ function FrontPage(props) {
           <h3 className="text-white mb-5 text-center">
             Crowdsourcing The College Experience
           </h3>
-          {/* <SimpleSearchBar/> */}
-          <SearchBarText />
+          <SearchBarText searchString={props.searchString} handleSearch={props.handleSearch} urlStringL={props.urlString}/>
+          {/* <SimpleSearchBar searchString={props.searchString} handleSearch={props.handleSearch} urlStringL={props.urlString}/> */}
           <div className="text-white text-font text-center">
             <div className="my-2">
             Want to help others? 
@@ -29,6 +29,5 @@ function FrontPage(props) {
   </div>);
 
 }
-//{props.isAuthed}
  
 export default FrontPage;
