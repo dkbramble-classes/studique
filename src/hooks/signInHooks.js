@@ -2,7 +2,7 @@ const firebase = require("firebase/app");
 
 require("firebase/auth");
 
-export async function signInFirebase(email, password)
+export async function signInFirebase(email, password, setAuthed, setName, setType)
 {
     let current_display_name = "";
     let login = await firebase.auth().signInWithEmailAndPassword(email, password).then(function() {
@@ -14,5 +14,9 @@ export async function signInFirebase(email, password)
         console.log(error.code + ": " + email);
         console.log(error.message);
     });
+
+    // setAuthed(true);
+    // setName("HALLO");
+    // setType("student");
     return login;
 }
