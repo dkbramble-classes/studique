@@ -79,11 +79,13 @@ function SignUp (props){
                         <div className="form-check">
                             <input className="form-check-input" type="radio" name="userType"
                                    value="student"
+                                   checked = {userPermission}
                                    onChange={handlePermission}/>
                                    <label className="form-check-label">Student</label>
                         </div>
                         <div className="form-check">
                             <input className="form-check-input" type="radio" name="userType" value="teacher"
+                            checked = {userPermission}
                                 onChange={handlePermission}
                               />
                             <label className="form-check-label">

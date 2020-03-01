@@ -287,7 +287,8 @@ body, html {
   }
 
   .bg-image{
-    overflow-y: scroll;
+    position: fixed;
+    overflow-y: hidden;
   }
 
   .nav-item {

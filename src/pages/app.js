@@ -13,10 +13,10 @@ import FrontPage from './frontpage';
 function App () {
   //Whether or not the user is logged in
   const [isAuthed, setAuthed] = useState(
-    localStorage.getItem('Authenticated') || ''
+    sessionStorage.getItem('Authenticated') || ''
   );
   useEffect(() => {
-    localStorage.setItem('Authenticated', isAuthed);
+    sessionStorage.setItem('Authenticated', isAuthed);
   }, [isAuthed]);
 
   //The name of the logged in user
@@ -43,6 +43,14 @@ function App () {
     sessionStorage.setItem('SearchString', searchString);
   }, [searchString]);
 
+  //Whether or not the user is logged in
+  const [urlString, setURL] = useState(
+    sessionStorage.getItem('SearchURL') || ''
+  );
+  useEffect(() => {
+    sessionStorage.setItem('SearchURL', urlString);
+  }, [urlString]);
+
   // const [isAuthed, setAuthed] = useSessionStorage('Authenticated', isAuthed, setAuthed );
   // const [displayName, setName] = useSessionStorage('DisplayName', displayName, setName );
   // const [userType, setType] = useSessionStorage('Permissions', userType, setType );
@@ -52,8 +60,9 @@ function App () {
     setAuthed(newVal);
   }
 
-  function handleSearch(newSearch){
+  function handleSearch(newSearch, newURL){
     setSearch(newSearch);
+    setURL(newURL);
   }
 
   function handleName(newName) {
@@ -66,7 +75,6 @@ function App () {
     //console.log(newType);
   }
 
-
   return (
     <Router>
       <div>
@@ -75,8 +83,8 @@ function App () {
         <script src="https://polyfill.io/v3/polyfill.min.js?features=default%2CArray.prototype.find%2CArray.prototype.includes%2CPromise%2CObject.assign%2CObject.entries"></script>
         
         <Nav isAuthed={isAuthed} handleAuthed={handleAuthed} displayName={displayName} handleName={handleName} handleType={handleType} />
-        <Route path="/" exact render={(props) => <FrontPage {...props} searchString={searchString} onChange={handleSearch} />}/>
-        <Route path="/results/*" exact render={(props) => <QuestionList {...props} searchString={searchString} onChange={handleSearch} isAuthed={isAuthed} userType={userType}/>}/>
+        <Route path="/" exact render={(props) => <FrontPage {...props} searchString={searchString} urlString={urlString} handleSearch={handleSearch} />}/>
+        <Route path="/results/*" exact render={(props) => <QuestionList {...props} searchString={searchString} handleSearch={handleSearch} isAuthed={isAuthed} userType={userType}/>}/>
         <Route path="/profile" exact render={(props) => <Profile {...props} handleName={handleName} displayName={displayName} isAuthed={isAuthed} />} />
         <Switch>
           <Route path="/results/search=:id"> <RoutResults/></Route>
@@ -89,6 +97,7 @@ function App () {
 function RoutResults() {
   // access dynamic URL variables
   let { id } = useParams();
+  
   return (
     <div>
       <h3>ID: {id}</h3>
