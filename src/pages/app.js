@@ -9,6 +9,7 @@ import Nav from '../components/nav';
 
 import profile from './profilePage';
 import FrontPage from './frontpage';
+import questionForm from './questionFormPage';
 
 class App extends React.Component {
   render(){
@@ -27,6 +28,7 @@ class App extends React.Component {
         <Route path="/" exact component={FrontPage}></Route>
         <Route path="/results/*" exact component={questionList}/>
         <Route path="/profile" exact component={profile} />
+        <Route path="/questionForm" exact component={questionForm}/>
         <Switch>
           <Route path="/results/:id"> <RoutResults/></Route>
         </Switch>

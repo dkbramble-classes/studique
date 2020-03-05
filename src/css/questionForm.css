@@ -1,0 +1,24 @@
+@import "./styles.css";
+
+.questionFormPage {
+    background-color: rgb(187, 187, 187);
+}
+
+.qFormInnerForm {
+    padding-left: 20px;
+    padding-top: 20px;
+}
+
+.qFormInput {
+    width: 80%;
+    border-radius: 5px;
+    border-style: inset;
+}
+
+.qFormSubtext {
+    font-family: "Monserrat";
+}
+
+.qFormSection {
+    padding: 10px 0px;
+}
