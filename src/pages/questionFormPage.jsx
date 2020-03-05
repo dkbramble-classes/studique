@@ -11,9 +11,11 @@ class QuestionForm extends React.Component {
   render() {
     return (
       <div className="questionFormPage">
-        <div className="qFormInnerForm">
+        <div className="qFormContent">
           <h1>Ask a new Question</h1>
 
+          <div className="qFormOuterForm">
+            <div className="qFormInnerForm">
           <div className="qFormSection">
             <h4>Title</h4>
             <div className="qFormSubtext">Be specific</div>
@@ -43,7 +45,7 @@ class QuestionForm extends React.Component {
                   id="questionBody"
                   autoComplete="off"
                   rows="10"
-                  placeholder="e.g. I have already tried looking at this website page (include link to page) ... "
+                  placeholder="e.g. I have already tried looking at this website page (include link to page) . . . "
                 />
               </form>
             </div>
@@ -62,9 +64,11 @@ class QuestionForm extends React.Component {
               />
             </form>
           </div>
+          </div>
+          </div>
 
-          <button type="submit" className="ext-font">
-            Submit Question
+          <button type="submit" className="text-font qFormButton">
+            SUBMIT QUESTION
           </button>
         </div>
       </div>
