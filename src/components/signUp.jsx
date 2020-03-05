@@ -1,109 +1,104 @@
-import React, {Component} from "react";
+import React, {useState} from "react";
 import {signUpFirebase} from "../hooks/signUpHooks";
-import { Link } from "react-router-dom";
+//import { Redirect } from "react-router";
 //import Popup from "reactjs-popup";
 
 
-class SignUp extends Component {
-    doSignUp() {
-        if (this.state.userPassword.length < 6)
+function SignUp (props){
+    const [userEmail, setEmail] = useState("");
+    const [userPassword, setPassword] = useState("");
+    const [userPermission, setPermission] = useState("student");
+    const [userDisplay, setDisplay] = useState("");
+
+    function handleEmail(ev) {
+      setEmail(ev.target.value);
+    }
+  
+    function handlePassword(ev){
+      setPassword(ev.target.value);
+    }
+
+    function handlePermission(ev) {
+        setPermission(ev.target.value);
+      }
+    function handleDisplay(ev){
+        setDisplay(ev.target.value);
+    }
+    async function doSignUp(ev) {
+        let signed_up = Promise.resolve(null);
+        if (userPassword.length < 6)
         {
             console.log("Password must be 6 characters long.")
         }
-        else if (this.state.userEmail.indexOf("mail.gvsu.edu") !== -1) {
-            signUpFirebase(this.state.userEmail, this.state.userPassword, this.state.permission, this.state.displayName);
+        else if (userEmail.indexOf("mail.gvsu.edu") !== -1) {
+            signed_up = await signUpFirebase(userEmail, userPassword, userPermission, userDisplay);
+
+            if (signed_up !== null){
+                //console.log(signed_up);
+                props.handleName(signed_up);
+                props.handleAuthed(true);
+                props.handleType(userPermission);
+            }
         }
+        return signed_up
     }
-    render() {
         return (
             <div className="container mx-auto text-center pop-up">
                 <h2 className="title">Sign-Up</h2>
-                <form onSubmit={this.handleSubmit}>
+                <form onSubmit={(e) => {doSignUp().then(function(display) {console.log("Signed in with name: " + display)}); e.preventDefault();}}>
                     <div className="form-group row">
                         <input className="form-control input-medium" id="inputText" type="text"
                             value={
-                                this.state.displayName
+                                userDisplay
                             }
                             name="displayName"
                             placeholder="Full Name"
-                            onChange={
-                                (e) => this.addFormData(e)
-                        }></input>
+                            onChange={handleDisplay}></input>
                     </div>
                     <div className="form-group row">
                         <input className="form-control input-medium" type="text"
                             value={
-                                this.state.userEmail
+                                userEmail
                             }
                             name="userEmail"
                             placeholder="Email"
-                            onChange={
-                                (e) => this.addFormData(e)
-                        }></input>
+                            onChange={handleEmail}></input>
                     </div>
                     <div className="form-group row">
                         <input className="form-control input-medium" type="password"
                             value={
-                                this.state.userPassword
+                                userPassword
                             }
                             name="userPassword"
                             placeholder="Password"
-                            onChange={
-                                (e) => this.addFormData(e)
-                        }></input>
+                            onChange={handlePassword}
+                        ></input>
                     </div>
                     <div className="form-group">
                         <h4 className="text-white">User Type:</h4>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="userType" id="student"
-                                   value=
-                                    {
-                                        this.state.permission ="student"
-                                    }
-                                   checked/>
-                                   <label
-                                 class="form-check-label" for="student">
-                                Student
-                            </label>
+                        <div className="form-check">
+                            <input className="form-check-input" type="radio" name="userType"
+                                   value="student"
+                                   checked = {userPermission}
+                                   onChange={handlePermission}/>
+                                   <label className="form-check-label">Student</label>
                         </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="userType" id="teacher" value=
-                                {
-                                    this.state.permission ="teacher"
-                                }/>
-                            <label class="form-check-label" for="teacher">
+                        <div className="form-check">
+                            <input className="form-check-input" type="radio" name="userType" value="teacher"
+                            checked = {userPermission}
+                                onChange={handlePermission}
+                              />
+                            <label className="form-check-label">
                                 Teacher
                             </label>
                         </div>
                     </div>
-                   
-                    <Link to="/profile">
                     <div className="form-group row last">
-                        <button className="btn btn-primary mx-auto"
-                            onClick={() =>{
-                                this.doSignUp();
-                        }}>Sign-Up</button>
-                        </div>
-                    </Link>
+                        <input type="submit" className="btn btn-primary mx-auto" value="Sign Up"/>
+                    </div>
                 </form>
             </div>
         );
-    }
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            userType: "student",
-            displayName: "",
-            userEmail: "",
-            userPassword: "",
-            permission: ""
-        }
-    }
-
-    addFormData(ev) {
-        this.setState({[ev.target.name]: ev.target.value});
-    }
-
 }
 export default SignUp;
+
