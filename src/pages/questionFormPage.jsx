@@ -16,7 +16,6 @@ class QuestionForm extends React.Component {
             <div className="qFormInnerForm">
               <div className="qFormSection">
                 <h4>Title</h4>
-                <div className="qFormSubtext">Be specific</div>
                 <div>
                   <form>
                     <input
@@ -32,9 +31,6 @@ class QuestionForm extends React.Component {
 
               <div className="qFormSection">
                 <h4>Body</h4>
-                <div className="qFormSubtext">
-                  Explain the context, why you need it, what you've tried, etc.
-                </div>
                 <div>
                   <form>
                     <textarea
@@ -43,7 +39,7 @@ class QuestionForm extends React.Component {
                       id="questionBody"
                       autoComplete="off"
                       rows="10"
-                      placeholder="e.g. I have already tried looking at this website page (include link to page) . . . "
+                      placeholder="Explain the context, why you need it, what you've tried, etc."
                     />
                   </form>
                 </div>
@@ -51,16 +47,13 @@ class QuestionForm extends React.Component {
 
               <div className="qFormSection">
                 <h4>Tags</h4>
-                <div className="qFormSubtext">
-                  Separate multiple tags by commas
-                </div>
                 <form>
                   <input
                     type="text"
                     className="qFormInput"
                     id="questionTags"
                     autoComplete="off"
-                    placeholder="e.g. Student employee, Employment"
+                    placeholder="e.g. Student employee, Employment (Separate multiple tags by commas)"
                   />
                 </form>
               </div>
