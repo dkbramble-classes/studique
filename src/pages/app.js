@@ -9,6 +9,7 @@ import Nav from '../components/nav';
 
 import Profile from './profilePage';
 import FrontPage from './frontpage';
+import QuestionForm from './questionFormPage';
 
 function App () {
   //Whether or not the user is logged in
@@ -86,6 +87,7 @@ function App () {
         <Route path="/" exact render={(props) => <FrontPage {...props} searchString={searchString} urlString={urlString} handleSearch={handleSearch} />}/>
         <Route path="/results/*" exact render={(props) => <QuestionList {...props} searchString={searchString} handleSearch={handleSearch} isAuthed={isAuthed} userType={userType}/>}/>
         <Route path="/profile" exact render={(props) => <Profile {...props} handleName={handleName} displayName={displayName} isAuthed={isAuthed} />} />
+        <Route path="/questionForm" exact render={(props) => <QuestionForm {...props} handleName={handleName} displayName={displayName} isAuthed={isAuthed} />} />
         <Switch>
           <Route path="/results/search=:id"> <RoutResults/></Route>
         </Switch>
