@@ -39,8 +39,8 @@
 
 .myQList{
     width: 70%;
-    justify-content: center;
-    display: inline-block
+    display: inline-block;
+    text-align: left;
 
 }
 

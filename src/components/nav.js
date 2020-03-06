@@ -3,6 +3,7 @@ import React from 'react';
 import SignIn from "../components/signIn.jsx";
 import SignUp from "../components/signUp.jsx";
 import Popup from "reactjs-popup";
+import { Link } from "react-router-dom";
 
 function Nav(props) {
   
@@ -60,8 +61,13 @@ function ButtonDisplay(props){
     );
   }
   else{
-    //Where to put the code if the person is logged in
-    return <div></div>
+    return <div className="text-white text-font text-center">
+    <div className="my-2">
+    </div>
+    <Link to="/profile/">
+     <input type="submit" className="nav-link btn text-font" value="Profile"  displayName={props.displayName} />
+    </Link>
+  </div>
   }
 }
 

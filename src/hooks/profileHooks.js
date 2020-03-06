@@ -10,9 +10,10 @@ export async function getUserInfo()
     let user_info = {
         "displayName": user.displayName,
         "email": user.email
-    };
+     };
      return await getUserMetadata(user).then(function(permission) {
          user_info["permissions"] = permission;
          return user_info
      });
 }
+
