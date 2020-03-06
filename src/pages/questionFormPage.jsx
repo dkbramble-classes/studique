@@ -20,7 +20,7 @@ class QuestionForm extends React.Component {
                   <form>
                     <input
                       type="text"
-                      className="qFormInput"
+                      className="form-control"
                       id="questionTitle"
                       autoComplete="off"
                       placeholder="e.g. Where can I find my tax forms as a student employee?"
@@ -35,7 +35,7 @@ class QuestionForm extends React.Component {
                   <form>
                     <textarea
                       type="text"
-                      className="qFormInput"
+                      className="form-control"
                       id="questionBody"
                       autoComplete="off"
                       rows="10"
@@ -50,7 +50,7 @@ class QuestionForm extends React.Component {
                 <form>
                   <input
                     type="text"
-                    className="qFormInput"
+                    className="form-control"
                     id="questionTags"
                     autoComplete="off"
                     placeholder="e.g. Student employee, Employment (Separate multiple tags by commas)"

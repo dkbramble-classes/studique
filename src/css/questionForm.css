@@ -21,14 +21,6 @@
     padding: 10px 20px;
 }
 
-.qFormInput {
-    width: 90%;
-    border-radius: 5px;
-    border-style: inset;
-    font-family: "Monserrat";
-    text-size-adjust: 2px;
-}
-
 .qFormSubtext {
     font-family: "Monserrat";
 }
