@@ -16,7 +16,7 @@ function Profile(props) {
 
 
     /*Code adapted from Tallan Groberg
-here is the link to his tutorial https://dev.to/tallangroberg/how-to-do-image-upload-with-firebase-in-react-cpj*/
+    here is the link to his tutorial https://dev.to/tallangroberg/how-to-do-image-upload-with-firebase-in-react-cpj*/
 
     const handleImageAsFile = (e) => {
         const image = e.target.files[0]
@@ -54,52 +54,61 @@ here is the link to his tutorial https://dev.to/tallangroberg/how-to-do-image-up
 
     // gets the functions from storage refences the image storage in firebase by the children
     // gets the download url then sets the image from firebase as the value for the imgUrl key:
-    storage.ref('images').child(user.email).getDownloadURL().then(fireBaseUrl => {
-        setProfileImageURL(prevObject => ({
-            ...prevObject,
-            imgUrl: fireBaseUrl
-        }))
-    })
+    if (props.displayName) {
+        storage.ref('images').child(user.email).getDownloadURL().then(fireBaseUrl => {
+            setProfileImageURL(prevObject => ({
+                ...prevObject,
+                imgUrl: fireBaseUrl
+            }))
+        })
 
-    return (
-        <div className="profile">
-            <div className="profileContainer">
-                <div className="userInfo">
-                    <h2>{
-                        props.displayName
-                    }</h2>
+        return (
 
-                    <img className="profileImage"
-                        src={
-                            profileImageURL.imgUrl
-                        }
-                        alt="Profile"/>
+            <div className="profile">
+                <div className="profileContainer">
+                    <div className="userInfo">
+                        <h2>{
+                            props.displayName
+                        }</h2>
+
+                        <img className="profileImage"
+                            src={
+                                profileImageURL.imgUrl
+                            }
+                            alt="Profile"/>
+                    </div>
+                    <div className="edit">
+                        <form onSubmit={handleFireBaseUpload}>
+                            <input type="file"
+                                onChange={handleImageAsFile}/>
+                            <button>Upload Profile Picture</button>
+                        </form>
+                    </div>
                 </div>
-                <div className="edit">
-                    <form onSubmit={handleFireBaseUpload}>
-                        <input type="file"
-                            onChange={handleImageAsFile}/>
-                        <button>Upload Profile Picture</button>
-                    </form>
+
+
+                <div className="qListContainer">
+                    <div className="myQList">
+                        <QCards/>
+                        <QCards/>
+                        <QCards/>
+                        <QCards/>
+                        <QCards/>
+                        <QCards/>
+                    </div>
                 </div>
+
+
             </div>
 
-
-            <div className="qListContainer">
-                <div className="myQList">
-                    <QCards/>
-                    <QCards/>
-                    <QCards/>
-                    <QCards/>
-                    <QCards/>
-                    <QCards/>
-                </div>
+        );
+    } else {
+        return (
+            <div>
+                <h2>Login in to access your profile</h2>
             </div>
-
-
-        </div>
-
-    );
+        );
+    }
 }
 
 export default Profile;
