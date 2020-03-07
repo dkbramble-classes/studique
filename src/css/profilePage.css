@@ -10,7 +10,6 @@
     border-radius: 5px;
     padding: 10px;
     margin: 10px 0px;
-    background-color: white;
     width: 70%;
     
 
@@ -22,7 +21,7 @@
 }
 
 .profile {
-    background-color: rgb(187, 187, 187);
+    background-color: #C7D0D8;
 }
 
 .profileContainer {

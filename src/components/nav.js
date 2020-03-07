@@ -65,7 +65,7 @@ function ButtonDisplay(props){
     <div className="my-2">
     </div>
     <Link to="/profile/">
-     <input type="submit" className="nav-link btn text-font" value="Profile"  displayName={props.displayName} />
+     <input type="submit" className="nav-link btn text-font" value="Profile"  displayName={props.displayName} email={props.email} />
     </Link>
   </div>
   }

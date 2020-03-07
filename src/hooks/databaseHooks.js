@@ -5,6 +5,8 @@ const firebase = require("firebase/app");
 const dotenv = require('dotenv');
 require("firebase/database");
 require("firebase/auth");
+require("firebase/storage");
+
 
 
 dotenv.config();
@@ -20,6 +22,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
+const storage = firebase.storage();
 
 export async function initializeUser(user, permission, displayName)
 {
@@ -48,4 +51,8 @@ export function getUserMetadata(user)
         let info = snapshot.val();
         return info.permissions;
     }).then(result => {return result});
+}
+
+export {
+    storage, firebase as default
 }

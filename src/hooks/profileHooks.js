@@ -16,4 +16,3 @@ export async function getUserInfo()
          return user_info
      });
 }
-
