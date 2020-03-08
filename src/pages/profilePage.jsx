@@ -9,7 +9,7 @@ function Profile(props) {
         imgUrl: ''
     };
     const [imageAsFile, setImageAsFile] = useState('');
-    const [setImageAsUrl] = useState(allInputs);
+    const [imageAsURL, setImageAsUrl] = useState(allInputs);
     const firebase = require("firebase/app");
     const user = firebase.auth().currentUser;
     const [profileImageURL, setProfileImageURL] = useState('');
