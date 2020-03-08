@@ -9,6 +9,7 @@ function Profile(props) {
         imgUrl: ''
     };
     const [imageAsFile, setImageAsFile] = useState('');
+    const [tempName, setTempName] = useState(props.displayName);
     const [imageAsURL, setImageAsUrl] = useState(allInputs);
     const firebase = require("firebase/app");
     const user = firebase.auth().currentUser;
@@ -21,6 +22,14 @@ function Profile(props) {
     const handleImageAsFile = (e) => {
         const image = e.target.files[0]
         setImageAsFile(imageFile => (image))
+    }
+
+    function handleTempName(newVal) {
+        setTempName(newVal.target.value);
+    }
+
+    function handleNameSubmit(newVal){
+        props.handleName(newVal.target.value);
     }
 
     const handleFireBaseUpload = e => {
@@ -55,22 +64,20 @@ function Profile(props) {
     // gets the functions from storage refences the image storage in firebase by the children
     // gets the download url then sets the image from firebase as the value for the imgUrl key:
     if (props.displayName) {
-        storage.ref('images').child(user.email).getDownloadURL().then(fireBaseUrl => {
-            setProfileImageURL(prevObject => ({
-                ...prevObject,
-                imgUrl: fireBaseUrl
-            }))
-        })
+        // storage.ref('images').child(user.email).getDownloadURL().then(fireBaseUrl => {
+        //     setProfileImageURL(prevObject => ({
+        //         ...prevObject,
+        //         imgUrl: fireBaseUrl
+        //     }))
+        // })
 
         return (
 
             <div className="profile">
                 <div className="profileContainer">
                     <div className="userInfo">
-                        <h2>{
-                            props.displayName
-                        }</h2>
-
+                        {/* <h2>{props.displayName}</h2> */}
+                        <input type="text" className="invisible-input" maxLength="20" value={tempName} onChange={handleTempName} onBlur={handleNameSubmit}/>
                         <img className="profileImage"
                             src={
                                 profileImageURL.imgUrl

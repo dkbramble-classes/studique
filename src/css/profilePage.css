@@ -30,11 +30,27 @@
 
 .userInfo {
     width: 70%;
-    justify-content: center;
-    display: inline-block;
     color: white;
-
+    justify-content:center;
+    display: inline-block;
 }
+
+.invisible-input{
+    background-color: rgba(0,0,0,0);
+    font-family: "Varela Round";
+    border-color: rgba(0,0,0,0);
+    color: rgba(255,255,255);
+    font-size: 1.5em;
+    text-align: center;
+  }
+  .invisible-input:focus{
+    background-color: rgba(0,0,0,0);
+    font-family: "Varela Round";
+    border-color: rgba(0,0,0,0);
+    color: rgba(255,255,255);
+    font-size: 1.5em;
+    text-align: center;
+  }
 
 .myQList{
     width: 70%;
