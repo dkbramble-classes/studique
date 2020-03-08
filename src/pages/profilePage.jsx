@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import '../css/profilePage.css';
 import QCards from '../components/questionCards';
-import {storage} from '../hooks/databaseHooks';
+import {storage, updateDisplayName} from '../hooks/databaseHooks';
 
 function Profile(props) {
 
@@ -9,6 +9,7 @@ function Profile(props) {
         imgUrl: ''
     };
     const [imageAsFile, setImageAsFile] = useState('');
+    const [tempName, setTempName] = useState(props.displayName);
     const [imageAsURL, setImageAsUrl] = useState(allInputs);
     const firebase = require("firebase/app");
     const user = firebase.auth().currentUser;
@@ -21,6 +22,15 @@ function Profile(props) {
     const handleImageAsFile = (e) => {
         const image = e.target.files[0]
         setImageAsFile(imageFile => (image))
+    }
+
+    async function handleTempName(newVal) {
+        setTempName(newVal.target.value);
+        await updateDisplayName(newVal.target.value);
+    }
+
+    function handleNameSubmit(newVal){
+        props.handleName(newVal.target.value);
     }
 
     const handleFireBaseUpload = e => {
@@ -67,10 +77,8 @@ function Profile(props) {
             <div className="profile">
                 <div className="profileContainer">
                     <div className="userInfo">
-                        <h2>{
-                            props.displayName
-                        }</h2>
-
+                        {/* <h2>{props.displayName}</h2> */}
+                        <input type="text" className="invisible-input" maxLength="20" value={tempName} onChange={handleTempName} onBlur={handleNameSubmit}/>
                         <img className="profileImage"
                             src={
                                 profileImageURL.imgUrl

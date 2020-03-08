@@ -45,6 +45,14 @@ export async function initializeUser(user, permission, displayName)
     }
 }
 
+export async function updateDisplayName(newName)
+{
+    let user = firebase.auth().currentUser;
+    return await user.updateProfile({
+        displayName: newName,
+    })
+}
+
 export function getUserMetadata(user)
 {
     return database.ref('users/' + user.uid).once('value').then(function (snapshot) {
