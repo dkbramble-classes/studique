@@ -4,8 +4,7 @@ import { Link } from "react-router-dom";
 //import SimpleSearchBar from '../components/simple_searchbar'
 import SearchBarText from '../components/searchbar_text';
 
-class FrontPage extends React.Component {
-  render(){
+function FrontPage(props) {
   return (
   <div className="bg-image">
     {/* <img className="app-bg" src={appbg} alt="bg"/> */}
@@ -15,8 +14,8 @@ class FrontPage extends React.Component {
           <h3 className="text-white mb-5 text-center">
             Crowdsourcing The College Experience
           </h3>
-          {/* <SimpleSearchBar/> */}
-          <SearchBarText/>
+          <SearchBarText searchString={props.searchString} handleSearch={props.handleSearch} urlStringL={props.urlString}/>
+          {/* <SimpleSearchBar searchString={props.searchString} handleSearch={props.handleSearch} urlStringL={props.urlString}/> */}
           <div className="text-white text-font text-center">
             <div className="my-2">
             Want to help others? 
@@ -27,9 +26,8 @@ class FrontPage extends React.Component {
           </div>
         </div>
     </section>
-  </div>
-);
-  }
+  </div>);
+
 }
  
 export default FrontPage;
