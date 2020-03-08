@@ -29,6 +29,7 @@ function ButtonDisplay(props){
 
   const handleLogout = () => {
     //Need to handle props.isAuthed some how
+    props.handleAuthed(false);
     signOut();
   }
   

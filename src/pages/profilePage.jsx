@@ -11,8 +11,6 @@ function Profile(props) {
     const [imageAsFile, setImageAsFile] = useState('');
     const [tempName, setTempName] = useState(props.displayName);
     const [imageAsURL, setImageAsUrl] = useState(allInputs);
-    const firebase = require("firebase/app");
-    const user = firebase.auth().currentUser;
     const [profileImageURL, setProfileImageURL] = useState('');
 
 
@@ -34,6 +32,8 @@ function Profile(props) {
     }
 
     const handleFireBaseUpload = e => {
+        let firebase = require("firebase/app");
+        let user = firebase.auth().currentUser;
         e.preventDefault()
         console.log('start of upload')
         // async magic goes here...
@@ -64,13 +64,28 @@ function Profile(props) {
 
     // gets the functions from storage refences the image storage in firebase by the children
     // gets the download url then sets the image from firebase as the value for the imgUrl key:
-    if (props.displayName) {
-        storage.ref('images').child(user.email).getDownloadURL().then(fireBaseUrl => {
-            setProfileImageURL(prevObject => ({
-                ...prevObject,
-                imgUrl: fireBaseUrl
-            }))
-        })
+    if (props.displayName !== ""){
+        try{
+            let firebase = require("firebase/app");
+            let user = firebase.auth().currentUser;
+            firebase.auth().onAuthStateChanged(function(user) {
+                storage.ref('images').child(user.email).getDownloadURL().then(fireBaseUrl => {
+                    setProfileImageURL(prevObject => ({
+                        ...prevObject,
+                        imgUrl: fireBaseUrl
+                    }))
+                })
+            });
+            
+        }
+        catch(e){
+            return(
+                <div>
+                <h2>Login in to access your profile</h2>
+            </div>
+            )
+        }
+        
 
         return (
 
