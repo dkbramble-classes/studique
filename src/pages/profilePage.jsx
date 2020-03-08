@@ -92,8 +92,9 @@ function Profile(props) {
             <div className="profile">
                 <div className="profileContainer">
                     <div className="userInfo">
-                        {/* <h2>{props.displayName}</h2> */}
+                        <h2>
                         <input type="text" className="invisible-input" maxLength="20" value={tempName} onChange={handleTempName} onBlur={handleNameSubmit}/>
+                        </h2>
                         <img className="profileImage"
                             src={
                                 profileImageURL.imgUrl
