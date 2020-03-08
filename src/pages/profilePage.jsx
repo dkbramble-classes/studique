@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import '../css/profilePage.css';
 import QCards from '../components/questionCards';
-import {storage} from '../hooks/databaseHooks';
+import {storage, updateDisplayName} from '../hooks/databaseHooks';
 
 function Profile(props) {
 
@@ -24,8 +24,9 @@ function Profile(props) {
         setImageAsFile(imageFile => (image))
     }
 
-    function handleTempName(newVal) {
+    async function handleTempName(newVal) {
         setTempName(newVal.target.value);
+        await updateDisplayName(newVal.target.value);
     }
 
     function handleNameSubmit(newVal){
