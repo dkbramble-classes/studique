@@ -29,8 +29,8 @@ function ButtonDisplay(props){
 
   const handleLogout = () => {
     //Need to handle props.isAuthed some how
-    props.handleAuthed(false);
-    signOut();
+    signOut(props);
+    props.handleAuthed('');
   }
   
   if (!props.isAuthed) {
@@ -77,8 +77,11 @@ function ButtonDisplay(props){
     </Link>
     </li>
     <li className="nav-item">
-      <button  className=" nav-btn btn nav-link text-font" onClick={handleLogout}>
-      Sign-Out</button>
+      {/* <button  className=" nav-btn btn nav-link text-font" onClick={handleLogout}>
+      Sign-Out</button> */}
+      <Link to="/">
+        <input type="submit" className="nav-link btn text-font" value="Log-Out" onClick={handleLogout} />
+      </Link>
     </li>
     </ui>
     </div>

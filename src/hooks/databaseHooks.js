@@ -61,9 +61,10 @@ export function getUserMetadata(user)
     }).then(result => {return result});
 }
 
-export function signOut(){
+export function signOut(props){
     firebase.auth().signOut().then(function() {
         // Sign-out successful.
+        props.handleAuthed('');
       }).catch(function(error) {
         // An error happened.
       });      

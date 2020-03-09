@@ -53,12 +53,13 @@ function Profile(props) {
         }, () => {
             // gets the functions from storage refences the image storage in firebase by the children
             // gets the download url then sets the image from firebase as the value for the imgUrl key:
+            firebase.auth().onAuthStateChanged(function(user) {
             storage.ref('images').child(user.email).getDownloadURL().then(fireBaseUrl => {
                 setImageAsUrl(prevObject => ({
                     ...prevObject,
                     imgUrl: fireBaseUrl
                 }))
-            })
+            })});
         })
     }
 
