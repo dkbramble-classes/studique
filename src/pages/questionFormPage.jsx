@@ -2,9 +2,9 @@ import React from "react";
 import "../css/questionForm.css";
 
 class QuestionForm extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
 
   render() {
     return (
