@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import algoliasearch from 'algoliasearch/lite';
 import alglogo from "../images/algolia-white.svg";
 
@@ -20,25 +20,32 @@ const index = client.initIndex('Questions');
 //   console.log(hits)
 // });
 
-class SimpleSearchBar extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {value: '', isEnabled: false};
+function SimpleSearchBar (props){
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {value: '', isEnabled: false};
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-  }
+  //   this.handleChange = this.handleChange.bind(this);
+  //   this.handleSubmit = this.handleSubmit.bind(this);
+  // }
+  const [tmpSearch, setSearch] = useState('');
+  const [tmpURL, setURL] = useState('');
+  const [isEnabled, setEnabled] = useState(false);
 
-
-  handleChange(event) {
-    this.setState({value: event.target.value});
-    
+  
+  function handleTextChange(event) {
+    setSearch(event.target.value);
+    var url = event.target.value.replace(/ /g, "&");
+    setURL(url);    
     let empty = event.target.value.length > 0;
-    this.setState({isEnabled: empty});
+    setEnabled(empty);
   }
-
-  handleSubmit(event) {
-    index.search(this.state.value, {
+  function handleSubmit(event) {
+    event.preventDefault();
+    if (tmpSearch.length > 0){
+      props.handleSearch(tmpSearch, tmpURL);
+    }
+    index.search(tmpSearch, {
       attributesToRetrieve: ['Text'],
       hitsPerPage: 10,
     }).then(({ hits }) => {
@@ -49,27 +56,22 @@ class SimpleSearchBar extends React.Component {
       //alert('Hits: ' + hits);
     });
     //alert('A name was submitted: ' + this.state.value);
-    event.preventDefault();
   }
-
-  render() {
-    return (
-      <div>
-          <a className="text-left alg-logo" href="https://www.algolia.com" class="ais-PoweredBy-link" aria-label="Algolia">
-            <img className="alg-logo content-left" src={alglogo} alt="alglogo"></img>
-          </a>
-        <form className="form-inline d-flex content-center text-center" onSubmit={this.handleSubmit}>
-          <input type="text" className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputText" autoComplete="off" placeholder="ASK A QUESTION" value={this.state.value} onChange={this.handleChange} />
-          <div className="mx-auto">
-          <Link to={"/results/" + this.state.value}>
-            <input type="submit" disabled={!this.state.isEnabled} className="btn btn-primary mx-auto" value="Submit" />
-          </Link>
-          </div>
-        </form>
-      </div>
-
-    );
-  }
+  return (
+    <div>
+        <a className="text-left alg-logo ais-PoweredBy-link" href="https://www.algolia.com" aria-label="Algolia">
+          <img className="alg-logo content-left" src={alglogo} alt="alglogo"></img>
+        </a>
+      <form className="form-inline d-flex content-center text-center" onSubmit={handleSubmit}>
+        <input type="text" className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0" id="inputText" autoComplete="off" placeholder="ASK A QUESTION" value={tmpSearch} onChange={handleTextChange} />
+        <div className="mx-auto">
+        <Link to={"/results/search=" + tmpURL}>
+          <input type="submit" disabled={!isEnabled} className="btn btn-primary mx-auto" value="Submit" />
+        </Link>
+        </div>
+      </form>
+    </div>
+  );
 }
 
 export default SimpleSearchBar

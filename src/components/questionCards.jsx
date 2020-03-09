@@ -82,7 +82,7 @@ class questionCards extends React.Component {
       );
     //create description
     if (isClicked) {
-      moreLink = "";
+      moreLink = <span className="moreLink" onClick = {this.updateClick}>See less</span>;
     }
     } else {
       moreLink = <span className="moreLink" onClick = {this.updateClick}>See more</span>;

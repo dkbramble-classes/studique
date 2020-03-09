@@ -5,6 +5,8 @@ const firebase = require("firebase/app");
 const dotenv = require('dotenv');
 require("firebase/database");
 require("firebase/auth");
+require("firebase/storage");
+
 
 
 dotenv.config();
@@ -20,60 +22,54 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
+const storage = firebase.storage();
 
-export function initializeUser(user, permission, displayName)
+export async function initializeUser(user, permission, displayName)
 {
-    console.log("Display name: " + displayName);
     if(user != null) {
-        user.updateProfile({
+        return await user.updateProfile({
             displayName: displayName,
+        }).then( function() {
+            return firebase.database().ref('users/' + user.uid).set({
+                email: user.email,
+                permissions: permission
+            });
         }).then(function() {
-            console.log("Updated name sucessfully: " + user.displayName + " " + user.email);
-            let displayName = user.displayName;},
-            function(error) {
-            // An error happened
+            return getUserInfo().then(function (result) {
+                console.log(result);
+                return result["displayName"];
+            });
         }).catch(function (error) {
             console.log(error.message)
         });
-
-        firebase.database().ref('users/' + user.uid).set({
-            email: user.email,
-            permissions: permission
-        });
-        let meta = {};
-        setTimeout(() => {getUserInfo().then(function (result) {
-            meta = result;
-        })}, 1000);
-        setTimeout(() => {
-            console.log(meta);
-        }, 1000);
     }
+}
+
+export async function updateDisplayName(newName)
+{
+    let user = firebase.auth().currentUser;
+    return await user.updateProfile({
+        displayName: newName,
+    })
 }
 
 export function getUserMetadata(user)
 {
     return database.ref('users/' + user.uid).once('value').then(function (snapshot) {
         let info = snapshot.val();
-        let metadata = {};
-        metadata["permissions"] = info.permissions;
-        return metadata;
-    }).then(result => {return result}).then(result => {return result});
-    // let metadata = {};
-    // let data = await database.ref('users/' + user.uid).once('value').then(function (snapshot) {
-    //     let info = snapshot.val();
-    //     let metadata = {};
-    //     metadata["permissions"] = info.permissions;
-    //     return metadata;
-    // }).then(result => {return result}).then();
-    // console.log(data);
-    // console.log(metadata);
-    //
-    // return data;
+        return info.permissions;
+    }).then(result => {return result});
 }
 
-export function getQuestions()
-{
-    database.ref('Questions/Q1').once('value').then(function (snapshot) {
-        console.log(snapshot.val());
-    });
+export function signOut(props){
+    firebase.auth().signOut().then(function() {
+        // Sign-out successful.
+        props.handleAuthed('');
+      }).catch(function(error) {
+        // An error happened.
+      });      
+}
+
+export {
+    storage, firebase as default
 }

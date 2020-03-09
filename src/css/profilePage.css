@@ -10,7 +10,6 @@
     border-radius: 5px;
     padding: 10px;
     margin: 10px 0px;
-    background-color: white;
     width: 70%;
     
 
@@ -22,7 +21,7 @@
 }
 
 .profile {
-    background-color: rgb(187, 187, 187);
+    background-color: #C7D0D8;
 }
 
 .profileContainer {
@@ -31,16 +30,32 @@
 
 .userInfo {
     width: 70%;
-    justify-content: center;
-    display: inline-block;
     color: white;
-
+    justify-content:center;
+    display: inline-block;
 }
+
+.invisible-input{
+    background-color: rgba(0,0,0,0);
+    font-family: "Varela Round";
+    border-color: rgba(0,0,0,0);
+    color: rgba(255,255,255);
+    font-size: 1.5em;
+    text-align: center;
+  }
+  .invisible-input:focus{
+    background-color: rgba(0,0,0,0);
+    font-family: "Varela Round";
+    border-color: rgba(0,0,0,0);
+    color: rgba(255,255,255);
+    font-size: 1.5em;
+    text-align: center;
+  }
 
 .myQList{
     width: 70%;
-    justify-content: center;
-    display: inline-block
+    display: inline-block;
+    text-align: left;
 
 }
 
