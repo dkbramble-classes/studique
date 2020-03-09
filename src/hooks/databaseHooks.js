@@ -5,6 +5,8 @@ const firebase = require("firebase/app");
 const dotenv = require('dotenv');
 require("firebase/database");
 require("firebase/auth");
+require("firebase/storage");
+
 
 
 dotenv.config();
@@ -20,6 +22,7 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const database = firebase.database();
+const storage = firebase.storage();
 
 export async function initializeUser(user, permission, displayName)
 {
@@ -42,10 +45,31 @@ export async function initializeUser(user, permission, displayName)
     }
 }
 
+export async function updateDisplayName(newName)
+{
+    let user = firebase.auth().currentUser;
+    return await user.updateProfile({
+        displayName: newName,
+    })
+}
+
 export function getUserMetadata(user)
 {
     return database.ref('users/' + user.uid).once('value').then(function (snapshot) {
         let info = snapshot.val();
         return info.permissions;
     }).then(result => {return result});
+}
+
+export function signOut(props){
+    firebase.auth().signOut().then(function() {
+        // Sign-out successful.
+        props.handleAuthed('');
+      }).catch(function(error) {
+        // An error happened.
+      });      
+}
+
+export {
+    storage, firebase as default
 }

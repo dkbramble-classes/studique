@@ -183,6 +183,7 @@ body, html {
 .nav-item{
   display: inline-block;
 }
+
 #mainNavStdq .navbar-nav .nav-item:hover {
   outline: 0;
 }
@@ -191,6 +192,7 @@ body, html {
   outline: 0;
   background-color: #313335;
 }
+
 @media (min-width: 0px) {
   #mainNavStdq {
     padding-top: 0;

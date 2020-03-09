@@ -3,6 +3,8 @@ import React from 'react';
 import SignIn from "../components/signIn.jsx";
 import SignUp from "../components/signUp.jsx";
 import Popup from "reactjs-popup";
+import { Link } from "react-router-dom";
+import {signOut} from "../hooks/databaseHooks";
 
 function Nav(props) {
   
@@ -24,6 +26,12 @@ function Nav(props) {
 
 
 function ButtonDisplay(props){
+
+  const handleLogout = () => {
+    //Need to handle props.isAuthed some how
+    signOut(props);
+    props.handleAuthed('');
+  }
   
   if (!props.isAuthed) {
     return(
@@ -60,8 +68,25 @@ function ButtonDisplay(props){
     );
   }
   else{
-    //Where to put the code if the person is logged in
-    return <div></div>
+    return( <div className="text-white text-font text-center">
+    <div className="my-2">
+    <ul className="navbar-nav">
+      <li className="nav-item">
+      <Link to="/profile/">
+     <input type="submit" className="nav-link btn text-font" value="Profile" />
+    </Link>
+    </li>
+    <li className="nav-item">
+      {/* <button  className=" nav-btn btn nav-link text-font" onClick={handleLogout}>
+      Sign-Out</button> */}
+      <Link to="/">
+        <input type="submit" className="nav-link btn text-font" value="Log-Out" onClick={handleLogout} />
+      </Link>
+    </li>
+    </ul>
+    </div>
+    
+  </div>);
   }
 }
 
