@@ -68,7 +68,7 @@ function Profile(props) {
     if (props.displayName !== ""){
         try{
             let firebase = require("firebase/app");
-            let user = firebase.auth().currentUser;
+            //let user = firebase.auth().currentUser;
             firebase.auth().onAuthStateChanged(function(user) {
                 storage.ref('images').child(user.email).getDownloadURL().then(fireBaseUrl => {
                     setProfileImageURL(prevObject => ({
