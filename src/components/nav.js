@@ -70,10 +70,10 @@ function ButtonDisplay(props){
   else{
     return( <div className="text-white text-font text-center">
     <div className="my-2">
-    <ui className="navbar-nav">
+    <ul className="navbar-nav">
       <li className="nav-item">
       <Link to="/profile/">
-     <input type="submit" className="nav-link btn text-font" value="Profile"  displayName={props.displayName} />
+     <input type="submit" className="nav-link btn text-font" value="Profile" />
     </Link>
     </li>
     <li className="nav-item">
@@ -83,7 +83,7 @@ function ButtonDisplay(props){
         <input type="submit" className="nav-link btn text-font" value="Log-Out" onClick={handleLogout} />
       </Link>
     </li>
-    </ui>
+    </ul>
     </div>
     
   </div>);
