@@ -42,12 +42,45 @@ body, html {
   background-image: url(../images/gv.jpg);
 }
 
+.search-mini{
+  font-family: "Varela Round";
+  font-size: 60%;
+  border: 0;
+  border-top-right-radius:0rem!important;
+  border-bottom-right-radius:0rem!important;
+}
+.search-mini:focus{
+  font-family: "Varela Round";
+  font-size: 60%;
+  border: 0;
+  border-top-right-radius:0rem!important;
+  border-bottom-right-radius:0rem!important;
+  box-shadow: none;
+}
+
+.btn-mini{
+  box-shadow:none;
+  text-transform: uppercase;
+  border: 0;
+  -webkit-box-shadow: none !important;
+  box-shadow: none  !important;
+  background-color: #64a19d;
+  font-size: 60%;
+  padding: .425rem .425rem;
+  border-top-left-radius:0rem!important;
+  border-bottom-left-radius:0rem!important;
+  color: #64a19d;
+  width: 2.95em;
+}
+
 .brand-logo {
   width: 10%;
 }
-.btn {
-  box-shadow:none;
-  padding: 1rem 1rem;
+
+.btn-primary {
+  background-color: #64a19d;
+  box-shadow: none;
+  padding: 1.25rem 2rem;
   font-family: "Varela Round";
   font-size: 80%;
   text-transform: uppercase;
@@ -56,7 +89,7 @@ body, html {
   -webkit-box-shadow: none !important;
   box-shadow: none  !important;
 }
-.btn:disabled {
+.btn-primary:disabled{
   box-shadow:none;
   padding: 1.25rem 2rem;
   font-family: "Varela Round";
@@ -68,29 +101,33 @@ body, html {
   box-shadow: none  !important;
   background-color: #4f837f;
 }
-.btn-primary {
-  background-color: #64a19d;
-  box-shadow: none;
-}
 .btn-primary-outline {
   background-color: transparent;
   box-shadow: none;
 }
-.btn-primary:hover {
+.btn-primary:hover .btn-mini:hover{
   background-color: #4f837f;
 }
-.btn-primary:focus {
+.btn-primary:focus .btn-mini:focus {
   background-color: #4f837f;
 }
-.btn-primary:active {
+.btn-primary:active .btn-mini:active {
+  background-color: #467370 !important;
+}
+.btn-mini:hover{
+  background-color: #4f837f;
+}
+.btn-mini:focus {
+  background-color: #4f837f;
+}
+.btn-mini:active {
   background-color: #467370 !important;
 }
 .input-empty{
   color: #cc0000;
 }
 
-.form-inline input {
-
+.form-inline .main-search{
   padding: 1.25rem 2rem;
   height: auto;
   font-family: "Varela Round";
@@ -98,6 +135,7 @@ body, html {
   letter-spacing: 0.15rem;
   border: 0;
 }
+
 .jumbotron {
   background-color: rgba(153,153,153,.90);
   padding-top: 2rem;
@@ -183,7 +221,9 @@ body, html {
 .nav-item{
   display: inline-block;
 }
-
+.inline-block {
+  display: inline-block;
+}
 #mainNavStdq .navbar-nav .nav-item:hover {
   outline: 0;
 }
@@ -293,15 +333,15 @@ body, html {
     overflow-y: hidden;
   }
 
-  .nav-item {
+  /* .nav-item {
     margin: 0;
-  }
-
+  } */
 }
 @media (min-width:460px) {
   .jumbotron {
     height:500px;
   }
+
 }
 @media (min-width: 576px) {
   .jumbotron {
