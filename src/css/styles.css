@@ -351,7 +351,9 @@ body, html {
     position: fixed;
     overflow-y: hidden;
   }
+
 }
+
 .navbar-nav {
   display: inline-block;
 } 
