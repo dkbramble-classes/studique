@@ -18,8 +18,10 @@ const Nav = ({location, ...props}) => (
       <div className="inline-block d-sm-inline d-none">Studique</div>
       </a>        
 
-      <div className="form-inline" id="navbarResponsive">
-      {location.pathname !== '/' && <NavBarText handleSearch={props.handleSearch} searchString/>}
+      <div className="d-inline-flex" id="navbarResponsive">
+        <div className="mt-2">
+          {location.pathname !== '/' && <NavBarText handleSearch={props.handleSearch} searchString/>}
+        </div>
         <ButtonDisplay isAuthed={props.isAuthed} handleAuthed={props.handleAuthed} displayName={props.displayName} handleName={props.handleName} handleType={props.handleType}/>
       </div>
     </div>
@@ -38,7 +40,7 @@ function ButtonDisplay(props){
   
   if (!props.isAuthed) {
     return(
-        <ul className="navbar-nav form-inline">
+        <ul className="navbar-nav">
           <li className="nav-item">
               {/* <button type="button" class="btn btn-outline-info border border-info">Info</button> */}
               <Popup
@@ -51,7 +53,7 @@ function ButtonDisplay(props){
                     Sign In
                   </button>
                 }
-                className="popup-set"
+                className="popup-set "
               >
                 <SignIn handleAuthed={props.handleAuthed} handleName={props.handleName} handleType={props.handleType} ></SignIn>
               </Popup>
