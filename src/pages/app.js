@@ -83,7 +83,7 @@ function App () {
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.3.1/themes/reset-min.css" integrity="sha256-t2ATOGCtAIZNnzER679jwcFcKYfLlw01gli6F6oszk8=" crossOrigin="anonymous"></link>
         <script src="https://polyfill.io/v3/polyfill.min.js?features=default%2CArray.prototype.find%2CArray.prototype.includes%2CPromise%2CObject.assign%2CObject.entries"></script>
         
-        <Nav isAuthed={isAuthed} handleAuthed={handleAuthed} displayName={displayName} handleName={handleName} handleType={handleType} />
+        <Nav isAuthed={isAuthed} handleAuthed={handleAuthed} displayName={displayName} handleName={handleName} handleType={handleType} searchString={searchString} handleSearch={handleSearch}/>
         <Route path="/" exact render={(props) => <FrontPage {...props} searchString={searchString} urlString={urlString} handleSearch={handleSearch} />}/>
         <Route path="/results/*" exact render={(props) => <QuestionList {...props} searchString={searchString} handleSearch={handleSearch} isAuthed={isAuthed} userType={userType}/>}/>
         <Route path="/profile" exact render={(props) => <Profile {...props} handleName={handleName} displayName={displayName} isAuthed={isAuthed} />} />

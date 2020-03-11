@@ -1,8 +1,9 @@
 import React,  {useState}  from 'react';
 import { Link } from "react-router-dom";
-import alglogo from "../images/algolia-white.svg";
+// import alglogo from "../images/algolia-white.svg";
+import Icon from "../components/searchIcon"
 
-function SearchBarText(props) {
+function NavSearchText(props) {
   // constructor(props) {
   //   super(props);
   //   this.state = {value: '', isEnabled: false};
@@ -11,7 +12,7 @@ function SearchBarText(props) {
   // }
   const [tmpSearch, setSearch] = useState('');
   const [tmpURL, setURL] = useState('');
-  const [isEnabled, setEnabled] = useState(false);
+  // const [isEnabled, setEnabled] = useState(false);
 
   
   function handleTextChange(event) {
@@ -22,7 +23,7 @@ function SearchBarText(props) {
       var url = event.target.value.replace(/ /g, '&');
       setURL(url);    
     }
-    setEnabled(empty);
+    //setEnabled(empty);
   }
 
   function subBtn(e){
@@ -34,14 +35,14 @@ function SearchBarText(props) {
 
   return (
     <div>
-      <a className="text-left alg-logo" href="https://www.algolia.com" aria-label="Algolia">
+      {/* <a className="text-left alg-logo" href="https://www.algolia.com" aria-label="Algolia">
         <img className="alg-logo content-left" src={alglogo} alt="alglogo"></img>
-      </a>
-      <form className="form-inline d-flex content-center text-center" onSubmit={subBtn}>
-        <input type="text" className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 main-search" id="inputText" autoComplete="off" placeholder="ASK A QUESTION" value={tmpSearch} onChange={handleTextChange} />
+      </a> */}
+      <form className="form-inline rounded-0" onSubmit={subBtn}>
+        <input type="text" className="form-control search-mini flex-fill d-sm-block d-none" autoComplete="off" placeholder="SEARCH QUESTIONS" value={tmpSearch} onChange={handleTextChange} />
         <div className="mx-auto">
         <Link to={"/results/search=" + tmpURL}>
-          <input type="submit" disabled={!isEnabled} className="btn btn-primary mx-auto" value="Submit" />
+          <button className="btn btn-mini d-sm-block d-none" ><Icon></Icon></button>
         </Link>
         </div>
       </form>
@@ -51,5 +52,5 @@ function SearchBarText(props) {
   
 }
 
-export default SearchBarText
+export default NavSearchText
     
