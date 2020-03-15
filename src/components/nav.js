@@ -2,7 +2,7 @@ import logo from "../images/logo.png";
 import React from 'react';
 import SignIn from "../components/signIn.jsx";
 import SignUp from "../components/signUp.jsx";
-import NavBarText from "../components/navsearch_text";
+import NavSearchText from "../components/navsearch_text";
 import Popup from "reactjs-popup";
 import { Link } from "react-router-dom";
 import {signOut} from "../hooks/databaseHooks";
@@ -20,7 +20,7 @@ const Nav = ({location, ...props}) => (
 
       <div className="d-inline-flex" id="navbarResponsive">
         <div className="mt-2">
-          {location.pathname !== '/' && <NavBarText handleSearch={props.handleSearch} searchString/>}
+          {location.pathname !== '/' && <NavSearchText handleSearch={props.handleSearch} searchString/>}
         </div>
         <ButtonDisplay isAuthed={props.isAuthed} handleAuthed={props.handleAuthed} displayName={props.displayName} handleName={props.handleName} handleType={props.handleType}/>
       </div>

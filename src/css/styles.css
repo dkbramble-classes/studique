@@ -59,7 +59,6 @@ body, html {
 }
 
 .btn-mini{
-  box-shadow:none;
   text-transform: uppercase;
   border: 0;
   -webkit-box-shadow: none !important;
@@ -127,6 +126,23 @@ body, html {
   color: #cc0000;
 }
 
+.btn-vote{
+  border: 0;
+  -webkit-box-shadow: none !important;
+  box-shadow: none  !important;
+  border-radius: 50%;
+  text-align: center;
+
+}
+.btn-vote:hover{
+  background-color: rgba(153,153,153,.40);
+}
+.btn-vote:focus {
+  background-color: rgba(153,153,153,.80);
+}
+.btn-vote:active {
+  background-color: rgba(153,153,153,.80);
+}
 .form-inline .main-search{
   padding: 1.25rem 2rem;
   height: auto;
