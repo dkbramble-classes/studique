@@ -169,6 +169,10 @@ body, html {
   font-family: "Varela Round";
 }
 
+.text-white {
+  color:rgb(255, 255, 255); 
+}
+
 .text-underline{
   text-decoration: underline;
   text-decoration-color: #64a19d;

@@ -38,7 +38,7 @@ function NavSearchText(props) {
       {/* <a className="text-left alg-logo" href="https://www.algolia.com" aria-label="Algolia">
         <img className="alg-logo content-left" src={alglogo} alt="alglogo"></img>
       </a> */}
-      <form className="form-inline rounded-0" onSubmit={subBtn}>
+      <form className="form-inline rounded-0 mr-1" onSubmit={subBtn}>
         <input type="text" className="form-control search-mini flex-fill d-sm-block d-none" autoComplete="off" placeholder="SEARCH QUESTIONS" value={tmpSearch} onChange={handleTextChange} />
         <div className="mx-auto">
         <Link to={"/results/search=" + tmpURL}>

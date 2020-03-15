@@ -100,11 +100,7 @@ function RoutResults() {
   // access dynamic URL variables
   let { id } = useParams();
   
-  return (
-    <div>
-      <h3>ID: {id}</h3>
-    </div>
-  );
+  return null;
 }
 
 export default App;

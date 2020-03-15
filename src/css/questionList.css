@@ -5,3 +5,21 @@
 .qlistPage {
     background-color: rgb(187, 187, 187);
 }
+.dropdown {
+    width: 15%;
+    text-transform: uppercase;
+    border: 0;
+    -webkit-box-shadow: none !important;
+    box-shadow: none  !important;
+    font-size: 60%;
+    height: 90%;
+}
+.html .body{
+    background-color: #C7D0D8;
+}
+
+/* 
+.dropdown-text {
+    text-transform: uppercase;
+    font-size: 60%;
+} */
