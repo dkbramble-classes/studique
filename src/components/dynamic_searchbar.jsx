@@ -1,6 +1,7 @@
 import React from 'react';
 import algoliasearch from 'algoliasearch/lite';
 import { InstantSearch, SearchBox, Hits} from 'react-instantsearch-dom';
+import QCards from './questionCards';
 
 // const Hits = ({ hits }) => (
 //   <ol>
@@ -16,7 +17,7 @@ const algoliaClient = algoliasearch('2OXOHVVBM2', 'b8769b9a1270565298eb7e51af306
 const searchClient = {
   search(requests) {
     const newRequests = requests.map((request)=>{
-      
+      console.log(request);
       // test for empty string and change request parameter: analytics
       if(!request.params.query || request.params.query.length===0) {
         request.params.analytics=false
@@ -47,17 +48,13 @@ const searchClient = {
 // );
 
 
-const Hit = ({ hit }) => (<p>{hit.Text}</p>);
+const Hit = ({ hit }) => (<QCards Rating={12} bodyText={hit.Text} />);
 class DynamicSearchBar extends React.Component {
     render() {
         return (
             <InstantSearch searchClient={searchClient} indexName="Questions" filters="Text">
-              <SearchBox />
-              <Hits className="rounded" hitComponent={Hit}></Hits>
-              {/* <Results>
-                
-              </Results> */}
-          </InstantSearch>
+              <Hits hitComponent={Hit}></Hits>
+            </InstantSearch>
         )
       }
 }

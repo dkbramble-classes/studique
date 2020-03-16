@@ -2,6 +2,7 @@ import React from 'react';
 import QCards from '../components/questionCards';
 import "../css/questionList.css";
 import { Link } from "react-router-dom";
+import AlgoliaSearch from "./algoliaSearch";
 
 function QuestionList() {
   return (
@@ -9,13 +10,14 @@ function QuestionList() {
 
       <h1>Question list page:</h1>
       <div className="qlistList">
-      <QCards Rating={12} />
+      <AlgoliaSearch query="Do"/>
+      {/* <QCards Rating={12} />
       <QCards Rating={1} />
       <QCards Rating={15} />
       <QCards Rating={12} />
       <QCards Rating={120} />
       <QCards Rating={400} />
-      <QCards Rating={12} />
+      <QCards Rating={12} /> */}
 
       <Link to="/questionForm">
       <button type="submit" className="text-font qFormButton">

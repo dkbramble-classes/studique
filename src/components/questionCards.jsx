@@ -148,7 +148,7 @@ function QuestionCards(props) {
           </div>
 
           <div className="qcardTitle" onClick = {handleClick}>
-            <h5>How do I create a Hello World in React?</h5>
+            <h5>{props.bodyText}</h5>
           </div>
 
           {description}
