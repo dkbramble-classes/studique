@@ -28,9 +28,9 @@ function NavSearchText(props) {
 
   function subBtn(e){
     e.preventDefault();
-    if (tmpSearch.length > 0){
-      props.handleSearch(tmpSearch, tmpURL);
-    }
+    // if (tmpSearch.length > 0){
+    //   props.handleSearch(tmpSearch, tmpURL);
+    // }
   }
 
   return (
@@ -41,7 +41,11 @@ function NavSearchText(props) {
       <form className="form-inline rounded-0" onSubmit={subBtn}>
         <input type="text" className="form-control search-mini flex-fill d-sm-block d-none" autoComplete="off" placeholder="SEARCH QUESTIONS" value={tmpSearch} onChange={handleTextChange} />
         <div className="mx-auto">
-        <Link to={"/results/search=" + tmpURL}>
+        <Link to={"/results/search=" + tmpURL} onClick={() =>   {
+          if (tmpSearch.length > 0){
+            props.handleSearch(tmpSearch, tmpURL);
+          }}
+          } >
           <button className="btn btn-mini d-sm-block d-none" ><Icon></Icon></button>
         </Link>
         </div>
