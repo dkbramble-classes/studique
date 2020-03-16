@@ -27,9 +27,9 @@ function SearchBarText(props) {
 
   function subBtn(e){
     e.preventDefault();
-    if (tmpSearch.length > 0){
-      props.handleSearch(tmpSearch, tmpURL);
-    }
+    // if (tmpSearch.length > 0){
+    //   props.handleSearch(tmpSearch, tmpURL);
+    // }
   }
 
   return (
@@ -40,7 +40,11 @@ function SearchBarText(props) {
       <form className="form-inline d-flex content-center text-center" onSubmit={subBtn}>
         <input type="text" className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 main-search" id="inputText" autoComplete="off" placeholder="ASK A QUESTION" value={tmpSearch} onChange={handleTextChange} />
         <div className="mx-auto">
-        <Link to={"/results/search=" + tmpURL}>
+        <Link to={"/results/search=" + tmpURL} onClick={() =>   {
+          if (tmpSearch.length > 0){
+            props.handleSearch(tmpSearch, tmpURL);
+          }}
+          } >
           <input type="submit" disabled={!isEnabled} className="btn btn-primary mx-auto" value="Submit" />
         </Link>
         </div>
