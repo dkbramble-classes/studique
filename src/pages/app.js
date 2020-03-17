@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch, useParams } from "react-router-dom";
+import { BrowserRouter as Router, Route } from "react-router-dom";
 
 //import { BrowserHistory } from 'react-history'
 
@@ -11,7 +11,7 @@ import Profile from './profilePage';
 import FrontPage from './frontpage';
 import QuestionForm from './questionFormPage';
 
-function App () {
+function App (props) {
   //Whether or not the user is logged in
   const [isAuthed, setAuthed] = useState(
     sessionStorage.getItem('Authenticated') || ''
@@ -36,13 +36,9 @@ function App () {
     localStorage.setItem('Permissions', userType);
   }, [userType]);
 
-  //The results of the last search
-  const [searchString, setSearch] = useState(
-    sessionStorage.getItem('SearchString') || ''
-  );
-  useEffect(() => {
-    sessionStorage.setItem('SearchString', searchString);
-  }, [searchString]);
+  //Passing current search value
+  const searchString = window.location.href.split('=')[1] === null ? null : window.location.href.split('=')[1];
+
 
   //Whether or not the user is logged in
   const [urlString, setURL] = useState(
@@ -62,7 +58,8 @@ function App () {
   }
 
   function handleSearch(newSearch, newURL){
-    setSearch(newSearch);
+    //console.log(newSearch);
+    //setSearch(newSearch);
     setURL(newURL);
   }
 
@@ -88,22 +85,11 @@ function App () {
         <Route path="/results/*" exact render={(props) => <QuestionList {...props} searchString={searchString} handleSearch={handleSearch} isAuthed={isAuthed} userType={userType}/>}/>
         <Route path="/profile" exact render={(props) => <Profile {...props} handleName={handleName} displayName={displayName} isAuthed={isAuthed} />} />
         <Route path="/questionForm" exact render={(props) => <QuestionForm {...props} handleName={handleName} displayName={displayName} isAuthed={isAuthed} />} />
-        <Switch>
+        {/* <Switch>
           <Route path="/results/search=:id"> <RoutResults/></Route>
-        </Switch>
+        </Switch> */}
       </div>
     </Router>
-  );
-}
-
-function RoutResults() {
-  // access dynamic URL variables
-  let { id } = useParams();
-  
-  return (
-    <div>
-      <h3>ID: {id}</h3>
-    </div>
   );
 }
 

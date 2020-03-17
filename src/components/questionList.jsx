@@ -4,10 +4,11 @@ import { Link } from "react-router-dom";
 import AlgoliaSearch from "./algoliaSearch";
 
 function QuestionList(props) {
-  const searchString = (props.location.pathname).split('=')[1];
-  console.log("seoij", props.location.pathname);
-  console.log("search", searchString);
-
+  //const searchString = (props.location.pathname).split('=')[1] === null ? (props.location.pathname).split('=')[1] : null;
+  const searchString = props.searchString;
+  // console.log("seoij", props.location.pathname);
+  // console.log("search", props.searchString);
+  
   return (
     <div className="qlistPage">
 
