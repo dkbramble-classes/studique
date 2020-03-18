@@ -2,7 +2,7 @@ import logo from "../images/logo.png";
 import React from 'react';
 import SignIn from "../components/signIn.jsx";
 import SignUp from "../components/signUp.jsx";
-import NavBarText from "../components/navsearch_text";
+import NavSearchText from "../components/navsearch_text";
 import Popup from "reactjs-popup";
 import { Link } from "react-router-dom";
 import {signOut} from "../hooks/databaseHooks";
@@ -11,7 +11,7 @@ import {withRouter} from 'react-router'
 const Nav = ({location, ...props}) => (
     <nav className="navbar navbar-expand-md navbar-expand-lg navbar-light" id="mainNavStdq" aria-expanded="false" >
     <div className="container">
-      <a className="navbar-brand text-font  mr-4" href="/">
+      <a className="navbar-brand text-font mr-md-4" href="/">
         <div className="inline-block">
       <img className="mr-2  " width="30" height="40" src={logo} alt="LogoBrand"/>
       </div>
@@ -20,7 +20,7 @@ const Nav = ({location, ...props}) => (
 
       <div className="d-inline-flex" id="navbarResponsive">
         <div className="mt-2">
-          {location.pathname !== '/' && <NavBarText handleSearch={props.handleSearch} searchString/>}
+          {location.pathname !== '/' && <NavSearchText handleSearch={props.handleSearch} searchString/>}
         </div>
         <ButtonDisplay isAuthed={props.isAuthed} handleAuthed={props.handleAuthed} displayName={props.displayName} handleName={props.handleName} handleType={props.handleType}/>
       </div>
@@ -74,11 +74,11 @@ function ButtonDisplay(props){
   }
   else{
     return( <div className="text-white text-font text-center">
-    <div className="my-2">
+    <div>
     <ul className="navbar-nav">
       <li className="nav-item">
       <Link to="/profile/">
-     <input type="submit" className="nav-link btn text-font" value="Profile" />
+     <input type="submit" className="nav-link nav-btn btn text-font" value="Profile" />
     </Link>
     </li>
     <li className="nav-item">
