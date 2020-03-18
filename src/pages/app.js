@@ -62,6 +62,7 @@ function App () {
   }
 
   function handleSearch(newSearch, newURL){
+    //console.log(newSearch);
     setSearch(newSearch);
     setURL(newURL);
   }
