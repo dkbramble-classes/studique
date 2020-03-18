@@ -70,6 +70,24 @@ export function signOut(props){
       });      
 }
 
+export function createQuestion(title, body, tagList) {
+    const user = firebase.auth().currentUser;
+
+    const postData = {
+        uid: user.uid,
+        Body: body,
+        Title: title,
+        Rating: 0,
+        Tags: tagList,
+        creationDate: Math.round((new Date()).getTime() / 1000),
+    };
+    console.log(postData);
+
+    const newPostKey = firebase.database().ref().child('Questions/').push().key;
+
+    return firebase.database().ref("Questions/" + newPostKey).set(postData);
+}
+
 export {
     storage, firebase as default
 }
