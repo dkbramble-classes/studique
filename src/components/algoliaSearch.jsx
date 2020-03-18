@@ -15,7 +15,9 @@ function AlgoliaSearch(props) {
         <h1>No Results Found</h1>
       ) : (
         result.map(item => {
-          return <QCards Rating={12} key={item.objectId} title={item.Text} description={item.description}/>;
+          return <QCards key={item.objectId} title={item.Text} 
+          description={item.Description} rating={item.Rating}
+          user={item.UserID} comments={item.Comments} tags={item.Tags}/>;
         })
       )}
     </div>
@@ -30,10 +32,11 @@ function useAsyncHook(searchHits) {
       try {
         setLoading("true");
         const response = await index.search(searchHits, {
-          attributesToRetrieve: ['Text', 'objectID', 'description', 
-          'rating', 'uploadDate', 'userId', 'userType'],
+          attributesToRetrieve: ['Text', 'objectID', 'Description', 
+          'Rating', 'UploadDate', 'UserID', 'UserType', 'Comments', 'Tags'],
           hitsPerPage: 10,
         }).then(({ hits }) => {
+          console.log('hits', hits)
           return hits;
         });
 

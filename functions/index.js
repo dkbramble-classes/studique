@@ -44,15 +44,15 @@ exports.updateAlgolia = functions.database.ref('/Questions/{q_id}/').onWrite(asy
         const index = client.initIndex(ALGOLIA_POSTS_INDEX_NAME);
         const firebaseObject = {
             Text: data.after.val().Text,
-            description: data.after.val().description,
-            rating: data.after.val().rating,
-            uploadData: data.after.val().uploadDate,
-            userId: data.after.val().userId,
-            userType: data.after.val().userType,
-            Comments: data.after.val().Comments.Text,
+            description: data.after.val().Description,
+            rating: data.after.val().Rating,
+            uploadData: data.after.val().UploadDate,
+            userId: data.after.val().UserID,
+            userType: data.after.val().UserType,
+            Comments: data.after.val().Comments,
+            tags: data.after.val().Tags,
             objectID: context.params.q_id
         };
-        console.log("fb object", firebaseObject);
 
         await index.saveObject(firebaseObject);
 });

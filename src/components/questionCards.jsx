@@ -7,9 +7,13 @@ function QuestionCards(props) {
   const [isClicked, updateClick] = useState(false);
   const [isUpVotable, updateUpVotable] = useState(true);
   const [isDownVotable, updateDownVotable] = useState(true);
-  const [voteCount, updateCount] = useState(props.Rating);
+  const [voteCount, updateCount] = useState(props.rating);
   const [voteColor, updateColor] = useState("black");
-  const initialRating = props.Rating;
+  const initialRating = props.rating;
+  const user = props.user;
+  const commentText = props.comments.Text;
+
+  // const tagList = props.tags.split(',');
 
 
   function handleClick() {
@@ -45,6 +49,30 @@ function QuestionCards(props) {
     }
   }
 
+  function Comments(props){
+    return <div className="qcardCommentsSection">
+        <Votes />
+        <div className="qcardRightContent">
+          <span className="qcardComment">
+            {props.text} will need to work on
+          </span>
+  
+          <div className="qcardProfile">
+            <img
+              className="qcardProfileLogo"
+              src={require("../images/louieLaker.jpg")}
+              alt="profilePic"
+            />
+            <span>Professor Peabody</span>
+          </div>
+        </div>
+      </div>
+  }
+
+  function Tags(props){
+    return <div className="tags">{props.tagname}</div>
+  }
+
   let description;
   let hrline;
   let comments;
@@ -77,25 +105,8 @@ function QuestionCards(props) {
   }
   //create comments
   if (isClicked) {
-    comments = (
-      <div className="qcardCommentsSection">
-        <Votes />
-        <div className="qcardRightContent">
-          <span className="qcardComment">
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-          </span>
-
-          <div className="qcardProfile">
-            <img
-              className="qcardProfileLogo"
-              src={require("../images/louieLaker.jpg")}
-              alt="profilePic"
-            />
-            <span>Professor Peabody</span>
-          </div>
-        </div>
-      </div>
-    );
+    //have to do comments 
+    comments = Comments(props.comments);
   }
   //create hrline
   if (isClicked) {
@@ -154,6 +165,10 @@ function QuestionCards(props) {
           {description}
 
           <div className="qcardTags">
+            
+            {/* {tagList.map((tag) => (
+                    <Tags tagname={tag.Text}/>
+            ))}; */}
             <div className="tags">CIS162</div>
             <div className="tags">computer science</div>
           </div>
@@ -170,15 +185,7 @@ function QuestionCards(props) {
 
 
 
-// const Profile = () => (
-//   <div className="qcardProfile">
-//             <img
-//               className="qcardProfileLogo"
-//               src={require("../images/louieLaker.jpg")}
-//               alt="profilePic"
-//             />
-//             <span>Standard Student</span>
-//           </div>
-// );
+
+
 
 export default QuestionCards;
