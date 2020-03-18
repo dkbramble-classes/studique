@@ -121,6 +121,9 @@ function QuestionCards(props) {
               placeholder="Write comment here"
             />
           </form>
+          <button type="submit" id="questionCardCommentButton" className="text-font qFormButton">
+            ASK QUESTION
+        </button>
         </div>
       </div>
     );
