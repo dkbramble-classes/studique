@@ -43,7 +43,7 @@ function Profile(props) {
             }`)
         }
         const uploadTask = storage.ref(`/images/${
-            user.email
+            user.email.substring(0, user.email.lastIndexOf("@"))
         }`).put(imageAsFile)
         // initiates the firebase side uploading
         uploadTask.on('state_changed', (snapShot) => { // takes a snap shot of the process as it is happening
@@ -54,7 +54,11 @@ function Profile(props) {
             // gets the functions from storage refences the image storage in firebase by the children
             // gets the download url then sets the image from firebase as the value for the imgUrl key:
             firebase.auth().onAuthStateChanged(function(user) {
-            storage.ref('images').child(user.email).getDownloadURL().then(fireBaseUrl => {
+                var mySubString = user.email.substring(
+                    0, 
+                    user.email.lastIndexOf("@")
+                )+ "_200x200";
+            storage.ref('images').child(mySubString).getDownloadURL().then(fireBaseUrl => {
                 setImageAsUrl(prevObject => ({
                     ...prevObject,
                     imgUrl: fireBaseUrl
@@ -70,7 +74,11 @@ function Profile(props) {
             let firebase = require("firebase/app");
             //let user = firebase.auth().currentUser;
             firebase.auth().onAuthStateChanged(function(user) {
-                storage.ref('images').child(user.email).getDownloadURL().then(fireBaseUrl => {
+                var mySubString = user.email.substring(
+                    0, 
+                    user.email.lastIndexOf("@")
+                ) + "_200x200";
+                storage.ref('images').child(mySubString).getDownloadURL().then(fireBaseUrl => {
                     setProfileImageURL(prevObject => ({
                         ...prevObject,
                         imgUrl: fireBaseUrl
