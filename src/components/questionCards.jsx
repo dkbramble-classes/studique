@@ -10,11 +10,34 @@ function QuestionCards(props) {
   const [voteCount, updateCount] = useState(props.rating);
   const [voteColor, updateColor] = useState("black");
   const initialRating = props.rating;
-  const user = props.user;
-  const commentText = props.comments.Text;
+  var tagList = [];
 
-  // const tagList = props.tags.split(',');
+  // if (props.tags) {
+  //   const tagList = this.props.tags.map(function (tag) {
+  //       return (
+  //         <Tags tagname={tag}/>
+  //       );
+  //   });
+  // }
 
+  function Tags(props){
+    return <div className="tags">{props.tagname}</div>
+  }
+  
+  if (typeof(props.tags) !== 'undefined' && props.tags != null) {
+    tagList = props.tags;
+    // tagList.map(tag => {
+    //   <div className="tags">{tag}</div>
+    // })
+    // tagList.map((tag) => (
+    //   <div className="tags"> {tag}</div>
+    // ))
+
+    tagList.map(tag => {
+      return <div className="tags"> {tag}</div>;
+    })
+    console.log(tagList);
+  }
 
   function handleClick() {
     var newClickState = isClicked === true ? false : true;
@@ -54,7 +77,7 @@ function QuestionCards(props) {
         <Votes />
         <div className="qcardRightContent">
           <span className="qcardComment">
-            {props.text} will need to work on
+            this is a fake comment. will need to work on
           </span>
   
           <div className="qcardProfile">
@@ -69,9 +92,7 @@ function QuestionCards(props) {
       </div>
   }
 
-  function Tags(props){
-    return <div className="tags">{props.tagname}</div>
-  }
+
 
   let description;
   let hrline;
@@ -132,6 +153,9 @@ function QuestionCards(props) {
               placeholder="Write comment here"
             />
           </form>
+          <button type="submit" id="questionCardCommentButton" className="text-font qFormButton">
+            ASK QUESTION
+        </button>
         </div>
       </div>
     );
@@ -165,12 +189,13 @@ function QuestionCards(props) {
           {description}
 
           <div className="qcardTags">
+
+          {tagList}
+
+            {/* <div className="tags">CIS162</div>
+            <div className="tags">computer science</div> */}
+
             
-            {/* {tagList.map((tag) => (
-                    <Tags tagname={tag.Text}/>
-            ))}; */}
-            <div className="tags">CIS162</div>
-            <div className="tags">computer science</div>
           </div>
           {moreLink}
         </div>
