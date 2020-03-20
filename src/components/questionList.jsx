@@ -1,7 +1,7 @@
 import React from 'react';
 import QCards from '../components/questionCards';
 import "../css/questionList.css";
-import { Link } from "react-router-dom";
+import {  BrowserRouter,Link } from "react-router-dom";
 
 function QuestionList(props) {
   console.log(props.searchString);
@@ -19,11 +19,13 @@ function QuestionList(props) {
       <QCards Rating={400} />
       <QCards Rating={12} />
 
+      {/* <BrowserRouter> */}
       <Link to="/questionForm">
       <button type="submit" className="text-font qFormButton">
             ASK QUESTION
         </button>
       </Link>
+      {/* </BrowserRouter> */}
       </div>
 
     </div>
