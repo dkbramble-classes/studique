@@ -20,23 +20,17 @@ function QuestionCards(props) {
   //   });
   // }
 
-  function Tags(props){
-    return <div className="tags">{props.tagname}</div>
-  }
+  // function Tags(props){
+  //   return <div className="tags">{props.tagname}</div>
+  // }
   
   if (typeof(props.tags) !== 'undefined' && props.tags != null) {
-    tagList = props.tags;
-    // tagList.map(tag => {
-    //   <div className="tags">{tag}</div>
-    // })
-    // tagList.map((tag) => (
-    //   <div className="tags"> {tag}</div>
-    // ))
+    var myTagList = props.tags;
 
-    tagList.map(tag => {
-      return <div className="tags"> {tag}</div>;
-    })
-    console.log(tagList);
+    tagList = myTagList.map(tag => (
+      <div className="tags">{tag}</div>
+    ))
+    
   }
 
   function handleClick() {
@@ -189,14 +183,9 @@ function QuestionCards(props) {
           {description}
 
           <div className="qcardTags">
-
-          {tagList}
-
-            {/* <div className="tags">CIS162</div>
-            <div className="tags">computer science</div> */}
-
-            
+          {tagList} 
           </div>
+          
           {moreLink}
         </div>
       </div>
