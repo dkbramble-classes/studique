@@ -12,25 +12,16 @@ function QuestionCards(props) {
   const initialRating = props.rating;
   var tagList = [];
 
-  // if (props.tags) {
-  //   const tagList = this.props.tags.map(function (tag) {
-  //       return (
-  //         <Tags tagname={tag}/>
-  //       );
-  //   });
-  // }
-
-  // function Tags(props){
-  //   return <div className="tags">{props.tagname}</div>
-  // }
+  function Tags(props){
+    return <div className="tags">{props.tagname}</div>
+  }
   
   if (typeof(props.tags) !== 'undefined' && props.tags != null) {
     var myTagList = props.tags;
 
     tagList = myTagList.map(tag => (
-      <div className="tags">{tag}</div>
+      <Tags tagname={tag}/>
     ))
-    
   }
 
   function handleClick() {
@@ -85,8 +76,6 @@ function QuestionCards(props) {
         </div>
       </div>
   }
-
-
 
   let description;
   let hrline;
@@ -185,7 +174,7 @@ function QuestionCards(props) {
           <div className="qcardTags">
           {tagList} 
           </div>
-          
+
           {moreLink}
         </div>
       </div>
