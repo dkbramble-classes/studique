@@ -79,7 +79,6 @@ export function createQuestion(title, body, tagList) {
         Title: title,
         Rating: 0,
         Tags: tagList,
-        Comments: {},
         creationDate: Math.round((new Date()).getTime() / 1000),
     };
     console.log(postData);
