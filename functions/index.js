@@ -42,6 +42,7 @@ const client = algoliasearch(functions.config().algolia.app_id, functions.config
 
 exports.updateAlgolia = functions.database.ref('/Questions/{q_id}/').onWrite(async (data, context) => {
         const index = client.initIndex(ALGOLIA_POSTS_INDEX_NAME);
+
         const firebaseObject = {
             Body: data.after.val().Body,
             Title: data.after.val().Title,
@@ -50,7 +51,7 @@ exports.updateAlgolia = functions.database.ref('/Questions/{q_id}/').onWrite(asy
             Tags: data.after.val().Tags,
             //UserType: data.after.val().userType,
             UserID: data.after.val().uid,
-            //Comments: data.after.val().Comments.Text,
+            Comments: data.after.val().Comments,
             objectID: context.params.q_id
         };
 

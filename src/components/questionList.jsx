@@ -11,13 +11,13 @@ function QuestionList(props) {
 
       <h1>Question list page:</h1>
       <div className="qlistList">
-      <QCards Rating={12} />
-      <QCards Rating={1} />
-      <QCards Rating={15} />
-      <QCards Rating={12} />
-      <QCards Rating={120} />
-      <QCards Rating={400} />
-      <QCards Rating={12} />
+      <QCards Rating={12} objectID={"-M2e51Q3wLz6uViSkt5h"}/>
+      <QCards Rating={1} objectID={"-M2e51Q3wLz6uViSkt5h"}/>
+      <QCards Rating={15} objectID={"-M2e51Q3wLz6uViSkt5h"}/>
+      <QCards Rating={12} objectID={"-M2e51Q3wLz6uViSkt5h"}/>
+      <QCards Rating={120} objectID={"-M2e51Q3wLz6uViSkt5h"}/>
+      <QCards Rating={400} objectID={"-M2e51Q3wLz6uViSkt5h"}/>
+      <QCards Rating={12} objectID={"-M2e51Q3wLz6uViSkt5h"}/>
 
       <Link to="/questionForm">
       <button type="submit" className="text-font qFormButton">

@@ -79,6 +79,7 @@ export function createQuestion(title, body, tagList) {
         Title: title,
         Rating: 0,
         Tags: tagList,
+        Comments: {},
         creationDate: Math.round((new Date()).getTime() / 1000),
     };
     console.log(postData);
@@ -86,6 +87,26 @@ export function createQuestion(title, body, tagList) {
     const newPostKey = firebase.database().ref().child('Questions/').push().key;
 
     return firebase.database().ref("Questions/" + newPostKey).set(postData);
+}
+
+export function addComment(q_id, body) {
+    const user = firebase.auth().currentUser;
+
+    const postData = {
+        uid: user.uid,
+        Body: body,
+        creationDate: Math.round((new Date()).getTime() / 1000),
+    };
+    console.log(postData);
+
+    const newPostKey = firebase.database().ref().child('Questions/' + q_id + '/Comments/').push().key;
+
+    return firebase.database().ref("Questions/" + q_id + '/Comments/' + newPostKey).set(postData);
+}
+
+export function updateRating(newRating, q_id)
+{
+    firebase.database().ref("Questions/" + q_id + '/').update({Rating: newRating}).then();
 }
 
 export {

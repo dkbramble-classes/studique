@@ -2,6 +2,8 @@ import React, {useState} from "react";
 import "../css/questionCards.css";
 import { ReactComponent as UpArrow } from "../images/keyboard_arrow_up-24px.svg";
 import { ReactComponent as DownArrow } from "../images/keyboard_arrow_down-24px.svg";
+import {addComment, updateRating} from "../hooks/databaseHooks"
+
 
 function QuestionCards(props) {
   const [isClicked, updateClick] = useState(false);
@@ -9,7 +11,9 @@ function QuestionCards(props) {
   const [isDownVotable, updateDownVotable] = useState(true);
   const [voteCount, updateCount] = useState(props.Rating);
   const [voteColor, updateColor] = useState("black");
+  const [bodyInput, setBodyInput] = useState("");
   const initialRating = props.Rating;
+  const q_id = props.objectID;
 
 
   function handleClick() {
@@ -21,6 +25,7 @@ function QuestionCards(props) {
     if (isUpVotable){
       let newVote = voteCount + 1
       updateCount(newVote);
+      updateRating(newVote, q_id);
       if(newVote !== initialRating){
         updateUpVotable(false);
         updateColor("#3944bc")
@@ -36,12 +41,31 @@ function QuestionCards(props) {
       let newVote = voteCount - 1
       updateCount(newVote);
       updateUpVotable(true);
+      updateRating(newVote, q_id);
       if(newVote !== initialRating){
         updateDownVotable(false);
         updateColor("#d21f3c")
       } else{
         updateColor("black");
       }
+    }
+  }
+
+  function handleBodyInput(ev) {
+    setBodyInput(ev.target.value);
+  }
+
+  function postComment()
+  {
+    if( bodyInput === "")
+    {
+      console.log("You can't post a comment with no content.")
+    }
+    else
+    {
+      addComment(q_id, bodyInput).then(function () {
+        console.log("Comment successfully added to question " + q_id);
+      });
     }
   }
 
@@ -119,11 +143,14 @@ function QuestionCards(props) {
               type="text"
               id="commentText"
               placeholder="Write comment here"
+              onChange={handleBodyInput}
             />
           </form>
-          <button type="submit" id="questionCardCommentButton" className="text-font qFormButton">
-            ASK QUESTION
-        </button>
+          <form onSubmit={(e) => {postComment(); e.preventDefault();}}>
+            <button type="submit" id={"questionCardCommentButton"} className="text-font qFormButton" >
+              SUBMIT QUESTION
+            </button>
+          </form>
         </div>
       </div>
     );
