@@ -131,13 +131,11 @@ export async function updateRating( q_id, voteDir)
                 }
                 else if(current_upvotes_list === undefined)
                 {
-                    console.log("HEre");
                     color = "Up";
                     isUp = false;
                     current_upvotes_list = [user.uid];
                 }
                 else{
-                    console.log("Here instead");
                     color = "Up";
                     isUp = false;
                     current_upvotes_list.push(user.uid)
