@@ -8,12 +8,8 @@ import {
 } from "../hooks/databaseHooks";
 
 function Profile(props) {
-  const allInputs = {
-    imgUrl: ""
-  };
   const [imageAsFile, setImageAsFile] = useState("");
   const [tempName, setTempName] = useState(props.displayName);
-  const [imageAsURL, setImageAsUrl] = useState(allInputs);
   const [profileImageURL, setProfileImageURL] = useState("");
   const [isEnabled, setEnabled] = useState(false);
 
@@ -22,7 +18,7 @@ function Profile(props) {
 
   const handleImageAsFile = e => {
     const image = e.target.files[0];
-    setImageAsFile(imageFile => image);
+    setImageAsFile(imgUrl => image);
     setEnabled(true);
   };
 
@@ -44,7 +40,8 @@ function Profile(props) {
     if (imageAsFile === "") {
       console.error(`not an image, the image file is a ${typeof imageAsFile}`);
     }
-    const uploadTask = storage
+    if(user){
+    storage
       .ref(`/images/${user.email.substring(0, user.email.lastIndexOf("@"))}`)
       .put(imageAsFile);
     var mySubString =
@@ -56,36 +53,7 @@ function Profile(props) {
         .child(mySubString)
         .getDownloadURL()
     );
-    // initiates the firebase side uploading
-    uploadTask.on(
-      "state_changed",
-      snapShot => {
-        // takes a snap shot of the process as it is happening
-        console.log(snapShot);
-      },
-      err => {
-        // catches the errors
-        console.log(err);
-      },
-      () => {
-        // gets the functions from storage refences the image storage in firebase by the children
-        // gets the download url then sets the image from firebase as the value for the imgUrl key:
-        firebase.auth().onAuthStateChanged(function(user) {
-          var mySubString =
-            user.email.substring(0, user.email.lastIndexOf("@")) + "_200x200";
-          storage
-            .ref("images")
-            .child(mySubString)
-            .getDownloadURL()
-            .then(fireBaseUrl => {
-              setImageAsUrl(prevObject => ({
-                ...prevObject,
-                imgUrl: fireBaseUrl
-              }));
-            });
-        });
-      }
-    );
+    }
   };
 
   // gets the functions from storage refences the image storage in firebase by the children
@@ -94,7 +62,8 @@ function Profile(props) {
     try {
       let firebase = require("firebase/app");
       //let user = firebase.auth().currentUser;
-      firebase.auth().onAuthStateChanged(function(user) {
+        firebase.auth().onAuthStateChanged(function(user) {
+            if(user){
         var mySubString =
           user.email.substring(0, user.email.lastIndexOf("@")) + "_200x200";
         storage
@@ -107,6 +76,7 @@ function Profile(props) {
               imgUrl: fireBaseUrl
             }));
           });
+        }
       });
     } catch (e) {
       return (
