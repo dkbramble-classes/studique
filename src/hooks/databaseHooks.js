@@ -94,15 +94,15 @@ export function signOut(props) {
 export function createQuestion(title, body, tagList) {
   const user = firebase.auth().currentUser;
 
-  const postData = {
-    uid: user.uid,
-    Body: body,
-    Title: title,
-    Rating: 0,
-    Tags: tagList,
-    creationDate: Math.round(new Date().getTime() / 1000)
-  };
-  console.log(postData);
+    const postData = {
+        uid: user.uid,
+        UserDisplayName: user.displayName,
+        Body: body,
+        Title: title,
+        Rating: 0,
+        Tags: tagList,
+        creationDate: Math.round((new Date()).getTime() / 1000),
+    };
 
   const newPostKey = firebase
     .database()
@@ -138,48 +138,73 @@ export function addComment(q_id, body) {
     .set(postData);
 }
 
-export async function updateRating(q_id, voteDir) {
-  const user = firebase.auth().currentUser;
-  return firebase
-    .database()
-    .ref("Questions/" + q_id + "/")
-    .once("value")
-    .then(function(snapshot) {
-      let rating = snapshot.val().Rating;
-      let current_upvotes_list = snapshot.val().UpVotes;
-      let current_downvotes_list = snapshot.val().DownVotes;
-      if (voteDir === "UpVotes") {
-        rating += 1;
-        if (current_upvotes_list === undefined) {
-          current_upvotes_list = [user.uid];
-        } else {
-          current_upvotes_list.push(user.uid);
+export async function updateRating( q_id, voteDir)
+{
+    const user = firebase.auth().currentUser;
+    return firebase.database().ref("Questions/" + q_id + '/').once('value').then(function(snapshot) {
+        if(user === null){
+            throw new Error("You must be signed in to vote on questions");
         }
-        if (current_downvotes_list !== undefined) {
-          let pos = current_downvotes_list.indexOf(user.uid);
-          if (pos !== -1) {
+        let rating = snapshot.val().Rating;
+        let color = "Neutral";
+        let isUp = true;
+        let isDown = true;
+        let current_upvotes_list = snapshot.val().UpVotes;
+        let current_downvotes_list = snapshot.val().DownVotes;
+        if(voteDir === "UpVotes")
+        {
             rating += 1;
-            current_downvotes_list.splice(pos, 1);
-          }
-        } else {
-          current_downvotes_list = [];
+            if(current_downvotes_list !== undefined) {
+                let pos = current_downvotes_list.indexOf(user.uid);
+                if (pos !== -1) {
+                    current_downvotes_list.splice(pos, 1);
+                    if(current_upvotes_list === undefined)
+                    {
+                        current_upvotes_list = [];
+                    }
+                }
+                else if(current_upvotes_list === undefined)
+                {
+                    color = "Up";
+                    isUp = false;
+                    current_upvotes_list = [user.uid];
+                }
+                else{
+                    color = "Up";
+                    isUp = false;
+                    current_upvotes_list.push(user.uid)
+                }
+            }
+            else
+            {
+                current_downvotes_list = [];
+                current_upvotes_list = [user.uid];
+                color = "Up";
+                isUp = false;
+            }
         }
-      } else {
-        if (current_downvotes_list === undefined) {
-          current_downvotes_list = [user.uid];
-        } else {
-          console.log(current_downvotes_list);
-          current_downvotes_list.push(user.uid);
-        }
-        rating -= 1;
-        if (current_upvotes_list !== undefined) {
-          let pos = current_upvotes_list.indexOf(user.uid);
-          if (pos !== -1) {
+        else
+        {
+            if(current_downvotes_list === undefined)
+            {
+                current_downvotes_list = [user.uid];
+            }
+            else{
+                console.log(current_downvotes_list);
+                current_downvotes_list.push(user.uid)
+            }
             rating -= 1;
-            current_upvotes_list.splice(pos, 1);
-          }
-        } else {
-          current_upvotes_list = [];
+            if(current_upvotes_list !== undefined) {
+                let pos = current_upvotes_list.indexOf(user.uid);
+                if (pos !== -1) {
+                    rating -= 1;
+                    current_upvotes_list.splice(pos, 1);
+                }
+            }
+            else
+            {
+                current_upvotes_list = []
+            }
         }
       }
       firebase
@@ -194,32 +219,41 @@ export async function updateRating(q_id, voteDir) {
           console.log(error.code);
           console.log(error.message);
         });
-      return rating;
+        return {Rating: rating, Color: color, isUp: isUp, isDown: isDown};
     });
 }
 
-export function getRatingInfo(q_id) {
-  return firebase
-    .database()
-    .ref("Questions/" + q_id + "/")
-    .once("value")
-    .then(function(snapshot) {
-      let rating = snapshot.val().Rating;
-      let color = "Neutral";
-      const user = firebase.auth().currentUser;
-      if (
-        snapshot.val().UpVotes !== undefined &&
-        snapshot.val().UpVotes.includes(user.uid)
-      ) {
-        color = "Up";
-      } else if (
-        snapshot.val().DownVotes !== undefined &&
-        snapshot.val().DownVotes.includes(user.uid)
-      ) {
-        color = "Down";
-      }
-      return { Rating: rating, color: color };
+export function getRatingInfo(q_id)
+{
+    return firebase.database().ref("Questions/" + q_id + '/').once('value').then(function(snapshot) {
+        let rating = snapshot.val().Rating;
+        let color = "Neutral";
+        let isUp = true;
+        let isDown = true;
+        const user = firebase.auth().currentUser;
+        if(user === null){
+            throw new Error("You must be signed in to interact with the results page");
+        }
+        else {
+            if (snapshot.val().UpVotes !== undefined && snapshot.val().UpVotes.includes(user.uid)) {
+                color = "Up";
+                isUp = false;
+            } else if (snapshot.val().DownVotes !== undefined && snapshot.val().DownVotes.includes(user.uid)) {
+                color = "Down";
+                isDown = false;
+            }
+        }
+        return {Rating: rating, color: color, isUp: isUp, isDown: isDown};
+    })
+}
+
+export function getRating(q_id)
+{
+    return firebase.database().ref("Questions/" + q_id + '/').once('value').then(function(snapshot) {
+        return snapshot.val().Rating;
     });
 }
 
-export { storage, firebase as default };
+export {
+    storage, firebase as default
+}
