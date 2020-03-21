@@ -4,20 +4,19 @@ import "../css/questionList.css";
 import { Link } from "react-router-dom";
 
 function QuestionList(props) {
-  console.log(props.searchString);
   return (
     <div className="qlistPage">
 
 
       <h1>Question list page:</h1>
       <div className="qlistList">
-      <QCards Rating={12} />
-      <QCards Rating={1} />
-      <QCards Rating={15} />
-      <QCards Rating={12} />
-      <QCards Rating={120} />
-      <QCards Rating={400} />
-      <QCards Rating={12} />
+      <QCards objectID={"-M2u7ipUHZxUPo0cN5S2"}/>
+      <QCards objectID={"-M2u7ipUHZxUPo0cN5S2"}/>
+      <QCards objectID={"-M2e51Q3wLz6uViSkt5h"}/>
+      <QCards objectID={"-M2e51Q3wLz6uViSkt5h"}/>
+      <QCards objectID={"-M2e51Q3wLz6uViSkt5h"}/>
+      <QCards objectID={"-M2e51Q3wLz6uViSkt5h"}/>
+      <QCards objectID={"-M2e51Q3wLz6uViSkt5h"}/>
 
       <Link to="/questionForm">
       <button type="submit" className="text-font qFormButton">
