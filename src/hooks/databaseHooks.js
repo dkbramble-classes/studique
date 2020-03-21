@@ -111,6 +111,9 @@ export async function updateRating( q_id, voteDir)
 {
     const user = firebase.auth().currentUser;
     return firebase.database().ref("Questions/" + q_id + '/').once('value').then(function(snapshot) {
+        if(user === null){
+            throw new Error("You must be signed in");
+        }
         let rating = snapshot.val().Rating;
         let color = "Neutral";
         let isUp = true;
@@ -198,17 +201,30 @@ export function getRatingInfo(q_id)
     return firebase.database().ref("Questions/" + q_id + '/').once('value').then(function(snapshot) {
         let rating = snapshot.val().Rating;
         let color = "Neutral";
+        let isUp = true;
+        let isDown = true;
         const user = firebase.auth().currentUser;
-        if(snapshot.val().UpVotes !== undefined && snapshot.val().UpVotes.includes(user.uid))
-        {
-            color = "Up";
+        if(user === null){
+            throw new Error("You must be signed in");
         }
-        else if(snapshot.val().DownVotes !== undefined && snapshot.val().DownVotes.includes(user.uid))
-        {
-            color = "Down";
+        else {
+            if (snapshot.val().UpVotes !== undefined && snapshot.val().UpVotes.includes(user.uid)) {
+                color = "Up";
+                isUp = false;
+            } else if (snapshot.val().DownVotes !== undefined && snapshot.val().DownVotes.includes(user.uid)) {
+                color = "Down";
+                isDown = false;
+            }
         }
-        return {Rating: rating, color: color};
+        return {Rating: rating, color: color, isUp: isUp, isDown: isDown};
     })
+}
+
+export function getRating(q_id)
+{
+    return firebase.database().ref("Questions/" + q_id + '/').once('value').then(function(snapshot) {
+        return snapshot.val().Rating;
+    });
 }
 
 export {

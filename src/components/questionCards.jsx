@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import "../css/questionCards.css";
 import { ReactComponent as UpArrow } from "../images/keyboard_arrow_up-24px.svg";
 import { ReactComponent as DownArrow } from "../images/keyboard_arrow_down-24px.svg";
-import {addComment, updateRating, getRatingInfo} from "../hooks/databaseHooks"
+import {addComment, updateRating, getRatingInfo, getRating} from "../hooks/databaseHooks"
 
 
 function QuestionCards(props) {
@@ -22,9 +22,17 @@ function QuestionCards(props) {
 
   function handleVoteInitialization() {
     getRatingInfo(q_id).then(function (state) {
+      console.log(state);
       updateCount(state.Rating);
       updateColor(colors[state.color]);
-    })
+      updateUpVotable(state.isUp);
+      updateDownVotable(state.isDown);
+    }).catch(function (error) {
+      console.log("Error: " + error.message);
+      getRating(q_id).then(function (rating) {
+        updateCount(rating);
+      })
+    });
   }
 
   function handleClick() {
@@ -39,6 +47,11 @@ function QuestionCards(props) {
         updateUpVotable(info.isUp);
         updateColor(colors[info.Color]);
         updateDownVotable(info.isDown);
+      }).catch(function (error) {
+        console.log("Error: " + error.message);
+        getRating(q_id).then(function (rating) {
+          updateCount(rating);
+        })
       });
     }
   }
@@ -50,6 +63,11 @@ function QuestionCards(props) {
         updateDownVotable(info.isDown);
         updateColor(colors[info.Color]);
         updateUpVotable(info.isUp);
+      }).catch(function (error) {
+        console.log("Error: " + error.message);
+        getRating(q_id).then(function (rating) {
+          updateCount(rating);
+        })
       });
     }
   }
