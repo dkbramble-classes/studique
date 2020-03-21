@@ -31,6 +31,9 @@ function QuestionForm(props)
       createQuestion(titleInput, bodyInput, tagList).then(function () {
         // Sign-out successful.
         console.log("Q-Card creation successful");
+      }).catch(function(error) {
+        console.log(error.code);
+        console.log(error.message);
       });
     }
   }

@@ -2,19 +2,30 @@ import React, {useState} from "react";
 import "../css/questionCards.css";
 import { ReactComponent as UpArrow } from "../images/keyboard_arrow_up-24px.svg";
 import { ReactComponent as DownArrow } from "../images/keyboard_arrow_down-24px.svg";
-import {addComment, updateRating} from "../hooks/databaseHooks"
+import {addComment, updateRating, getRatingInfo} from "../hooks/databaseHooks"
 
 
 function QuestionCards(props) {
   const [isClicked, updateClick] = useState(false);
   const [isUpVotable, updateUpVotable] = useState(true);
   const [isDownVotable, updateDownVotable] = useState(true);
-  const [voteCount, updateCount] = useState(props.Rating);
-  const [voteColor, updateColor] = useState("black");
+  const [voteCount, updateCount] = useState(0);
+  const colors = {
+    Neutral: "black",
+    Up: "#3944bc",
+    Down: "#d21f3c"
+  };
+  const [voteColor, updateColor] = useState(colors["Neutral"]);
   const [bodyInput, setBodyInput] = useState("");
-  const initialRating = props.Rating;
+
   const q_id = props.objectID;
 
+  function handleVoteInitialization() {
+    getRatingInfo(q_id).then(function (state) {
+      updateCount(state.Rating);
+      updateColor(colors[state.color]);
+    })
+  }
 
   function handleClick() {
     var newClickState = isClicked === true ? false : true;
@@ -23,31 +34,23 @@ function QuestionCards(props) {
 
   function handleUpClick(){
     if (isUpVotable){
-      let newVote = voteCount + 1
-      updateCount(newVote);
-      updateRating(newVote, q_id);
-      if(newVote !== initialRating){
+      updateRating(q_id, "UpVotes").then(function(rating){
+        updateCount(rating);
         updateUpVotable(false);
-        updateColor("#3944bc")
-      } else{
-        updateColor("black");
-      }
-      updateDownVotable(true);
+        updateColor(colors["Up"]);
+        updateDownVotable(true);
+      });
     }
   }
 
   function handleDownClick(){
     if (isDownVotable){
-      let newVote = voteCount - 1
-      updateCount(newVote);
-      updateUpVotable(true);
-      updateRating(newVote, q_id);
-      if(newVote !== initialRating){
+      updateRating( q_id, "DownVotes").then(function(rating) {
+        updateCount(rating);
         updateDownVotable(false);
-        updateColor("#d21f3c")
-      } else{
-        updateColor("black");
-      }
+        updateColor(colors["Down"]);
+        updateUpVotable(true);
+      });
     }
   }
 
@@ -65,7 +68,10 @@ function QuestionCards(props) {
     {
       addComment(q_id, bodyInput).then(function () {
         console.log("Comment successfully added to question " + q_id);
-      });
+      }).catch(function(error) {
+        console.log(error.code);
+        console.log(error.message);
+      });;
     }
   }
 
@@ -74,6 +80,7 @@ function QuestionCards(props) {
   let comments;
   let answerSection;
   let moreLink;
+  handleVoteInitialization(q_id);
 
   const Votes = () => (
     <div className="qcardVotes ">
