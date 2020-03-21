@@ -11,9 +11,9 @@ function QuestionCards(props) {
   const [isDownVotable, updateDownVotable] = useState(true);
   const [voteCount, updateCount] = useState(0);
   const colors = {
-    Neutral: "black",
-    Up: "#3944bc",
-    Down: "#d21f3c"
+    "Neutral": "black",
+    "Up": "#3944bc",
+    "Down": "#d21f3c"
   };
   const [voteColor, updateColor] = useState(colors["Neutral"]);
   const [bodyInput, setBodyInput] = useState("");
@@ -34,22 +34,22 @@ function QuestionCards(props) {
 
   function handleUpClick(){
     if (isUpVotable){
-      updateRating(q_id, "UpVotes").then(function(rating){
-        updateCount(rating);
-        updateUpVotable(false);
-        updateColor(colors["Up"]);
-        updateDownVotable(true);
+      updateRating(q_id, "UpVotes").then(function(info){
+        updateCount(info.Rating);
+        updateUpVotable(info.isUp);
+        updateColor(colors[info.Color]);
+        updateDownVotable(info.isDown);
       });
     }
   }
 
   function handleDownClick(){
     if (isDownVotable){
-      updateRating( q_id, "DownVotes").then(function(rating) {
-        updateCount(rating);
-        updateDownVotable(false);
-        updateColor(colors["Down"]);
-        updateUpVotable(true);
+      updateRating( q_id, "DownVotes").then(function(info) {
+        updateCount(info.Rating);
+        updateDownVotable(info.isDown);
+        updateColor(colors[info.Color]);
+        updateUpVotable(info.isUp);
       });
     }
   }
