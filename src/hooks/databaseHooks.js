@@ -112,7 +112,7 @@ export async function updateRating( q_id, voteDir)
     const user = firebase.auth().currentUser;
     return firebase.database().ref("Questions/" + q_id + '/').once('value').then(function(snapshot) {
         if(user === null){
-            throw new Error("You must be signed in");
+            throw new Error("You must be signed in to vote on questions");
         }
         let rating = snapshot.val().Rating;
         let color = "Neutral";
@@ -205,7 +205,7 @@ export function getRatingInfo(q_id)
         let isDown = true;
         const user = firebase.auth().currentUser;
         if(user === null){
-            throw new Error("You must be signed in");
+            throw new Error("You must be signed in to interact with the results page");
         }
         else {
             if (snapshot.val().UpVotes !== undefined && snapshot.val().UpVotes.includes(user.uid)) {
