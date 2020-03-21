@@ -12,6 +12,7 @@ function Profile(props) {
     const [tempName, setTempName] = useState(props.displayName);
     const [imageAsURL, setImageAsUrl] = useState(allInputs);
     const [profileImageURL, setProfileImageURL] = useState('');
+    const [isEnabled, setEnabled] = useState(false);
 
 
     /*Code adapted from Tallan Groberg
@@ -24,6 +25,7 @@ function Profile(props) {
 
     async function handleTempName(newVal) {
         setTempName(newVal.target.value);
+        setEnabled(true);
         await updateDisplayName(newVal.target.value);
     }
 
@@ -112,9 +114,11 @@ function Profile(props) {
                     </div>
                     <div className="edit">
                         <form onSubmit={handleFireBaseUpload}>
-                            <input type="file"
-                                onChange={handleImageAsFile}/>
-                            <button>Upload Profile Picture</button>
+                        <input type="button" id="loadFile" value="Select File" onclick="document.getElementById('file').click();" className="btn btn-secondary mx-auto"/>
+
+                            <input type="file" 
+                                onChange={handleImageAsFile} hidden/>
+                            <button id="upload" disabled={!isEnabled} className="btn btn-secondary mx-auto">Upload Picture</button>
                         </form>
                     </div>
                 </div>
