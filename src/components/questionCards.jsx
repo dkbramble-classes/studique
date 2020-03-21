@@ -22,7 +22,6 @@ function QuestionCards(props) {
 
   function handleVoteInitialization() {
     getRatingInfo(q_id).then(function (state) {
-      console.log(state);
       updateCount(state.Rating);
       updateColor(colors[state.color]);
       updateUpVotable(state.isUp);
