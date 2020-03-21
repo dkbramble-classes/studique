@@ -79,13 +79,13 @@ export function createQuestion(title, body, tagList) {
 
     const postData = {
         uid: user.uid,
+        UserDisplayName: user.displayName,
         Body: body,
         Title: title,
         Rating: 0,
         Tags: tagList,
         creationDate: Math.round((new Date()).getTime() / 1000),
     };
-    console.log(postData);
 
     const newPostKey = firebase.database().ref().child('Questions/').push().key;
 
