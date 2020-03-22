@@ -84,7 +84,6 @@ export function signOut(props){
 export function createQuestion(title, body, tagList) {
     const user = firebase.auth().currentUser;
 
-    console.log(user.photoURL);
     const postData = {
         uid: user.uid,
         UserDisplayName: user.displayName,
