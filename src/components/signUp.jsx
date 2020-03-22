@@ -21,21 +21,26 @@ function SignUp (props){
             setPermission("teacher");
             // console.log("teacher");
         }
-
-      setEmail(ev.target.value);
+        if(ev.target.value.length < 30){
+        setEmail(ev.target.value);
+        }
     //   console.log("TEECH" + teach);
     //   console.log("LEARN" + learn);
     }
   
     function handlePassword(ev){
-      setPassword(ev.target.value);
+        if(ev.target.value.length < 30){
+            setPassword(ev.target.value);
+        }
     }
 
     // function handlePermission(ev) {
     //     setPermission(ev.target.value);
     //   }
     function handleDisplay(ev){
-        setDisplay(ev.target.value);
+        if(ev.target.value.length < 30){
+            setDisplay(ev.target.value);
+        }
     }
     async function doSignUp(ev) {
         let signed_up = Promise.resolve(null);
@@ -60,7 +65,7 @@ function SignUp (props){
                 <h2 className="title">Sign-Up</h2>
                 <form onSubmit={(e) => {doSignUp().then(function(display) {console.log("Signed in with name: " + display)}); e.preventDefault();}}>
                     <div className="form-group row">
-                        <input className="form-control input-medium" id="inputText" type="text"
+                        <input className="form-control input-medium" id="inputDisplayUp" type="text"
                             value={
                                 userDisplay
                             }
@@ -69,7 +74,7 @@ function SignUp (props){
                             onChange={handleDisplay}></input>
                     </div>
                     <div className="form-group row">
-                        <input className="form-control input-medium" type="text"
+                        <input className="form-control input-medium" type="text" id="inputEmailUp"
                             value={
                                 userEmail
                             }
@@ -78,7 +83,7 @@ function SignUp (props){
                             onChange={handleEmail}></input>
                     </div>
                     <div className="form-group row">
-                        <input className="form-control input-medium" type="password"
+                        <input className="form-control input-medium" type="password" id="inputPasswordUp"
                             value={
                                 userPassword
                             }
@@ -88,7 +93,7 @@ function SignUp (props){
                         ></input>
                     </div>
                     <div className="form-group row last">
-                        <input type="submit" className="btn btn-primary mx-auto" value="Sign Up"/>
+                        <input type="submit" className="btn btn-primary mx-auto" id="inputSignin" value="Sign Up"/>
                     </div>
                 </form>
             </div>

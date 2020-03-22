@@ -16,14 +16,16 @@ function NavSearchText(props) {
 
   
   function handleTextChange(event) {
-    setSearch(event.target.value);
+    if(event.target.value.length < 140){
+      setSearch(event.target.value);
 
-    let empty = event.target.value.length > 0;
-    if (empty) {
-      var url = event.target.value.replace(/ /g, '&');
-      setURL(url);    
+      let empty = event.target.value.length > 0;
+      if (empty) {
+        var url = event.target.value.replace(/ /g, '&');
+        setURL(url);    
+      }
+      setEnabled(empty);
     }
-    setEnabled(empty);
   }
 
   function subBtn(e){

@@ -15,8 +15,7 @@ function SearchBarText(props) {
 
   
   function handleTextChange(event) {
-    let full = event.target.value.length > 100;
-    if (!full){
+    if(event.target.value.length < 140){
 
       setSearch(event.target.value);
 

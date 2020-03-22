@@ -49,6 +49,7 @@ function ButtonDisplay(props){
                   <button
                     type="submit"
                     className=" nav-btn btn nav-link text-font"
+                    id='signInNav'
                     >
                     Sign In
                   </button>
@@ -62,7 +63,7 @@ function ButtonDisplay(props){
               <Popup
                 modal
                 trigger={
-                  <button className="nav-link btn text-font">Sign up</button>
+                  <button className="nav-link btn text-font" id='signUpNav'>Sign up</button>
                 }
                 className="popup-set"
               >
@@ -79,7 +80,7 @@ function ButtonDisplay(props){
       <li className="nav-item">
       {/* <BrowserRouter> */}
       <Link to="/profile/">
-     <input type="submit" className="nav-link nav-btn btn text-font" value="Profile" />
+     <input type="submit" className="nav-link nav-btn btn text-font" value="Profile" id='profileNav' />
     </Link>
     {/* </BrowserRouter> */}
     </li>
@@ -88,7 +89,7 @@ function ButtonDisplay(props){
       Sign-Out</button> */}
       {/* <BrowserRouter> */}
       <Link to="/">
-        <input type="submit" className="nav-link btn text-font" value="Log-Out" onClick={handleLogout} />
+        <input type="submit" className="nav-link btn text-font" value="Log-Out" id='logOutNav' onClick={handleLogout} />
       </Link>
       {/* </BrowserRouter> */}
     </li>
