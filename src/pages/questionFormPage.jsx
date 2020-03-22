@@ -93,13 +93,15 @@ function QuestionForm(props)
             </div>
           </div>
         </div>
-        <Link to="/results">
+        
         <form onSubmit={(e) => {createQuestionCard(); e.preventDefault();}}>
+        {/* <Link to="/results/"> */}
           <button type="submit" className="text-font qFormButton" >
             SUBMIT QUESTION
           </button>
+          {/* </Link> */}
         </form>
-        </Link>
+        
       </div>
     </div>
   );

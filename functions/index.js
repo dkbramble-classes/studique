@@ -27,6 +27,7 @@ exports.updateAlgolia = functions.database.ref('/Questions/{q_id}/').onWrite(asy
                 //UserType: data.after.val().userType,
                 UserID: data.after.val().uid,
                 UserDisplayName: data.after.val().UserDisplayName,
+                UserPhoto: data.after.val().UserPhoto,
                 Comments: data.after.val().Comments,
                 objectID: context.params.q_id
             };

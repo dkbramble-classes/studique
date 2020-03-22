@@ -17,9 +17,11 @@ function AlgoliaSearch(props) {
         <div>
         <h3>Questions similar to yours:</h3>
         {result.map(item => {
+          console.log('what we saving as userPHoto', item.UserPhoto);
           return <QCards key={item.objectID} objectId={item.objectID} title={item.Title}
           body={item.Body} rating={item.Rating} creationDate={item.creationDate}
-          tags={item.Tags} userId={item.UserID} userDisplayName={item.UserDisplayName}/>
+          tags={item.Tags} userId={item.UserID} userDisplayName={item.UserDisplayName}
+          userPhoto={item.UserPhoto}/>
         })}
         </div>
       )}
@@ -35,7 +37,8 @@ function useAsyncHook(searchHits) {
       try {
         setLoading("true");
         const response = await index.search(searchHits, {
-          attributesToRetrieve: ['Body', 'Title', 'Rating', 'CreationDate', 'Tags', 'UserID', 'objectID', 'UserDisplayName'],
+          attributesToRetrieve: ['Body', 'Title', 'Rating', 'CreationDate', 
+          'Tags', 'UserID', 'objectID', 'UserDisplayName', 'UserPhoto'],
           hitsPerPage: 10,
         }).then(({ hits }) => {
           console.log('hits', hits)

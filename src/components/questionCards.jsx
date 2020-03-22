@@ -212,9 +212,9 @@ function QuestionCards(props) {
 
         <div className="qcardRightContent">
           <div className="qcardProfile">
-            <img
+            <img 
               className="qcardProfileLogo"
-              src={require("../images/louieLaker.jpg")}
+              src={props.userPhoto}
               alt="profilePic"
             />
             <span>{props.userDisplayName}</span>
