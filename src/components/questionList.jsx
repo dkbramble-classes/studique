@@ -15,13 +15,6 @@ function QuestionList(props) {
       <h1>Question list page:</h1>
       <div className="qlistList">
         <AlgoliaSearch query={searchString}/>
-        {/* <QCards Rating={12} />
-        <QCards Rating={1} />
-        <QCards Rating={15} />
-        <QCards Rating={12} />
-        <QCards Rating={120} />
-        <QCards Rating={400} />
-        <QCards Rating={12} /> */}
 
         <Link to="/questionForm">
           <button type="submit" className="text-font qFormButton">

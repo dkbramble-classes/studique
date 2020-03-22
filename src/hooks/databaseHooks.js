@@ -58,7 +58,10 @@ export function getUserMetadata(user)
     return database.ref('users/' + user.uid).once('value').then(function (snapshot) {
         let info = snapshot.val();
         return info.permissions;
-    }).then(result => {return result});
+    }).catch(function(error) {
+        console.log(error.code);
+        console.log(error.message);
+    });
 }
 
 export function signOut(props){
@@ -66,8 +69,9 @@ export function signOut(props){
         // Sign-out successful.
         props.handleAuthed('');
       }).catch(function(error) {
-        // An error happened.
-      });      
+        console.log(error.code);
+        console.log(error.message);
+    });
 }
 
 export function createQuestion(title, body, tagList) {
@@ -86,6 +90,102 @@ export function createQuestion(title, body, tagList) {
     const newPostKey = firebase.database().ref().child('Questions/').push().key;
 
     return firebase.database().ref("Questions/" + newPostKey).set(postData);
+}
+
+export function addComment(q_id, body) {
+    const user = firebase.auth().currentUser;
+
+    const postData = {
+        uid: user.uid,
+        Body: body,
+        creationDate: Math.round((new Date()).getTime() / 1000),
+    };
+    console.log(postData);
+
+    const newPostKey = firebase.database().ref().child('Questions/' + q_id + '/Comments/').push().key;
+
+    return firebase.database().ref("Questions/" + q_id + '/Comments/' + newPostKey).set(postData);
+}
+
+export async function updateRating( q_id, voteDir)
+{
+    const user = firebase.auth().currentUser;
+    return firebase.database().ref("Questions/" + q_id + '/').once('value').then(function(snapshot) {
+        let rating = snapshot.val().Rating;
+        let current_upvotes_list = snapshot.val().UpVotes;
+        let current_downvotes_list = snapshot.val().DownVotes;
+        if(voteDir === "UpVotes")
+        {
+            rating += 1;
+            if(current_upvotes_list === undefined)
+            {
+                current_upvotes_list = [user.uid];
+            }else{
+                current_upvotes_list.push(user.uid)
+            }
+            if(current_downvotes_list !== undefined) {
+                let pos = current_downvotes_list.indexOf(user.uid);
+                if (pos !== -1) {
+                    rating += 1;
+                    current_downvotes_list.splice(pos, 1);
+                }
+            }
+            else
+            {
+                current_downvotes_list = []
+            }
+        }
+        else
+        {
+            if(current_downvotes_list === undefined)
+            {
+                current_downvotes_list = [user.uid];
+            }
+            else{
+                console.log(current_downvotes_list);
+                current_downvotes_list.push(user.uid)
+            }
+            rating -= 1;
+            if(current_upvotes_list !== undefined) {
+                let pos = current_upvotes_list.indexOf(user.uid);
+                if (pos !== -1) {
+                    rating -= 1;
+                    current_upvotes_list.splice(pos, 1);
+                }
+            }
+            else
+            {
+                current_upvotes_list = []
+            }
+        }
+        firebase.database().ref("Questions/" + q_id + '/').update({
+            Rating: rating,
+            UpVotes: current_upvotes_list,
+            DownVotes: current_downvotes_list,
+        }).catch(function (error) {
+            console.log(error.code);
+            console.log(error.message);
+        });
+        return rating;
+    });
+}
+
+export function getRatingInfo(q_id)
+{
+    return firebase.database().ref("Questions/" + q_id + '/').once('value').then(function(snapshot) {
+        let rating = snapshot.val().Rating;
+        let color = "Neutral";
+        const user = firebase.auth().currentUser;
+        if(snapshot.val().UpVotes !== undefined && snapshot.val().UpVotes.includes(user.uid))
+        {
+            color = "Up";
+        }
+        else if(snapshot.val().DownVotes !== undefined && snapshot.val().DownVotes.includes(user.uid))
+        {
+            color = "Down";
+        }
+        return {Rating: rating, color: color};
+    })
 }
 
 export {

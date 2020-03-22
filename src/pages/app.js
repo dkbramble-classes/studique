@@ -1,17 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route } from "react-router-dom";
-
-//import { BrowserHistory } from 'react-history'
-
-//import {getQuestions} from '../hooks/databaseHooks'
 import QuestionList from '../components/questionList';
 import Nav from '../components/nav';
-
 import Profile from './profilePage';
 import FrontPage from './frontpage';
 import QuestionForm from './questionFormPage';
 
-function App (props) {
+function App () {
   //Whether or not the user is logged in
   const [isAuthed, setAuthed] = useState(
     sessionStorage.getItem('Authenticated') || ''
@@ -58,19 +53,15 @@ function App (props) {
   }
 
   function handleSearch(newSearch, newURL){
-    //console.log(newSearch);
-    //setSearch(newSearch);
     setURL(newURL);
   }
 
   function handleName(newName) {
-    //console.log(newName);
     setName(newName);
   }
 
   function handleType(newType){
     setType(newType);
-    //console.log(newType);
   }
 
   return (
@@ -85,9 +76,6 @@ function App (props) {
         <Route path="/results/*" exact render={(props) => <QuestionList {...props} searchString={searchString} handleSearch={handleSearch} isAuthed={isAuthed} userType={userType}/>}/>
         <Route path="/profile" exact render={(props) => <Profile {...props} handleName={handleName} displayName={displayName} isAuthed={isAuthed} />} />
         <Route path="/questionForm" exact render={(props) => <QuestionForm {...props} handleName={handleName} displayName={displayName} isAuthed={isAuthed} />} />
-        {/* <Switch>
-          <Route path="/results/search=:id"> <RoutResults/></Route>
-        </Switch> */}
       </div>
     </Router>
   );
