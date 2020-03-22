@@ -9,11 +9,15 @@ function QuestionForm(props)
   const [tagsInput, setTagsInput] = useState("");
 
   function handleTitleInput(ev) {
-    setTitleInput(ev.target.value);
+    if(ev.target.value.length < 30){
+      setTitleInput(ev.target.value);
+    }
   }
 
   function handleBodyInput(ev) {
-    setBodyInput(ev.target.value);
+    if(ev.target.value.length < 2000){
+      setBodyInput(ev.target.value);
+    }
   }
 
   function handleTagsInput(ev) {
@@ -93,7 +97,7 @@ function QuestionForm(props)
           </div>
         </div>
         <form onSubmit={(e) => {createQuestionCard(); e.preventDefault();}}>
-          <button type="submit" className="text-font qFormButton" >
+          <button type="submit" id='qFormSubmit' className="text-font qFormButton mb-2" >
             SUBMIT QUESTION
           </button>
         </form>

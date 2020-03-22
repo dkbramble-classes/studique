@@ -4,7 +4,7 @@ import SignIn from "../components/signIn.jsx";
 import SignUp from "../components/signUp.jsx";
 import NavSearchText from "../components/navsearch_text";
 import Popup from "reactjs-popup";
-import { Link } from "react-router-dom";
+import { BrowserRouter, Link } from "react-router-dom";
 import {signOut} from "../hooks/databaseHooks";
 import {withRouter} from 'react-router'
 
@@ -49,6 +49,7 @@ function ButtonDisplay(props){
                   <button
                     type="submit"
                     className=" nav-btn btn nav-link text-font"
+                    id='signInNav'
                     >
                     Sign In
                   </button>
@@ -62,7 +63,7 @@ function ButtonDisplay(props){
               <Popup
                 modal
                 trigger={
-                  <button className="nav-link btn text-font">Sign up</button>
+                  <button className="nav-link btn text-font" id='signUpNav'>Sign up</button>
                 }
                 className="popup-set"
               >
@@ -77,16 +78,20 @@ function ButtonDisplay(props){
     <div>
     <ul className="navbar-nav">
       <li className="nav-item">
+      {/* <BrowserRouter> */}
       <Link to="/profile/">
-     <input type="submit" className="nav-link nav-btn btn text-font" value="Profile" />
+     <input type="submit" className="nav-link nav-btn btn text-font" value="Profile" id='profileNav' />
     </Link>
+    {/* </BrowserRouter> */}
     </li>
     <li className="nav-item">
       {/* <button  className=" nav-btn btn nav-link text-font" onClick={handleLogout}>
       Sign-Out</button> */}
+      {/* <BrowserRouter> */}
       <Link to="/">
-        <input type="submit" className="nav-link btn text-font" value="Log-Out" onClick={handleLogout} />
+        <input type="submit" className="nav-link btn text-font" value="Log-Out" id='logOutNav' onClick={handleLogout} />
       </Link>
+      {/* </BrowserRouter> */}
     </li>
     </ul>
     </div>

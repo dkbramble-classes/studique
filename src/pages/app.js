@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Switch, useParams } from "react-router-dom";
+import { BrowserRouter , Route, Switch, useParams } from "react-router-dom";
 
 //import { BrowserHistory } from 'react-history'
 
@@ -78,7 +78,7 @@ function App () {
   }
 
   return (
-    <Router>
+    <BrowserRouter>
       <div>
         <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet"></link>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.3.1/themes/reset-min.css" integrity="sha256-t2ATOGCtAIZNnzER679jwcFcKYfLlw01gli6F6oszk8=" crossOrigin="anonymous"></link>
@@ -93,7 +93,7 @@ function App () {
           <Route path="/results/search=:id"> <RoutResults/></Route>
         </Switch>
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 

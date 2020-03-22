@@ -91,6 +91,7 @@ function Profile(props) {
                         <h2>
                             <input type="text" className="invisible-input" maxLength="20"
                                 value={tempName}
+                                id="profileNameInput"
                                 onChange={handleTempName}
                                 onBlur={handleNameSubmit}/>
                         </h2>
