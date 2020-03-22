@@ -43,7 +43,7 @@ function SignUp (props){
         {
             console.log("Password must be 6 characters long.")
         }
-        else if (userEmail.indexOf("mail.gvsu.edu") !== -1) {
+        else if (userEmail.indexOf("@mail.gvsu.edu") !== -1 || userEmail.indexOf("@gvsu.edu") !== -1) {
             signed_up = await signUpFirebase(userEmail, userPassword, userPermission, userDisplay);
 
             if (signed_up !== null){
