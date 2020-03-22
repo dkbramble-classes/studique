@@ -10,15 +10,18 @@ function AlgoliaSearch(props) {
   return (
     <div>
       {loading === "false" ? (
-        <h1>Searching</h1>
-      ) : loading === "null" ? (
-        <h1>No Results Found</h1>
+        <h3>Loading...</h3>
+      ) : result.length === 0 ? (
+        <h3>No results found</h3>
       ) : (
-        result.map(item => {
-          return <QCards key={item.objectId} title={item.Title}
+        <div>
+        <h3>Questions similar to yours:</h3>
+        {result.map(item => {
+          return <QCards key={item.objectID} objectId={item.objectID} title={item.Title}
           body={item.Body} rating={item.Rating} creationDate={item.creationDate}
-          tags={item.Tags} userId={item.UserID}/>;
-        })
+          tags={item.Tags} userId={item.UserID} userDisplayName={item.UserDisplayName}/>
+        })}
+        </div>
       )}
     </div>
   );
@@ -32,7 +35,7 @@ function useAsyncHook(searchHits) {
       try {
         setLoading("true");
         const response = await index.search(searchHits, {
-          attributesToRetrieve: ['Body', 'Title', 'Rating', 'CreationDate', 'Tags', 'UserID', 'objectID'],
+          attributesToRetrieve: ['Body', 'Title', 'Rating', 'CreationDate', 'Tags', 'UserID', 'objectID', 'UserDisplayName'],
           hitsPerPage: 10,
         }).then(({ hits }) => {
           console.log('hits', hits)
@@ -43,7 +46,6 @@ function useAsyncHook(searchHits) {
         const hits = await response;
         setResult(
           hits.map(item => {
-            // let hitlist = [item.Text, item.objectID];
             console.log("item", item);
             return item;
           })

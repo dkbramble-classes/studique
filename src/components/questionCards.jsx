@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import "../css/questionCards.css";
 import { ReactComponent as UpArrow } from "../images/keyboard_arrow_up-24px.svg";
 import { ReactComponent as DownArrow } from "../images/keyboard_arrow_down-24px.svg";
-import {addComment, updateRating, getRatingInfo} from "../hooks/databaseHooks"
+import {addComment, updateRating, getRatingInfo, getRating} from "../hooks/databaseHooks"
 
 
 function QuestionCards(props) {
@@ -25,20 +25,29 @@ function QuestionCards(props) {
 
   const [voteCount, updateCount] = useState(0);
   const colors = {
-    Neutral: "black",
-    Up: "#3944bc",
-    Down: "#d21f3c"
+    "Neutral": "black",
+    "Up": "#3944bc",
+    "Down": "#d21f3c"
   };
   const [voteColor, updateColor] = useState(colors["Neutral"]);
   const [bodyInput, setBodyInput] = useState("");
 
-  const q_id = props.objectID;
+  const q_id = props.objectId;
+  console.log('props', props);
 
   function handleVoteInitialization() {
+    console.log('inside handlevoteinitialization', q_id);
     getRatingInfo(q_id).then(function (state) {
       updateCount(state.Rating);
       updateColor(colors[state.color]);
-    })
+      updateUpVotable(state.isUp);
+      updateDownVotable(state.isDown);
+    }).catch(function (error) {
+      console.log("Error: " + error.message);
+      getRating(q_id).then(function (rating) {
+        updateCount(rating);
+      })
+    });
   }
 
   function handleClick() {
@@ -48,22 +57,32 @@ function QuestionCards(props) {
 
   function handleUpClick(){
     if (isUpVotable){
-      updateRating(q_id, "UpVotes").then(function(rating){
-        updateCount(rating);
-        updateUpVotable(false);
-        updateColor(colors["Up"]);
-        updateDownVotable(true);
+      updateRating(q_id, "UpVotes").then(function(info){
+        updateCount(info.Rating);
+        updateUpVotable(info.isUp);
+        updateColor(colors[info.Color]);
+        updateDownVotable(info.isDown);
+      }).catch(function (error) {
+        console.log("Error: " + error.message);
+        getRating(q_id).then(function (rating) {
+          updateCount(rating);
+        })
       });
     }
   }
 
   function handleDownClick(){
     if (isDownVotable){
-      updateRating( q_id, "DownVotes").then(function(rating) {
-        updateCount(rating);
-        updateDownVotable(false);
-        updateColor(colors["Down"]);
-        updateUpVotable(true);
+      updateRating( q_id, "DownVotes").then(function(info) {
+        updateCount(info.Rating);
+        updateDownVotable(info.isDown);
+        updateColor(colors[info.Color]);
+        updateUpVotable(info.isUp);
+      }).catch(function (error) {
+        console.log("Error: " + error.message);
+        getRating(q_id).then(function (rating) {
+          updateCount(rating);
+        })
       });
     }
   }
@@ -198,7 +217,7 @@ function QuestionCards(props) {
               src={require("../images/louieLaker.jpg")}
               alt="profilePic"
             />
-            <span>Standard Student</span>
+            <span>{props.userDisplayName}</span>
           </div>
 
           <div className="qcardTitle" onClick = {handleClick}>

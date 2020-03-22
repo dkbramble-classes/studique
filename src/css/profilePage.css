@@ -4,6 +4,7 @@
     border-radius: 50%;
     margin-right: 10px;
     object-fit: cover;
+    
 }
 
 .profileCard { 
@@ -62,4 +63,9 @@
 
 .qListContainer {
     text-align: center;
+}
+
+.btn-secondary{
+    margin-right: 2rem;
+    margin-left: 2rem;
 }
