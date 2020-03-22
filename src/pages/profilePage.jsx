@@ -27,7 +27,7 @@ function Profile(props) {
         props.handleName(newVal.target.value);
     }
 
-    const handleFireBaseUpload = async e => {
+    const handleFireBaseUpload = e => {
         let firebase = require("firebase/app");
         let user = firebase.auth().currentUser;
         e.preventDefault();
@@ -45,7 +45,11 @@ function Profile(props) {
                 }`).put(imageAsFile);
                 var mySubString = user.email.substring(0, user.email.lastIndexOf("@")) + "_200x200";
 
-                await updatePhotoUrl(storage.ref("images").child(mySubString).getDownloadURL());
+                storage.ref("images").child(mySubString).getDownloadURL().then(function(snapshot) {
+                    updatePhotoUrl(snapshot).catch(function (error) {
+                        console.log("Error: " + error.message);
+                    })
+                });
             } catch (e) {
                 console.log(e);
             }
@@ -113,10 +117,10 @@ function Profile(props) {
 
                 <div className="qListContainer">
                     <div className="myQList">
-                        <QCards objectID={"-M2z9WUddIwRWWloeFeV"}/>
-                        <QCards objectID={"-M2z9WUddIwRWWloeFeV"}/>
-                        <QCards objectID={"-M2z9WUddIwRWWloeFeV"}/>
-                        <QCards objectID={"-M2z9WUddIwRWWloeFeV"}/>
+                        <QCards objectID={"-M3-Nm4SK4BImLE878PM"}/>
+                        <QCards objectID={"-M3-Nm4SK4BImLE878PM"}/>
+                        <QCards objectID={"-M3-Nm4SK4BImLE878PM"}/>
+                        <QCards objectID={"-M3-Nm4SK4BImLE878PM"}/>
                     </div>
                 </div>
             </div>

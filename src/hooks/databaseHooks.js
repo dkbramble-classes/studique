@@ -56,7 +56,7 @@ export async function updateDisplayName(newName)
 export async function updatePhotoUrl(newURL) {
     let user = firebase.auth().currentUser;
     return await user.updateProfile({
-        photoUrl: newURL
+        photoURL: newURL
     });
 }
 
@@ -87,6 +87,7 @@ export function createQuestion(title, body, tagList) {
     const postData = {
         uid: user.uid,
         UserDisplayName: user.displayName,
+        UserPhoto: user.photoURL,
         Body: body,
         Title: title,
         Rating: 0,
