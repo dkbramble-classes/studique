@@ -1,6 +1,7 @@
 import React, {useState} from "react";
 import "../css/questionForm.css";
 import {createQuestion} from "../hooks/databaseHooks"
+import { Link } from "react-router-dom";
 
 function QuestionForm(props)
 {
@@ -92,11 +93,13 @@ function QuestionForm(props)
             </div>
           </div>
         </div>
+        <Link to="/results">
         <form onSubmit={(e) => {createQuestionCard(); e.preventDefault();}}>
           <button type="submit" className="text-font qFormButton" >
             SUBMIT QUESTION
           </button>
         </form>
+        </Link>
       </div>
     </div>
   );

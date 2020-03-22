@@ -21,6 +21,8 @@ function QuestionCards(props) {
     tagList = myTagList.map(tag => (
       <Tags tagname={tag}/>
     ))
+  }
+
   const [voteCount, updateCount] = useState(0);
   const colors = {
     Neutral: "black",
@@ -219,10 +221,6 @@ function QuestionCards(props) {
     </div>
   );
 }
-
-
-
-
 
 
 export default QuestionCards;
