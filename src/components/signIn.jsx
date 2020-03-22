@@ -60,7 +60,7 @@ function SignIn(props){
                         onChange={handlePassword}></input>
                 </div>
                 <div className="form-group row last">
-                    <input type="submit" className="btn btn-primary mx-auto" value="Sign In"/>
+                    <input type="submit" id="signInSubmit" className="btn btn-primary mx-auto" value="Sign In"/>
                 </div>
             </form>
         </div>

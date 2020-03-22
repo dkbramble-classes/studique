@@ -1,9 +1,6 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
 import SearchBarText from '../../components/searchbar_text'
 import {render, fireEvent, cleanup, getByPlaceholderText, getByText, getElementById} from '@testing-library/react';
-// import App from '../../pages/app'
-// import FrontPage from '../../pages/frontpage.js'
 import { MemoryRouter} from "react-router-dom";
 
 afterEach(cleanup)

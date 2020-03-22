@@ -97,7 +97,7 @@ function QuestionForm(props)
           </div>
         </div>
         <form onSubmit={(e) => {createQuestionCard(); e.preventDefault();}}>
-          <button type="submit" className="text-font qFormButton mb-2" >
+          <button type="submit" id='qFormSubmit' className="text-font qFormButton mb-2" >
             SUBMIT QUESTION
           </button>
         </form>
