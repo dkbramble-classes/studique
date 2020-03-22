@@ -17,7 +17,6 @@ function AlgoliaSearch(props) {
         <div>
         <h3>Questions similar to yours:</h3>
         {result.map(item => {
-          console.log('what we saving as userPHoto', item.UserPhoto);
           return <QCards key={item.objectID} objectId={item.objectID} title={item.Title}
           body={item.Body} rating={item.Rating} creationDate={item.creationDate}
           tags={item.Tags} userId={item.UserID} userDisplayName={item.UserDisplayName}
