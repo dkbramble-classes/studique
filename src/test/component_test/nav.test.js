@@ -12,6 +12,7 @@ it('Checking initial log in state', () => {
     expect(document.getElementById("profileNav")).toBeNull()
     expect(document.getElementById("logOutNav")).toBeNull()
  });
+ 
 
  it('Checking logged in state', () => {
   const { search } = render(<MemoryRouter><Nav isAuthed={true}/></MemoryRouter>);

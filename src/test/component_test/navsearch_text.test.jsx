@@ -1,10 +1,6 @@
 import React from 'react';
-// import ReactDOM from 'react-dom';
 import NavSearchText from '../../components/navsearch_text'
-// import Nav from '../../components/nav'
-import {render, fireEvent, cleanup, getByPlaceholderText, getByText, getElementById} from '@testing-library/react';
-// import App from '../../pages/app'
-// import FrontPage from '../../pages/frontpage.js'
+import {render, fireEvent, cleanup, getByPlaceholderText} from '@testing-library/react';
 import { MemoryRouter} from "react-router-dom";
 
 afterEach(cleanup)

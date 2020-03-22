@@ -1,6 +1,6 @@
 import React from 'react';
 import SearchBarText from '../../components/searchbar_text'
-import {render, fireEvent, cleanup, getByPlaceholderText, getByText, getElementById} from '@testing-library/react';
+import {render, fireEvent, cleanup, getByPlaceholderText, getByText} from '@testing-library/react';
 import { MemoryRouter} from "react-router-dom";
 
 afterEach(cleanup)

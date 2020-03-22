@@ -1,6 +1,6 @@
 import React from 'react';
 import QuestionFormPage from '../../pages/questionFormPage'
-import {render, fireEvent, cleanup, getByPlaceholderText, getByText, getElementById} from '@testing-library/react';
+import {render, fireEvent, cleanup} from '@testing-library/react';
 import { MemoryRouter} from "react-router-dom";
 
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import SignIn from '../../components/signIn'
-import {render, fireEvent, cleanup, getByPlaceholderText, getByText, getElementById} from '@testing-library/react';
+import {render, fireEvent, cleanup, getByPlaceholderText} from '@testing-library/react';
 
 afterEach(cleanup)
 
