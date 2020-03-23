@@ -10,7 +10,6 @@ function SignIn(props){
     
         if(ev.target.value.length < 30){
             setEmail(ev.target.value);
-            console.log(userEmail);
         }
     }
   
