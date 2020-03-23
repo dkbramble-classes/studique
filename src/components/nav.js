@@ -2,27 +2,32 @@ import logo from "../images/logo.png";
 import React from 'react';
 import SignIn from "../components/signIn.jsx";
 import SignUp from "../components/signUp.jsx";
+import NavSearchText from "../components/navsearch_text";
 import Popup from "reactjs-popup";
-import { Link } from "react-router-dom";
+import { BrowserRouter, Link } from "react-router-dom";
 import {signOut} from "../hooks/databaseHooks";
+import {withRouter} from 'react-router'
 
-function Nav(props) {
-  
-  return (
+const Nav = ({location, ...props}) => (
     <nav className="navbar navbar-expand-md navbar-expand-lg navbar-light" id="mainNavStdq" aria-expanded="false" >
     <div className="container">
-      <a className="navbar-brand text-font" href="/">
-        <img className="mr-2 " width="30" height="40" src={logo} alt="LogoBrand" />
-        Studique
-      </a>
-      <div className="" id="navbarResponsive">
+      <a className="navbar-brand text-font mr-md-4" href="/">
+        <div className="inline-block">
+      <img className="mr-2  " width="30" height="40" src={logo} alt="LogoBrand"/>
+      </div>
+      <div className="inline-block d-sm-inline d-none">Studique</div>
+      </a>        
+
+      <div className="d-inline-flex" id="navbarResponsive">
+        <div className="mt-2">
+          {location.pathname !== '/' && <NavSearchText handleSearch={props.handleSearch} searchString/>}
+        </div>
         <ButtonDisplay isAuthed={props.isAuthed} handleAuthed={props.handleAuthed} displayName={props.displayName} handleName={props.handleName} handleType={props.handleType}/>
       </div>
     </div>
   </nav>
       
-  );
-}
+);
 
 
 function ButtonDisplay(props){
@@ -44,11 +49,12 @@ function ButtonDisplay(props){
                   <button
                     type="submit"
                     className=" nav-btn btn nav-link text-font"
+                    id='signInNav'
                     >
                     Sign In
                   </button>
                 }
-                className="popup-set"
+                className="popup-set "
               >
                 <SignIn handleAuthed={props.handleAuthed} handleName={props.handleName} handleType={props.handleType} ></SignIn>
               </Popup>
@@ -57,7 +63,7 @@ function ButtonDisplay(props){
               <Popup
                 modal
                 trigger={
-                  <button className="nav-link btn text-font">Sign up</button>
+                  <button className="nav-link btn text-font" id='signUpNav'>Sign up</button>
                 }
                 className="popup-set"
               >
@@ -69,19 +75,23 @@ function ButtonDisplay(props){
   }
   else{
     return( <div className="text-white text-font text-center">
-    <div className="my-2">
+    <div>
     <ul className="navbar-nav">
       <li className="nav-item">
+      {/* <BrowserRouter> */}
       <Link to="/profile/">
-     <input type="submit" className="nav-link btn text-font" value="Profile" />
+     <input type="submit" className="nav-link nav-btn btn text-font" value="Profile" id='profileNav' />
     </Link>
+    {/* </BrowserRouter> */}
     </li>
     <li className="nav-item">
       {/* <button  className=" nav-btn btn nav-link text-font" onClick={handleLogout}>
       Sign-Out</button> */}
+      {/* <BrowserRouter> */}
       <Link to="/">
-        <input type="submit" className="nav-link btn text-font" value="Log-Out" onClick={handleLogout} />
+        <input type="submit" className="nav-link btn text-font" value="Log-Out" id='logOutNav' onClick={handleLogout} />
       </Link>
+      {/* </BrowserRouter> */}
     </li>
     </ul>
     </div>
@@ -90,4 +100,4 @@ function ButtonDisplay(props){
   }
 }
 
-export default Nav;
+export default withRouter(Nav);
