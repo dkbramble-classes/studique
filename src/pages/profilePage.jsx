@@ -118,10 +118,7 @@ function Profile(props) {
 
                 <div className="qListContainer">
                     <div className="myQList">
-                        <QCards objectID={"-M3-Nm4SK4BImLE878PM"}/>
-                        <QCards objectID={"-M3-Nm4SK4BImLE878PM"}/>
-                        <QCards objectID={"-M3-Nm4SK4BImLE878PM"}/>
-                        <QCards objectID={"-M3-Nm4SK4BImLE878PM"}/>
+
                     </div>
                 </div>
             </div>

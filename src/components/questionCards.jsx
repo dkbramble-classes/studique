@@ -2,13 +2,32 @@ import React, {useState} from "react";
 import "../css/questionCards.css";
 import { ReactComponent as UpArrow } from "../images/keyboard_arrow_up-24px.svg";
 import { ReactComponent as DownArrow } from "../images/keyboard_arrow_down-24px.svg";
-import {addComment, updateRating, getRatingInfo, getRating} from "../hooks/databaseHooks"
-
+import {storage, addComment, updateRating, getRatingInfo, getRating} from "../hooks/databaseHooks";
+import 'firebase/storage';
 
 function QuestionCards(props) {
   const [isClicked, updateClick] = useState(false);
   const [isUpVotable, updateUpVotable] = useState(true);
   const [isDownVotable, updateDownVotable] = useState(true);
+  var tagList = [];
+  var url = 'require("../images/louieLaker.jpg")'
+
+  function Tags(props){
+    return <div className="tags">{props.tagname}</div>
+  }
+  
+  if (typeof(props.tags) !== 'undefined' && props.tags != null) {
+    var myTagList = props.tags;
+
+    tagList = myTagList.map(tag => (
+      <Tags tagname={tag}/>
+    ))
+  }
+
+  if(props.userPhoto != null && props.userPhoto !== undefined){
+    url = props.userPhoto;
+  }
+
   const [voteCount, updateCount] = useState(0);
   const colors = {
     "Neutral": "black",
@@ -18,9 +37,11 @@ function QuestionCards(props) {
   const [voteColor, updateColor] = useState(colors["Neutral"]);
   const [bodyInput, setBodyInput] = useState("");
 
-  const q_id = props.objectID;
+  const q_id = props.objectId;
+  console.log('props', props);
 
   function handleVoteInitialization() {
+    console.log('inside handlevoteinitialization', q_id);
     getRatingInfo(q_id).then(function (state) {
       updateCount(state.Rating);
       updateColor(colors[state.color]);
@@ -92,6 +113,26 @@ function QuestionCards(props) {
     }
   }
 
+  function Comments(props){
+    return <div className="qcardCommentsSection">
+        <Votes />
+        <div className="qcardRightContent">
+          <span className="qcardComment">
+            this is a fake comment. will need to work on
+          </span>
+  
+          <div className="qcardProfile">
+            <img
+              className="qcardProfileLogo"
+              src={require("../images/louieLaker.jpg")}
+              alt="profilePic"
+            />
+            <span>Professor Peabody</span>
+          </div>
+        </div>
+      </div>
+  }
+
   let description;
   let hrline;
   let comments;
@@ -119,31 +160,14 @@ function QuestionCards(props) {
   if (isClicked) {
     description = (
       <div className="qcardDescription">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        {props.description}
       </div>
     );
   }
   //create comments
   if (isClicked) {
-    comments = (
-      <div className="qcardCommentsSection">
-        <Votes />
-        <div className="qcardRightContent">
-          <span className="qcardComment">
-          Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil molestiae consequatur, vel illum qui dolorem eum fugiat quo voluptas nulla pariatur?
-          </span>
-
-          <div className="qcardProfile">
-            <img
-              className="qcardProfileLogo"
-              src={require("../images/louieLaker.jpg")}
-              alt="profilePic"
-            />
-            <span>Professor Peabody</span>
-          </div>
-        </div>
-      </div>
-    );
+    //have to do comments 
+    comments = Comments(props.comments);
   }
   //create hrline
   if (isClicked) {
@@ -157,7 +181,7 @@ function QuestionCards(props) {
         <div className="qcardAnswerSection">
           <img
             className="qcardProfileLogo"
-            src={require("../images/louieLaker.jpg")}
+            src={url}
             alt="profilePic"
           />
 
@@ -193,24 +217,24 @@ function QuestionCards(props) {
 
         <div className="qcardRightContent">
           <div className="qcardProfile">
-            <img
+            <img 
               className="qcardProfileLogo"
-              src={require("../images/louieLaker.jpg")}
+              src="https://firebasestorage.googleapis.com/v0/b/studique.appspot.com/o/images%2Fhancoxk_200x200?alt=media&token=e577b6e9-7a9b-4711-ad8b-1556f1068bf6"
               alt="profilePic"
             />
-            <span>Standard Student</span>
+            <span>{props.userDisplayName}</span>
           </div>
 
           <div className="qcardTitle" onClick = {handleClick}>
-            <h5>How do I create a Hello World in React?</h5>
+            <h5>{props.title}</h5>
           </div>
 
           {description}
 
           <div className="qcardTags">
-            <div className="tags">CIS162</div>
-            <div className="tags">computer science</div>
+          {tagList} 
           </div>
+
           {moreLink}
         </div>
       </div>
@@ -222,17 +246,5 @@ function QuestionCards(props) {
   );
 }
 
-
-
-// const Profile = () => (
-//   <div className="qcardProfile">
-//             <img
-//               className="qcardProfileLogo"
-//               src={require("../images/louieLaker.jpg")}
-//               alt="profilePic"
-//             />
-//             <span>Standard Student</span>
-//           </div>
-// );
 
 export default QuestionCards;

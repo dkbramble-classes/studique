@@ -240,6 +240,7 @@ export function getRatingInfo(q_id)
 
 export function getRating(q_id)
 {
+    console.log('inseide getrating', q_id);
     return firebase.database().ref("Questions/" + q_id + '/').once('value').then(function(snapshot) {
         return snapshot.val().Rating;
     });

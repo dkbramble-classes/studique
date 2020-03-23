@@ -1,30 +1,24 @@
 import React from 'react';
-import QCards from '../components/questionCards';
 import "../css/questionList.css";
-import {  BrowserRouter,Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import AlgoliaSearch from "./algoliaSearch";
 
 function QuestionList(props) {
+  const searchString = props.searchString;
+  
   return (
     <div className="qlistPage">
 
-
-      <h1>Question list page:</h1>
       <div className="qlistList">
-      <QCards objectID={"-M3-Nm4SK4BImLE878PM"}/>
-      <QCards objectID={"-M3-Nm4SK4BImLE878PM"}/>
-      <QCards objectID={"-M3-Nm4SK4BImLE878PM"}/>
-      <QCards objectID={"-M3-Nm4SK4BImLE878PM"}/>
-      <QCards objectID={"-M3-Nm4SK4BImLE878PM"}/>
-      <QCards objectID={"-M3-Nm4SK4BImLE878PM"}/>
-      <QCards objectID={"-M3-Nm4SK4BImLE878PM"}/>
+        <AlgoliaSearch query={searchString}/>
 
-      {/* <BrowserRouter> */}
-      <Link to="/questionForm">
-      <button type="submit" className="text-font qFormButton">
-            ASK QUESTION
-        </button>
-      </Link>
-      {/* </BrowserRouter> */}
+        <br/>
+        <h4>Didn't find what you're looking for?</h4>
+        <Link to="/questionForm">
+          <button type="submit" className="text-font qFormButton">
+                ASK QUESTION
+          </button>
+        </Link>
       </div>
 
     </div>
