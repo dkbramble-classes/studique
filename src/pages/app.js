@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter , Route } from "react-router-dom";
 import QuestionList from '../components/questionList';
 import Nav from '../components/nav';
 import Profile from './profilePage';
@@ -65,7 +65,7 @@ function App () {
   }
 
   return (
-    <Router>
+    <BrowserRouter>
       <div>
         <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet"></link>
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.3.1/themes/reset-min.css" integrity="sha256-t2ATOGCtAIZNnzER679jwcFcKYfLlw01gli6F6oszk8=" crossOrigin="anonymous"></link>
@@ -77,7 +77,7 @@ function App () {
         <Route path="/profile" exact render={(props) => <Profile {...props} handleName={handleName} displayName={displayName} isAuthed={isAuthed} />} />
         <Route path="/questionForm" exact render={(props) => <QuestionForm {...props} handleName={handleName} displayName={displayName} isAuthed={isAuthed} />} />
       </div>
-    </Router>
+    </BrowserRouter>
   );
 }
 

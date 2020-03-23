@@ -100,6 +100,16 @@ export function createQuestion(title, body, tagList) {
     return firebase.database().ref("Questions/" + newPostKey).set(postData);
 }
 
+export function updateQuestion(q_id, title, body, tagList) {
+    const postData = {
+        Body: body,
+        Title: title,
+        Tags: tagList,
+    };
+
+    return firebase.database().ref("Questions/" + q_id + "/").update(postData);
+}
+
 export function addComment(q_id, body) {
     const user = firebase.auth().currentUser;
 

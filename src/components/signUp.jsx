@@ -11,18 +11,36 @@ function SignUp (props){
     const [userDisplay, setDisplay] = useState("");
 
     function handleEmail(ev) {
-      setEmail(ev.target.value);
+
+        var teach = ev.target.value.includes("@gvsu.edu");
+        var learn = ev.target.value.includes("@mail.gvsu.edu")
+        if (learn){
+            setPermission("student");
+            // console.log("student");
+        } else if (teach && !learn){
+            setPermission("teacher");
+            // console.log("teacher");
+        }
+        if(ev.target.value.length < 30){
+        setEmail(ev.target.value);
+        }
+    //   console.log("TEECH" + teach);
+    //   console.log("LEARN" + learn);
     }
   
     function handlePassword(ev){
-      setPassword(ev.target.value);
+        if(ev.target.value.length < 30){
+            setPassword(ev.target.value);
+        }
     }
 
-    function handlePermission(ev) {
-        setPermission(ev.target.value);
-      }
+    // function handlePermission(ev) {
+    //     setPermission(ev.target.value);
+    //   }
     function handleDisplay(ev){
-        setDisplay(ev.target.value);
+        if(ev.target.value.length < 30){
+            setDisplay(ev.target.value);
+        }
     }
     async function doSignUp(ev) {
         let signed_up = Promise.resolve(null);
@@ -30,7 +48,7 @@ function SignUp (props){
         {
             console.log("Password must be 6 characters long.")
         }
-        else if (userEmail.indexOf("mail.gvsu.edu") !== -1) {
+        else if (userEmail.indexOf("@mail.gvsu.edu") !== -1 || userEmail.indexOf("@gvsu.edu") !== -1) {
             signed_up = await signUpFirebase(userEmail, userPassword, userPermission, userDisplay);
 
             if (signed_up !== null){
@@ -47,7 +65,7 @@ function SignUp (props){
                 <h2 className="title">Sign-Up</h2>
                 <form onSubmit={(e) => {doSignUp().then(function(display) {console.log("Signed in with name: " + display)}); e.preventDefault();}}>
                     <div className="form-group row">
-                        <input className="form-control input-medium" id="inputText" type="text"
+                        <input className="form-control input-medium" id="inputDisplayUp" type="text"
                             value={
                                 userDisplay
                             }
@@ -56,7 +74,7 @@ function SignUp (props){
                             onChange={handleDisplay}></input>
                     </div>
                     <div className="form-group row">
-                        <input className="form-control input-medium" type="text"
+                        <input className="form-control input-medium" type="text" id="inputEmailUp"
                             value={
                                 userEmail
                             }
@@ -65,7 +83,7 @@ function SignUp (props){
                             onChange={handleEmail}></input>
                     </div>
                     <div className="form-group row">
-                        <input className="form-control input-medium" type="password"
+                        <input className="form-control input-medium" type="password" id="inputPasswordUp"
                             value={
                                 userPassword
                             }
@@ -74,27 +92,8 @@ function SignUp (props){
                             onChange={handlePassword}
                         ></input>
                     </div>
-                    <div className="form-group">
-                        <h4 className="text-white">User Type:</h4>
-                        <div className="form-check">
-                            <input className="form-check-input" type="radio" name="userType"
-                                   value="student"
-                                   checked = {userPermission}
-                                   onChange={handlePermission}/>
-                                   <label className="form-check-label">Student</label>
-                        </div>
-                        <div className="form-check">
-                            <input className="form-check-input" type="radio" name="userType" value="teacher"
-                            checked = {userPermission}
-                                onChange={handlePermission}
-                              />
-                            <label className="form-check-label">
-                                Teacher
-                            </label>
-                        </div>
-                    </div>
                     <div className="form-group row last">
-                        <input type="submit" className="btn btn-primary mx-auto" value="Sign Up"/>
+                        <input type="submit" className="btn btn-primary mx-auto" id="inputSignin" value="Sign Up"/>
                     </div>
                 </form>
             </div>
