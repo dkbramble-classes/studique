@@ -46,6 +46,7 @@ function SignUp (props){
         let signed_up = Promise.resolve(null);
         if (userPassword.length < 6)
         {
+            //Add error pop up class here
             console.log("Password must be 6 characters long.")
         }
         else if (userEmail.indexOf("@mail.gvsu.edu") !== -1 || userEmail.indexOf("@gvsu.edu") !== -1) {

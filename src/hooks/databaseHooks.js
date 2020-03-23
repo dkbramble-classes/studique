@@ -29,6 +29,7 @@ export async function initializeUser(user, permission, displayName)
     if(user != null) {
         return await user.updateProfile({
             displayName: displayName,
+            photoURL: storage.ref("images").child().getDownloadURL("louieLaker_200x200")
         }).then( function() {
             return firebase.database().ref('users/' + user.uid).set({
                 email: user.email,
