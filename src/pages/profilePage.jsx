@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import "../css/profilePage.css";
 import QCards from "../components/questionCards";
 import {storage, updateDisplayName, updatePhotoUrl} from "../hooks/databaseHooks";
+import ProfileQuestions from "../components/profileQuestions";
 
 function Profile(props) {
     const [imageAsFile, setImageAsFile] = useState("");
@@ -29,7 +30,8 @@ function Profile(props) {
 
     const handleFireBaseUpload = e => {
         let firebase = require("firebase/app");
-        let user = firebase.auth().currentUser;
+        let currUser = firebase.auth().currentUser;
+        
         e.preventDefault();
         console.log("start of upload");
         // async magic goes here...
@@ -38,12 +40,12 @@ function Profile(props) {
                 typeof imageAsFile
             }`);
         }
-        if (user) {
+        if (currUser) {
             try {
                 storage.ref(`/images/${
-                    user.email.substring(0, user.email.lastIndexOf("@"))
+                    currUser.email.substring(0, currUser.email.lastIndexOf("@"))
                 }`).put(imageAsFile);
-                var mySubString = user.email.substring(0, user.email.lastIndexOf("@")) + "_200x200";
+                var mySubString = currUser.email.substring(0, currUser.email.lastIndexOf("@")) + "_200x200";
 
                 storage.ref("images").child(mySubString).getDownloadURL().then(function(snapshot) {
                     updatePhotoUrl(snapshot).catch(function (error) {
@@ -118,7 +120,7 @@ function Profile(props) {
 
                 <div className="qListContainer">
                     <div className="myQList">
-
+                        <ProfileQuestions/>
                     </div>
                 </div>
             </div>

@@ -3,9 +3,9 @@ import "../css/questionCards.css";
 import { ReactComponent as UpArrow } from "../images/keyboard_arrow_up-24px.svg";
 import { ReactComponent as DownArrow } from "../images/keyboard_arrow_down-24px.svg";
 import {storage, addComment, updateRating, getRatingInfo, getRating} from "../hooks/databaseHooks";
-import 'firebase/storage';
 
 function QuestionCards(props) {
+  console.log("inside question cards");
   const [isClicked, updateClick] = useState(false);
   const [isUpVotable, updateUpVotable] = useState(true);
   const [isDownVotable, updateDownVotable] = useState(true);

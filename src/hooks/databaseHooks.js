@@ -60,6 +60,11 @@ export async function updatePhotoUrl(newURL) {
     });
 }
 
+export function getUid() {
+    let user = firebase.auth().currentUser;
+    return user.uid;
+}
+
 export function getUserMetadata(user)
 {
     return database.ref('users/' + user.uid).once('value').then(function (snapshot) {
@@ -98,6 +103,21 @@ export function createQuestion(title, body, tagList) {
     const newPostKey = firebase.database().ref().child('Questions/').push().key;
 
     return firebase.database().ref("Questions/" + newPostKey).set(postData);
+}
+
+export function getQuestionsByUser(uid){
+    let question_list = {};
+    return firebase.database().ref("/Questions/").once('value').then(function (snapshot) {
+        snapshot.forEach(function (childSnapshot) {
+
+            if(childSnapshot.val().uid === uid){
+                // var copyOfSnapshot = childSnapshot.val();
+                // copyOfSnapshot["objectId"] = key;
+                question_list[childSnapshot.key] = childSnapshot.val()
+            }
+        });
+        return question_list;
+    })
 }
 
 export function updateQuestion(q_id, title, body, tagList) {
