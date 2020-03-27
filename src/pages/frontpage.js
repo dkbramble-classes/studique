@@ -1,13 +1,11 @@
 import React from 'react';
 import { Link } from "react-router-dom";
-
-//import SimpleSearchBar from '../components/simple_searchbar'
 import SearchBarText from '../components/searchbar_text';
 
 function FrontPage(props) {
   return (
   <div className="bg-image">
-    {/* <img className="app-bg" src={appbg} alt="bg"/> */}
+
     <section id="signup" className="signup-section mt-5 justify-content-center d-flex h-100">
         <div className="mx-auto jumbotron">
           <h1 className="text-white mb-4 text-center">Studique</h1>
@@ -15,7 +13,7 @@ function FrontPage(props) {
             Crowdsourcing The College Experience
           </h3>
           <SearchBarText searchString={props.searchString} handleSearch={props.handleSearch} urlStringL={props.urlString}/>
-          {/* <SimpleSearchBar searchString={props.searchString} handleSearch={props.handleSearch} urlStringL={props.urlString}/> */}
+
           <div className="text-white text-font text-center">
             <div className="my-2">
             Want to help others? 

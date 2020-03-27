@@ -7,12 +7,16 @@ function SignIn(props){
     const [userPassword, setPassword] = useState("");
   
     function handleEmail(ev) {
-      setEmail(ev.target.value);
-      console.log(userEmail);
+    
+        if(ev.target.value.length < 30){
+            setEmail(ev.target.value);
+        }
     }
   
     function handlePassword(ev){
-      setPassword(ev.target.value);
+        if(ev.target.value.length < 30){
+            setPassword(ev.target.value);
+        }
     }
 
     async function doSignIn() {
@@ -36,7 +40,7 @@ function SignIn(props){
             <form onSubmit={ (e) => {doSignIn().then(function(display) {console.log("Signed in with name: " + display)}); e.preventDefault();}}>
                 <div className="form-group row">
                     <input className="form-control input-medium"
-                        id="inputText"
+                        id="inputEmailIn"
                         type="text"
                         value={
                             userEmail
@@ -46,7 +50,7 @@ function SignIn(props){
                         onChange={handleEmail}></input>
                 </div>
                 <div className="form-group row">
-                    <input className="form-control input-medium" id="inputText" type="password"
+                    <input className="form-control input-medium" id="inputPasswordIn" type="password"
                         value={
                             userPassword
                         }
@@ -55,7 +59,7 @@ function SignIn(props){
                         onChange={handlePassword}></input>
                 </div>
                 <div className="form-group row last">
-                    <input type="submit" className="btn btn-primary mx-auto" value="Sign In"/>
+                    <input type="submit" id="signInSubmit" className="btn btn-primary mx-auto" value="Sign In"/>
                 </div>
             </form>
         </div>

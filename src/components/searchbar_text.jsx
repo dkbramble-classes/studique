@@ -1,5 +1,5 @@
 import React,  {useState}  from 'react';
-import { Link } from "react-router-dom";
+import { BrowserRouter, Link } from "react-router-dom";
 import alglogo from "../images/algolia-white.svg";
 
 function SearchBarText(props) {
@@ -15,21 +15,25 @@ function SearchBarText(props) {
 
   
   function handleTextChange(event) {
-    setSearch(event.target.value);
+    if(event.target.value.length < 140){
 
-    let empty = event.target.value.length > 0;
-    if (empty) {
-      var url = event.target.value.replace(/ /g, '&');
-      setURL(url);    
+      setSearch(event.target.value);
+
+      let empty = event.target.value.length > 0;
+      if (empty) {
+        var url = event.target.value.replace(/ /g, '&');
+        setURL(url);    
+      }
+      setEnabled(empty);
+            
     }
-    setEnabled(empty);
   }
 
   function subBtn(e){
     e.preventDefault();
-    if (tmpSearch.length > 0){
-      props.handleSearch(tmpSearch, tmpURL);
-    }
+    // if (tmpSearch.length > 0){
+    //   props.handleSearch(tmpSearch, tmpURL);
+    // }
   }
 
   return (
@@ -40,9 +44,15 @@ function SearchBarText(props) {
       <form className="form-inline d-flex content-center text-center" onSubmit={subBtn}>
         <input type="text" className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 main-search" id="inputText" autoComplete="off" placeholder="ASK A QUESTION" value={tmpSearch} onChange={handleTextChange} />
         <div className="mx-auto">
-        <Link to={"/results/search=" + tmpURL}>
+        {/* <BrowserRouter> */}
+        <Link to={"/results/search=" + tmpURL} onClick={() =>   {
+          if (tmpSearch.length > 0){
+            props.handleSearch(tmpSearch, tmpURL);
+          }}
+          } >
           <input type="submit" disabled={!isEnabled} className="btn btn-primary mx-auto" value="Submit" />
         </Link>
+        {/* </BrowserRouter> */}
         </div>
       </form>
     </div>
