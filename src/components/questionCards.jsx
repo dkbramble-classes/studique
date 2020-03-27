@@ -18,9 +18,8 @@ function QuestionCards(props) {
   
   if (typeof(props.tags) !== 'undefined' && props.tags != null) {
     var myTagList = props.tags;
-
     tagList = myTagList.map(tag => (
-      <Tags key={props.objectId+tag} tagname={tag}/>
+      <Tags key={props.objectId+"tags"+tag} tagname={tag}/>
     ))
   }
 
