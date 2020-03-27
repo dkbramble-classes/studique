@@ -6,28 +6,33 @@ import AlgoliaSearch from "./algoliaSearch";
 
 const options = [
   { value: 'rating', label: 'Rating' },
-  { value: 'datetime', label: 'Date Asked' },
-  { value: 'usertype', label: 'User Type' }
+  { value: 'date', label: 'Date Asked' }
+  // { value: 'usertype', label: 'User Type' }
 ]
 
 function QuestionList(props) {
+  const [sortOption, setSort] = React.useState("rating");
   const searchString = props.searchString;
+
   const handleDropDown = selectedOption => {
-    console.log(`Option selected:`, selectedOption.value);
+    setSort(selectedOption.value);
+    // console.log(`Option selected:`, sortOption);
   };
+
   return (
-      <div className="qlistPage pt-2">
-        <form className="form-inline rounded-0 m text-font">
+      <div className="qlistPage">
+
+      <div className="qlistList">
+        <form className="form-inline pt-2 rounded-0 text-font">
           <p className="text-font text-white mt-3">Sort By:</p>
           <Select options={options} className="text-font dropdown text-left align-left" onChange={handleDropDown}  defaultValue={ { value: 'rating', label: 'Rating' }}/>
         </form>
-      <div className="qlistList">
-        <AlgoliaSearch query={searchString}/>
+        <AlgoliaSearch query={searchString} sortOption={sortOption}/>
 
         <br/>
         <h4>Didn't find what you're looking for?</h4>
         <Link to="/questionForm">
-          <button type="submit" className="text-font qFormButton">
+          <button type="submit" className="text-font mb-3 qFormButton">
                 ASK QUESTION
           </button>
         </Link>
