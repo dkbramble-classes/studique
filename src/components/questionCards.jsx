@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import "../css/questionCards.css";
 import { ReactComponent as UpArrow } from "../images/keyboard_arrow_up-24px.svg";
 import { ReactComponent as DownArrow } from "../images/keyboard_arrow_down-24px.svg";
-import {storage, addComment, updateRating, getRatingInfo, getRating} from "../hooks/databaseHooks";
+import { addComment, updateRating, getRatingInfo, getRating} from "../hooks/databaseHooks";
 import 'firebase/storage';
 
 function QuestionCards(props) {
@@ -20,7 +20,7 @@ function QuestionCards(props) {
     var myTagList = props.tags;
 
     tagList = myTagList.map(tag => (
-      <Tags tagname={tag}/>
+      <Tags key={props.objectId+tag} tagname={tag}/>
     ))
   }
 
