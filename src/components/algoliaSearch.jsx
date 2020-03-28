@@ -6,6 +6,7 @@ const client = algoliasearch('2OXOHVVBM2', 'b8769b9a1270565298eb7e51af306c8b');
 function AlgoliaSearch(props) {
 
   function GetCards(){
+
     const [result, loading] = useAsyncHook(props.query, props.sortOption);
     return (
       <div>
@@ -16,12 +17,7 @@ function AlgoliaSearch(props) {
         ) : (
           <div>
           <h3>Questions similar to yours:</h3>
-          {result.map(item => {
-            return <QCards key={item.objectID} objectId={item.objectID} title={item.Title}
-            body={item.Body} rating={item.Rating} creationDate={item.creationDate}
-            tags={item.Tags} userId={item.UserID} userDisplayName={item.UserDisplayName}
-            userPhoto={item.UserPhoto}/>
-          })}
+          {<SortCards result={result} sortOption={props.sortOption}/>}
           </div>
         )}
       </div>
@@ -29,12 +25,38 @@ function AlgoliaSearch(props) {
 
   }
 
+  function SortCards(props){
+    //console.log(cards);
+
+    if (props.sortOption === "rating"){
+      console.log(props.result);
+      props.result.sort(SortCompare);
+      console.log(props.result);
+    }
+    var cards = [];
+    cards = props.result.map(item => {
+      return <QCards key={item.objectID} objectId={item.objectID} title={item.Title}
+      body={item.Body} rating={item.Rating} creationDate={item.creationDate}
+      tags={item.Tags} userId={item.UserID} userDisplayName={item.UserDisplayName}
+      userPhoto={item.UserPhoto}/>
+    });
+
+    return cards;
+  }
+
+  function SortCompare(item1, item2){
+    return item2.Rating - item1.Rating;
+  }
+
   return(<GetCards/>);
 
 }
+
+
 function useAsyncHook(searchHits, sortOption) {
   const [result, setResult] = React.useState([]);
   const [loading, setLoading] = React.useState("false");
+
 
 
   React.useEffect(() => {
