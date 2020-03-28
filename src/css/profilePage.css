@@ -23,7 +23,8 @@
 }
 
 .profile {
-    background-color: #C7D0D8;
+    /* background-color: #C7D0D8; */
+    background-color: rgb(187, 187, 187);
 }
 
 .profileContainer {

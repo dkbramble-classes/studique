@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import "../css/questionCards.css";
 import { ReactComponent as UpArrow } from "../images/keyboard_arrow_up-24px.svg";
 import { ReactComponent as DownArrow } from "../images/keyboard_arrow_down-24px.svg";
-import {storage, addComment, updateRating, getRatingInfo, getRating} from "../hooks/databaseHooks";
+import { addComment, updateRating, getRatingInfo, getRating} from "../hooks/databaseHooks";
 import 'firebase/storage';
 
 function QuestionCards(props) {
@@ -18,9 +18,8 @@ function QuestionCards(props) {
   
   if (typeof(props.tags) !== 'undefined' && props.tags != null) {
     var myTagList = props.tags;
-
     tagList = myTagList.map(tag => (
-      <Tags tagname={tag}/>
+      <Tags key={props.objectId+"tags"+tag} tagname={tag}/>
     ))
   }
 
@@ -28,7 +27,7 @@ function QuestionCards(props) {
     url = props.userPhoto;
   }
 
-  const [voteCount, updateCount] = useState(0);
+  const [voteCount, updateCount] = useState(props.rating);
   const colors = {
     "Neutral": "black",
     "Up": "#3944bc",
@@ -38,10 +37,10 @@ function QuestionCards(props) {
   const [bodyInput, setBodyInput] = useState("");
 
   const q_id = props.objectId;
-  console.log('props', props);
+  // console.log('props', props);
 
   function handleVoteInitialization() {
-    console.log('inside handlevoteinitialization', q_id);
+    // console.log('inside handlevoteinitialization', q_id);
     getRatingInfo(q_id).then(function (state) {
       updateCount(state.Rating);
       updateColor(colors[state.color]);

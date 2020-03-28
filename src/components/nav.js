@@ -4,7 +4,7 @@ import SignIn from "../components/signIn.jsx";
 import SignUp from "../components/signUp.jsx";
 import NavSearchText from "../components/navsearch_text";
 import Popup from "reactjs-popup";
-import { BrowserRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import {signOut} from "../hooks/databaseHooks";
 import {withRouter} from 'react-router'
 

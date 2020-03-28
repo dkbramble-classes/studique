@@ -3,39 +3,75 @@ import algoliasearch from 'algoliasearch/lite';
 import QCards from './questionCards';
 
 const client = algoliasearch('2OXOHVVBM2', 'b8769b9a1270565298eb7e51af306c8b');
-const index = client.initIndex('Questions');
-
 function AlgoliaSearch(props) {
-  const [result, loading] = useAsyncHook(props.query);
-  return (
-    <div>
-      {loading === "false" ? (
-        <h3>Loading...</h3>
-      ) : result.length === 0 ? (
-        <h3>No results found</h3>
-      ) : (
-        <div>
-        <h3>Questions similar to yours:</h3>
-        {result.map(item => {
-          return <QCards key={item.objectID} objectId={item.objectID} title={item.Title}
-          body={item.Body} rating={item.Rating} creationDate={item.creationDate}
-          tags={item.Tags} userId={item.UserID} userDisplayName={item.UserDisplayName}
-          userPhoto={item.UserPhoto}/>
-        })}
-        </div>
-      )}
-    </div>
-  );
+
+  function GetCards(){
+
+    const [result, loading] = useAsyncHook(props.query, props.sortOption);
+    return (
+      <div>
+        {loading === "false" ? (
+          <h3>Loading...</h3>
+        ) : result.length === 0 ? (
+          <h3>No results found</h3>
+        ) : (
+          <div>
+          <h3>Questions similar to yours:</h3>
+          {<SortCards result={result} sortOption={props.sortOption}/>}
+          </div>
+        )}
+      </div>
+    );
+
+  }
+
+  function SortCards(props){
+    //console.log(cards);
+
+    if (props.sortOption === "rating"){
+      console.log(props.result);
+      props.result.sort(SortCompare);
+      console.log(props.result);
+    }
+    var cards = [];
+    cards = props.result.map(item => {
+      return <QCards key={item.objectID} objectId={item.objectID} title={item.Title}
+      body={item.Body} rating={item.Rating} creationDate={item.creationDate}
+      tags={item.Tags} userId={item.UserID} userDisplayName={item.UserDisplayName}
+      userPhoto={item.UserPhoto}/>
+    });
+
+    return cards;
+  }
+
+  function SortCompare(item1, item2){
+    return item2.Rating - item1.Rating;
+  }
+
+  return(<GetCards/>);
+
 }
-function useAsyncHook(searchHits) {
+
+
+function useAsyncHook(searchHits, sortOption) {
   const [result, setResult] = React.useState([]);
   const [loading, setLoading] = React.useState("false");
 
+
+
   React.useEffect(() => {
+    var indexName;
+    if (sortOption){
+      indexName = (sortOption === "rating") ? 'Questions' : 'Questions_Date';
+    } else {
+      indexName = "rating";
+    }
+    
     async function fetchSearch() {
       try {
+
         setLoading("true");
-        const response = await index.search(searchHits, {
+        const response = await client.initIndex(indexName).search(searchHits, {
           attributesToRetrieve: ['Body', 'Title', 'Rating', 'CreationDate', 
           'Tags', 'UserID', 'objectID', 'UserDisplayName', 'UserPhoto'],
           hitsPerPage: 10,
@@ -60,7 +96,7 @@ function useAsyncHook(searchHits) {
     if (searchHits !== "") {
       fetchSearch();
     }
-  }, [searchHits]);
+  }, [searchHits, sortOption]);
 
   return [result, loading];
 }

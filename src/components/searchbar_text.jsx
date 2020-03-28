@@ -1,5 +1,5 @@
 import React,  {useState}  from 'react';
-import { BrowserRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import alglogo from "../images/algolia-white.svg";
 
 function SearchBarText(props) {
