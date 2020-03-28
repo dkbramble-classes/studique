@@ -42,7 +42,7 @@ function QuestionCards(props) {
   console.log('props', props);
 
   function handleVoteInitialization() {
-    console.log('inside handlevoteinitialization', q_id);
+    console.log('inside handlevoteinitialization', props.objectId);
     getRatingInfo(q_id).then(function (state) {
       updateCount(state.Rating);
       updateColor(colors[state.color]);
@@ -95,7 +95,13 @@ function QuestionCards(props) {
 
   function getQuestionPhoto(uid){
     getPhotoURL(uid).then( function (url) {
-      updateQuestionPhoto(url);
+      if(url === "")
+      {
+        updateQuestionPhoto("https://firebasestorage.googleapis.com/v0/b/studique.appspot.com/o/images%2Fhancoxk_200x200?alt=media&token=e577b6e9-7a9b-4711-ad8b-1556f1068bf6")
+      }
+      else{
+        updateQuestionPhoto(url);
+      }
     }).catch(function(error) {
       console.log(error.code);
       console.log(error.message);
@@ -231,7 +237,7 @@ function QuestionCards(props) {
               className="qcardProfileLogo"
               src={questionPhoto}
               alt="profilePic"
-              onLoad={updateQuestionPhoto(props.UserID)}
+              onLoad={getQuestionPhoto(props.userId)}
             />
             <span>{props.userDisplayName}</span>
           </div>
