@@ -44,11 +44,7 @@ function NavSearchText(props) {
         <input type="text" id="inputMini"  className="form-control search-mini flex-fill d-sm-block d-none" autoComplete="off" placeholder="SEARCH QUESTIONS" value={tmpSearch} onChange={handleTextChange} />
         <div className="mx-auto">
         {/* <BrowserRouter> */}
-        <Link to={"/results/search=" + tmpURL} onClick={() =>   {
-          if (tmpSearch.length > 0){
-            props.handleSearch(tmpSearch, tmpURL);
-          }}
-          } >
+        <Link to={"/results/search=" + tmpURL}>
           <button id="navSubmit" disabled={!isEnabled} className="btn btn-mini d-sm-block d-none" ><Icon></Icon></button>
         </Link>
         {/* </BrowserRouter> */}
