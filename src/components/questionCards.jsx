@@ -18,9 +18,8 @@ function QuestionCards(props) {
   
   if (typeof(props.tags) !== 'undefined' && props.tags != null) {
     var myTagList = props.tags;
-
     tagList = myTagList.map(tag => (
-      <Tags tagname={tag}/>
+      <Tags key={props.objectId+"tags"+tag} tagname={tag}/>
     ))
   }
 
@@ -28,7 +27,7 @@ function QuestionCards(props) {
     url = props.userPhoto;
   }
 
-  const [voteCount, updateCount] = useState(0);
+  const [voteCount, updateCount] = useState(props.rating);
   const colors = {
     "Neutral": "black",
     "Up": "#3944bc",
@@ -39,10 +38,9 @@ function QuestionCards(props) {
   const [questionPhoto, updateQuestionPhoto] = useState("");
 
   const q_id = props.objectId;
-  console.log('props', props);
+  // console.log('props', props);
 
   function handleVoteInitialization() {
-    console.log('inside handlevoteinitialization', props.objectId);
     getRatingInfo(q_id).then(function (state) {
       updateCount(state.Rating);
       updateColor(colors[state.color]);

@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import "../css/questionForm.css";
 import {createQuestion} from "../hooks/databaseHooks"
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 function QuestionForm(props)
 {

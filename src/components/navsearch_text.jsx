@@ -1,5 +1,5 @@
 import React,  {useState}  from 'react';
-import { BrowserRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 // import alglogo from "../images/algolia-white.svg";
 import Icon from "../components/searchIcon"
 
@@ -40,15 +40,11 @@ function NavSearchText(props) {
       {/* <a className="text-left alg-logo" href="https://www.algolia.com" aria-label="Algolia">
         <img className="alg-logo content-left" src={alglogo} alt="alglogo"></img>
       </a> */}
-      <form className="form-inline rounded-0" onSubmit={subBtn}>
-        <input type="text" id="inputMini" className="form-control search-mini flex-fill d-sm-block d-none" autoComplete="off" placeholder="SEARCH QUESTIONS" value={tmpSearch} onChange={handleTextChange} />
+      <form className="form-inline rounded-0 mr-1" onSubmit={subBtn}>
+        <input type="text" id="inputMini"  className="form-control search-mini flex-fill d-sm-block d-none" autoComplete="off" placeholder="SEARCH QUESTIONS" value={tmpSearch} onChange={handleTextChange} />
         <div className="mx-auto">
         {/* <BrowserRouter> */}
-        <Link to={"/results/search=" + tmpURL} onClick={() =>   {
-          if (tmpSearch.length > 0){
-            props.handleSearch(tmpSearch, tmpURL);
-          }}
-          } >
+        <Link to={"/results/search=" + tmpURL}>
           <button id="navSubmit" disabled={!isEnabled} className="btn btn-mini d-sm-block d-none" ><Icon></Icon></button>
         </Link>
         {/* </BrowserRouter> */}
