@@ -70,6 +70,9 @@ function Profile(props) {
                                 ...prevObject,
                                 imgUrl: fireBaseUrl
                             }));
+                            updatePhotoUrl(fireBaseUrl).catch(function (error) {
+                                console.log("Error: " + error.message);
+                            })
                         });
                     } catch (e) {
                         console.log(e);
