@@ -12,7 +12,6 @@ const options = [
 
 function QuestionList(props) {
   const [sortOption, setSort] = React.useState("rating");
-  const searchString = props.searchString;
 
   const handleDropDown = selectedOption => {
     setSort(selectedOption.value);
@@ -27,7 +26,7 @@ function QuestionList(props) {
           <p className="text-font text-white mt-3">Sort By:</p>
           <Select options={options} className="text-font dropdown text-left align-left" onChange={handleDropDown}  defaultValue={ { value: 'rating', label: 'Rating' }}/>
         </form>
-        <AlgoliaSearch query={searchString} sortOption={sortOption}/>
+        <AlgoliaSearch sortOption={sortOption}/>
 
         <br/>
         <h4>Didn't find what you're looking for?</h4>
