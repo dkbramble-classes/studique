@@ -6,7 +6,7 @@ import {storage, updateDisplayName, updatePhotoUrl} from "../hooks/databaseHooks
 function Profile(props) {
     const [imageAsFile, setImageAsFile] = useState("");
     const [tempName, setTempName] = useState(props.displayName);
-    const [profileImageURL, setProfileImageURL] = useState("");
+    const [profileImageURL, setProfileImageURL] = useState(require("../images/louieLaker.jpg"));
     const [isEnabled, setEnabled] = useState(false);
 
     /*Code adapted from Tallan Groberg
@@ -66,10 +66,16 @@ function Profile(props) {
                     var mySubString = user.email.substring(0, user.email.lastIndexOf("@")) + "_200x200";
                     try {
                         storage.ref("images").child(mySubString).getDownloadURL().then(fireBaseUrl => {
-                            setProfileImageURL(prevObject => ({
-                                ...prevObject,
-                                imgUrl: fireBaseUrl
-                            }));
+                            if(fireBaseUrl == "")
+                            {
+                                setProfileImageURL(require("../images/louieLaker.jpg"));
+                            }
+                            else{
+                                setProfileImageURL(fireBaseUrl);
+                            }
+                            updatePhotoUrl(fireBaseUrl).catch(function (error) {
+                                console.log("Error: " + error.message);
+                            })
                         });
                     } catch (e) {
                         console.log(e);
@@ -97,7 +103,7 @@ function Profile(props) {
                         </h2>
                         <img className="profileImage"
                             src={
-                                profileImageURL.imgUrl
+                                profileImageURL
                             }
                             alt="Profile"/>
                     </div>

@@ -2,7 +2,7 @@ import React, {useState} from "react";
 import "../css/questionCards.css";
 import { ReactComponent as UpArrow } from "../images/keyboard_arrow_up-24px.svg";
 import { ReactComponent as DownArrow } from "../images/keyboard_arrow_down-24px.svg";
-import { addComment, updateRating, getRatingInfo, getRating} from "../hooks/databaseHooks";
+import {storage, addComment, updateRating, getRatingInfo, getRating, getPhotoURL} from "../hooks/databaseHooks";
 import 'firebase/storage';
 
 function QuestionCards(props) {
@@ -23,7 +23,7 @@ function QuestionCards(props) {
     ))
   }
 
-  if(props.userPhoto != null && props.userPhoto !== undefined){
+  if(props.userPhoto !== null && props.userPhoto !== undefined){
     url = props.userPhoto;
   }
 
@@ -35,12 +35,12 @@ function QuestionCards(props) {
   };
   const [voteColor, updateColor] = useState(colors["Neutral"]);
   const [bodyInput, setBodyInput] = useState("");
+  const [questionPhoto, updateQuestionPhoto] = useState("");
 
   const q_id = props.objectId;
   // console.log('props', props);
 
   function handleVoteInitialization() {
-    // console.log('inside handlevoteinitialization', q_id);
     getRatingInfo(q_id).then(function (state) {
       updateCount(state.Rating);
       updateColor(colors[state.color]);
@@ -89,6 +89,21 @@ function QuestionCards(props) {
         })
       });
     }
+  }
+
+  function getQuestionPhoto(uid){
+    getPhotoURL(uid).then( function (url) {
+      if(url === "")
+      {
+        updateQuestionPhoto(require("../images/louieLaker.jpg"))
+      }
+      else{
+        updateQuestionPhoto(url);
+      }
+    }).catch(function(error) {
+      console.log(error.code);
+      console.log(error.message);
+    });
   }
 
   function handleBodyInput(ev) {
@@ -218,8 +233,9 @@ function QuestionCards(props) {
           <div className="qcardProfile">
             <img 
               className="qcardProfileLogo"
-              src="https://firebasestorage.googleapis.com/v0/b/studique.appspot.com/o/images%2Fhancoxk_200x200?alt=media&token=e577b6e9-7a9b-4711-ad8b-1556f1068bf6"
+              src={questionPhoto}
               alt="profilePic"
+              onLoad={getQuestionPhoto(props.userId)}
             />
             <span>{props.userDisplayName}</span>
           </div>

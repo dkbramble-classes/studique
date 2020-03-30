@@ -55,8 +55,28 @@ export async function updateDisplayName(newName)
 
 export async function updatePhotoUrl(newURL) {
     let user = firebase.auth().currentUser;
-    return await user.updateProfile({
-        photoURL: newURL
+    return await firebase.database().ref('users/' + user.uid).update({
+        photoURL: newURL,
+    }).then(function (snapshot) {
+        user.updateProfile({
+            photoURL: newURL
+        })
+    }).catch(function(error) {
+        console.log(error.code);
+        console.log(error.message);
+    });
+}
+
+export function getPhotoURL(uid){
+    return firebase.database().ref('users/' + uid).once('value').then(function (snapshot) {
+        if(snapshot.val().photoURL)
+        {
+            return snapshot.val().photoURL
+        }
+        return "";
+    }).catch(function(error) {
+        console.log(error.code);
+        console.log(error.message);
     });
 }
 
