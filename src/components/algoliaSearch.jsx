@@ -7,11 +7,8 @@ function AlgoliaSearch(props) {
   //console.log(props.query);
   function GetCards(){
     var searchString;
-    if (!props.query){
-      searchString = window.location.href.split('=')[1] === null ? null : window.location.href.split('=')[1];
-    } else {
-      searchString = props.query;
-    }
+    searchString = window.location.href.split('=')[1] === null ? null : window.location.href.split('=')[1];
+    console.log(searchString);
     const [result, loading] = useAsyncHook(searchString, props.sortOption);
     return (
       <div>
