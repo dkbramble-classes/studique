@@ -32,16 +32,16 @@ function App () {
   }, [userType]);
 
   //Passing current search value
-  const searchString = window.location.href.split('=')[1] === null ? null : window.location.href.split('=')[1];
+  //const searchString = window.location.href.split('=')[1] === null ? null : window.location.href.split('=')[1];
 
 
   //Whether or not the user is logged in
-  const [urlString, setURL] = useState(
-    sessionStorage.getItem('SearchURL') || ''
-  );
-  useEffect(() => {
-    sessionStorage.setItem('SearchURL', urlString);
-  }, [urlString]);
+  // const [urlString, setURL] = useState(
+  //   sessionStorage.getItem('SearchURL') || ''
+  // );
+  // useEffect(() => {
+  //   sessionStorage.setItem('SearchURL', urlString);
+  // }, [urlString]);
 
   // const [isAuthed, setAuthed] = useSessionStorage('Authenticated', isAuthed, setAuthed );
   // const [displayName, setName] = useSessionStorage('DisplayName', displayName, setName );
@@ -52,9 +52,9 @@ function App () {
     setAuthed(newVal);
   }
 
-  function handleSearch(newSearch, newURL){
-    setURL(newURL);
-  }
+  // function handleSearch(newURL){
+  //   setURL(newURL);
+  // }
 
   function handleName(newName) {
     setName(newName);
@@ -71,9 +71,9 @@ function App () {
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/instantsearch.css@7.3.1/themes/reset-min.css" integrity="sha256-t2ATOGCtAIZNnzER679jwcFcKYfLlw01gli6F6oszk8=" crossOrigin="anonymous"></link>
         <script src="https://polyfill.io/v3/polyfill.min.js?features=default%2CArray.prototype.find%2CArray.prototype.includes%2CPromise%2CObject.assign%2CObject.entries"></script>
         
-        <Nav isAuthed={isAuthed} handleAuthed={handleAuthed} displayName={displayName} handleName={handleName} handleType={handleType} searchString={searchString} handleSearch={handleSearch}/>
-        <Route path="/" exact render={(props) => <FrontPage {...props} searchString={searchString} urlString={urlString} handleSearch={handleSearch} />}/>
-        <Route path="/results/*" exact render={(props) => <QuestionList {...props} searchString={searchString} handleSearch={handleSearch} isAuthed={isAuthed} userType={userType}/>}/>
+        <Nav isAuthed={isAuthed} handleAuthed={handleAuthed} displayName={displayName} handleName={handleName} handleType={handleType} />
+        <Route path="/" exact render={(props) => <FrontPage {...props} />}/>
+        <Route path="/results/*" exact render={(props) => <QuestionList {...props} isAuthed={isAuthed} userType={userType}/>}/>
         <Route path="/profile" exact render={(props) => <Profile {...props} handleName={handleName} displayName={displayName} isAuthed={isAuthed} />} />
         <Route path="/questionForm" exact render={(props) => <QuestionForm {...props} handleName={handleName} displayName={displayName} isAuthed={isAuthed} />} />
       </div>

@@ -55,14 +55,29 @@ export async function updateDisplayName(newName)
 
 export async function updatePhotoUrl(newURL) {
     let user = firebase.auth().currentUser;
-    return await user.updateProfile({
-        photoURL: newURL
+    return await firebase.database().ref('users/' + user.uid).update({
+        photoURL: newURL,
+    }).then(function (snapshot) {
+        user.updateProfile({
+            photoURL: newURL
+        })
+    }).catch(function(error) {
+        console.log(error.code);
+        console.log(error.message);
     });
 }
 
-export function getUid() {
-    let user = firebase.auth().currentUser;
-    return user.uid;
+export function getPhotoURL(uid){
+    return firebase.database().ref('users/' + uid).once('value').then(function (snapshot) {
+        if(snapshot.val().photoURL)
+        {
+            return snapshot.val().photoURL
+        }
+        return "";
+    }).catch(function(error) {
+        console.log(error.code);
+        console.log(error.message);
+    });
 }
 
 export function getUserMetadata(user)
@@ -103,21 +118,6 @@ export function createQuestion(title, body, tagList) {
     const newPostKey = firebase.database().ref().child('Questions/').push().key;
 
     return firebase.database().ref("Questions/" + newPostKey).set(postData);
-}
-
-export function getQuestionsByUser(uid){
-    let question_list = [];
-    return firebase.database().ref("/Questions/").once('value').then(function (snapshot) {
-        snapshot.forEach(function (childSnapshot) {
-
-            if(childSnapshot.val().uid === uid){
-                // var copyOfSnapshot = childSnapshot.val();
-                // copyOfSnapshot["objectId"] = key;
-                question_list[childSnapshot.key] = childSnapshot.val()
-            }
-        });
-        return question_list;
-    })
 }
 
 export function updateQuestion(q_id, title, body, tagList) {

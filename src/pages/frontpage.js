@@ -12,7 +12,7 @@ function FrontPage(props) {
           <h3 className="text-white mb-5 text-center">
             Crowdsourcing The College Experience
           </h3>
-          <SearchBarText searchString={props.searchString} handleSearch={props.handleSearch} urlStringL={props.urlString}/>
+          <SearchBarText urlStringL={props.urlString}/>
 
           <div className="text-white text-font text-center">
             <div className="my-2">
