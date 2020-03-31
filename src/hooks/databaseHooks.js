@@ -106,7 +106,7 @@ export function createQuestion(title, body, tagList) {
 }
 
 export function getQuestionsByUser(uid){
-    let question_list = {};
+    let question_list = [];
     return firebase.database().ref("/Questions/").once('value').then(function (snapshot) {
         snapshot.forEach(function (childSnapshot) {
 

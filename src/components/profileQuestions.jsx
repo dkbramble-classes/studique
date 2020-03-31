@@ -12,12 +12,9 @@ function ProfileQuestions(props) {
     getQuestionsByUser(uid)
       .then(function(snapshots) {
         console.log('snapshots', snapshots)
-        console.log('snapshots as array', [...snapshots])
         currentQuestions = snapshots;
         //0: {key: ___, body: ___}
-        [...snapshots].forEach(function(value, key) {
-            console.log('isnide snapshots' + key + ' = ' + value)
-          })
+        Object.entries(snapshots).forEach(item => { return <div>item</div> }); //console.log("item", item)});
 
       })
       .catch(function(error) {
