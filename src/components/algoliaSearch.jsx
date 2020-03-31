@@ -40,7 +40,7 @@ function AlgoliaSearch(props) {
       return <QCards key={item.objectID} objectId={item.objectID} title={item.Title}
       body={item.Body} rating={item.Rating} creationDate={item.creationDate}
       tags={item.Tags} userId={item.UserID} userDisplayName={item.UserDisplayName}
-      userPhoto={item.UserPhoto}/>
+      userPhoto={item.UserPhoto} comments={item.Comments}/>
     });
 
     return cards;
@@ -75,7 +75,7 @@ function useAsyncHook(searchHits, sortOption) {
         setLoading("true");
         const response = await client.initIndex(indexName).search(searchHits, {
           attributesToRetrieve: ['Body', 'Title', 'Rating', 'CreationDate', 
-          'Tags', 'UserID', 'objectID', 'UserDisplayName', 'UserPhoto'],
+          'Tags', 'UserID', 'objectID', 'UserDisplayName', 'UserPhoto', 'Comments'],
           hitsPerPage: 10,
         }).then(({ hits }) => {
           console.log('hits', hits)
@@ -86,7 +86,6 @@ function useAsyncHook(searchHits, sortOption) {
         const hits = await response;
         setResult(
           hits.map(item => {
-            //console.log("item", item);
             return item;
           })
         );

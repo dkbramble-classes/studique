@@ -135,6 +135,7 @@ export function addComment(q_id, body) {
 
     const postData = {
         uid: user.uid,
+        DisplayName: user.displayName,
         Body: body,
         creationDate: Math.round((new Date()).getTime() / 1000),
     };

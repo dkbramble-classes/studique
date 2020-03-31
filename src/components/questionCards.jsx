@@ -128,23 +128,42 @@ function QuestionCards(props) {
   }
 
   function Comments(props){
-    return <div className="qcardCommentsSection">
+    let comment_url = require("../images/louieLaker.jpg")
+
+    function getCommentPhoto(uid){
+      getPhotoURL(uid).then( function (url) {
+        if(url === "")
+        {
+          comment_url = require("../images/louieLaker.jpg")
+        }
+        else{
+          comment_url = url;
+        }
+      }).catch(function(error) {
+        console.log(error.code);
+        console.log(error.message);
+      });
+    }
+    for (let [key, value] of Object.entries(props)) {
+      return <div className="qcardCommentsSection">
         <Votes />
         <div className="qcardRightContent">
           <span className="qcardComment">
-            this is a fake comment. will need to work on
+            {value.Body}
           </span>
-  
+
           <div className="qcardProfile">
             <img
-              className="qcardProfileLogo"
-              src={require("../images/louieLaker.jpg")}
-              alt="profilePic"
+                className="qcardProfileLogo"
+                src={comment_url}
+                alt="profilePic"
+                onLoad={getCommentPhoto(value.uid)}
             />
-            <span>Professor Peabody</span>
+            <span>{value.DisplayName}</span>
           </div>
         </div>
       </div>
+    }
   }
 
   let description;
@@ -174,7 +193,7 @@ function QuestionCards(props) {
   if (isClicked) {
     description = (
       <div className="qcardDescription">
-        {props.description}
+        {props.body}
       </div>
     );
   }
