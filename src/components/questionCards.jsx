@@ -2,8 +2,9 @@ import React, {useState} from "react";
 import "../css/questionCards.css";
 import { ReactComponent as UpArrow } from "../images/keyboard_arrow_up-24px.svg";
 import { ReactComponent as DownArrow } from "../images/keyboard_arrow_down-24px.svg";
-import {storage, addComment, updateRating, getRatingInfo, getRating, getPhotoURL} from "../hooks/databaseHooks";
+import { addComment, updateRating, getRatingInfo, getRating, getPhotoURL} from "../hooks/databaseHooks";
 import 'firebase/storage';
+import Comments from './comments';
 
 function QuestionCards(props) {
   const [isClicked, updateClick] = useState(false);
@@ -127,45 +128,6 @@ function QuestionCards(props) {
     }
   }
 
-  function Comments(props){
-    let comment_url = require("../images/louieLaker.jpg")
-
-    function getCommentPhoto(uid){
-      getPhotoURL(uid).then( function (url) {
-        if(url === "")
-        {
-          comment_url = require("../images/louieLaker.jpg")
-        }
-        else{
-          comment_url = url;
-        }
-      }).catch(function(error) {
-        console.log(error.code);
-        console.log(error.message);
-      });
-    }
-    for (let [key, value] of Object.entries(props)) {
-      return <div className="qcardCommentsSection">
-        <Votes />
-        <div className="qcardRightContent">
-          <span className="qcardComment">
-            {value.Body}
-          </span>
-
-          <div className="qcardProfile">
-            <img
-                className="qcardProfileLogo"
-                src={comment_url}
-                alt="profilePic"
-                onLoad={getCommentPhoto(value.uid)}
-            />
-            <span>{value.DisplayName}</span>
-          </div>
-        </div>
-      </div>
-    }
-  }
-
   let description;
   let hrline;
   let comments;
@@ -200,7 +162,7 @@ function QuestionCards(props) {
   //create comments
   if (isClicked) {
     //have to do comments 
-    comments = Comments(props.comments);
+    comments = <Comments props={props.Comments}></Comments>;
   }
   //create hrline
   if (isClicked) {
@@ -212,12 +174,6 @@ function QuestionCards(props) {
       <div>
         <h5>Add An Answer</h5>
         <div className="qcardAnswerSection">
-          <img
-            className="qcardProfileLogo"
-            src={url}
-            alt="profilePic"
-          />
-
           <form>
             <textarea
               className="qcardCommentTextBox"
@@ -229,7 +185,7 @@ function QuestionCards(props) {
           </form>
           <form onSubmit={(e) => {postComment(); e.preventDefault();}}>
             <button type="submit" id={"questionCardCommentButton"} className="text-font qFormButton" >
-              SUBMIT QUESTION
+              SUBMIT
             </button>
           </form>
         </div>
@@ -272,7 +228,6 @@ function QuestionCards(props) {
           {moreLink}
         </div>
       </div>
-      {hrline}
       {comments}
       {hrline}
       {answerSection}
