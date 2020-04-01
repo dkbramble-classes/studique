@@ -1,12 +1,12 @@
-import React, {useState} from "react";
+import React, {useState, forceUpdate} from "react";
 import "../css/questionCards.css";
 import { ReactComponent as UpArrow } from "../images/keyboard_arrow_up-24px.svg";
 import { ReactComponent as DownArrow } from "../images/keyboard_arrow_down-24px.svg";
-import { addComment, updateRating, getRatingInfo, getRating, getPhotoURL } from "../hooks/databaseHooks";
+import { addComment, updateRating, getRatingInfo, getRating, getPhotoURL} from "../hooks/databaseHooks";
 import 'firebase/storage';
+import Comments from './comments';
 
 function QuestionCards(props) {
-  console.log("inside question cards");
   const [isClicked, updateClick] = useState(false);
   const [isUpVotable, updateUpVotable] = useState(true);
   const [isDownVotable, updateDownVotable] = useState(true);
@@ -14,7 +14,11 @@ function QuestionCards(props) {
   var url = 'require("../images/louieLaker.jpg")'
 
   function Tags(props){
-    return <div className="tags">{props.tagname}</div>
+    if(props.tagname.length !== 0){
+      return <div className="tags">{props.tagname}</div>
+    } else {
+      return null;
+    }
   }
   
   if (typeof(props.tags) !== 'undefined' && props.tags != null) {
@@ -39,7 +43,6 @@ function QuestionCards(props) {
   const [questionPhoto, updateQuestionPhoto] = useState("");
 
   const q_id = props.objectId;
-  // console.log('props', props);
 
   function handleVoteInitialization() {
     getRatingInfo(q_id).then(function (state) {
@@ -68,7 +71,6 @@ function QuestionCards(props) {
         updateColor(colors[info.Color]);
         updateDownVotable(info.isDown);
       }).catch(function (error) {
-        console.log("Error: " + error.message);
         getRating(q_id).then(function (rating) {
           updateCount(rating);
         })
@@ -115,37 +117,18 @@ function QuestionCards(props) {
   {
     if( bodyInput === "")
     {
-      console.log("You can't post a comment with no content.")
+      alert("You can't post a comment with no content.")
     }
     else
     {
       addComment(q_id, bodyInput).then(function () {
         console.log("Comment successfully added to question " + q_id);
       }).catch(function(error) {
+        alert("There was an error creating this comment. Please refresh and try again.")
         console.log(error.code);
         console.log(error.message);
       });;
     }
-  }
-
-  function Comments(props){
-    return <div className="qcardCommentsSection">
-        <Votes />
-        <div className="qcardRightContent">
-          <span className="qcardComment">
-            this is a fake comment. will need to work on
-          </span>
-  
-          <div className="qcardProfile">
-            <img
-              className="qcardProfileLogo"
-              src={require("../images/louieLaker.jpg")}
-              alt="profilePic"
-            />
-            <span>Professor Peabody</span>
-          </div>
-        </div>
-      </div>
   }
 
   let description;
@@ -181,8 +164,13 @@ function QuestionCards(props) {
   }
   //create comments
   if (isClicked) {
-    //have to do comments 
-    comments = Comments(props.comments);
+    //have to do comments
+    console.log('what im passing: ', props.comments); 
+    console.log('keys: ', props.comments[0]); 
+    if(props.comments !== undefined) {
+      comments = <Comments commentContent={props.comments}></Comments>;
+    }
+    
   }
   //create hrline
   if (isClicked) {
@@ -194,13 +182,7 @@ function QuestionCards(props) {
       <div>
         <h5>Add An Answer</h5>
         <div className="qcardAnswerSection">
-          <img
-            className="qcardProfileLogo"
-            src={url}
-            alt="profilePic"
-          />
-
-          <form>
+          <form className="qcardCommentForm">
             <textarea
               className="qcardCommentTextBox"
               type="text"
@@ -210,8 +192,8 @@ function QuestionCards(props) {
             />
           </form>
           <form onSubmit={(e) => {postComment(); e.preventDefault();}}>
-            <button type="submit" id={"questionCardCommentButton"} className="text-font qFormButton" >
-              SUBMIT QUESTION
+            <button type="submit" id={"questionCardCommentButton"} className="text-font qcardSubmitButton" >
+              SUBMIT
             </button>
           </form>
         </div>
@@ -254,7 +236,6 @@ function QuestionCards(props) {
           {moreLink}
         </div>
       </div>
-      {hrline}
       {comments}
       {hrline}
       {answerSection}
