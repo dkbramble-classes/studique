@@ -16,6 +16,8 @@ function SignIn(props){
     function handlePassword(ev){
         if(ev.target.value.length < 30){
             setPassword(ev.target.value);
+        }
+        else{
             alert("Password must be less than 30 characters.");
         }
     }

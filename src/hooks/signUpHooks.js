@@ -14,10 +14,12 @@ export function signUpFirebase(email, password, permission, displayName)
         }).catch(function(error) {
             console.log(error.code);
             console.log(error.message);
+            alert(error.message);
         });
         
     }).catch(function(error) {
         console.log(error.code);
         console.log(error.message);
+        alert(error.message);
     });
 }

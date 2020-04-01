@@ -64,6 +64,7 @@ export async function updatePhotoUrl(newURL) {
     }).catch(function(error) {
         console.log(error.code);
         console.log(error.message);
+        alert(error.message);
     });
 }
 
@@ -77,6 +78,7 @@ export function getPhotoURL(uid){
     }).catch(function(error) {
         console.log(error.code);
         console.log(error.message);
+        alert(error.message);
     });
 }
 
@@ -88,6 +90,7 @@ export function getUserMetadata(user)
     }).catch(function(error) {
         console.log(error.code);
         console.log(error.message);
+        alert(error.message);
     });
 }
 
@@ -98,6 +101,7 @@ export function signOut(props){
     }).catch(function(error) {
         console.log(error.code);
         console.log(error.message);
+        alert(error.message);
     });
 }
 
@@ -150,6 +154,7 @@ export async function updateRating( q_id, voteDir)
     const user = firebase.auth().currentUser;
     return firebase.database().ref("Questions/" + q_id + '/').once('value').then(function(snapshot) {
         if(user === null){
+            alert("You must be signed in to vote on questions");
             throw new Error("You must be signed in to vote on questions");
         }
         let rating = snapshot.val().Rating;
@@ -229,6 +234,7 @@ export async function updateRating( q_id, voteDir)
         }).catch(function (error) {
             console.log(error.code);
             console.log(error.message);
+            alert(error.message);
         });
         return {Rating: rating, Color: color, isUp: isUp, isDown: isDown};
     });
@@ -255,6 +261,8 @@ export function getRatingInfo(q_id)
             }
         }
         return {Rating: rating, color: color, isUp: isUp, isDown: isDown};
+    }).catch(function (error) {
+        alert(error.message);
     })
 }
 
@@ -263,6 +271,8 @@ export function getRating(q_id)
     console.log('inseide getrating', q_id);
     return firebase.database().ref("Questions/" + q_id + '/').once('value').then(function(snapshot) {
         return snapshot.val().Rating;
+    }).catch(function (error){
+        alert(error.message);
     });
 }
 
