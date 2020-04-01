@@ -1,13 +1,11 @@
 import React, {useState} from "react";
 import {getPhotoURL} from "../hooks/databaseHooks";
+import "../css/comments.css";
 
 function Comments(props){
     const [commentPhoto, updateCommentPhoto] = useState("");
 
-    console.log('props inside comments', props);
-
     if(props.commentContent === null || props.commentContent === undefined) {
-        console.log('inside comments with null')
         return null
     }
 
@@ -29,25 +27,25 @@ function Comments(props){
 
       return <div>
          {Object.entries(props.commentContent).map(([key, value])=>{
-           return (<div className="">
+           return <div>
                <hr/>
-               <div className="">
+               <div className="commentMaterial">
                  <span className="">
                    {value.Body}
                  </span>
        
-                 <div className="qcardProfile">
+                 <div className="commentProfile">
                    <img
                        className="qcardProfileLogo"
-                       src={commentPhoto}
+                       src={require("../images/louieLaker.jpg")}
                        alt="profilePic"
-                       onLoad={getCommentPhoto(value.uid)}
+                       //onLoad={getCommentPhoto(value.uid)}
                    />
                    <span>{value.DisplayName}</span>
                  </div>
                </div>
              </div>
-         )})
+         })
          }
          </div>
       
