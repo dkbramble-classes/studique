@@ -83,7 +83,6 @@ function useAsyncHook(searchHits, sortOption) {
           'Tags', 'UserID', 'objectID', 'UserDisplayName', 'UserPhoto', 'Comments'],
           hitsPerPage: 10,
         }).then(({ hits }) => {
-          //console.log('hits', hits)
           return hits;
         });
 

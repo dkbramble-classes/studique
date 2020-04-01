@@ -5,8 +5,6 @@ import "../css/comments.css";
 function Comments(props){
     const [commentPhoto, updateCommentPhoto] = useState("");
 
-    console.log('Inside Comments Again');
-
     function getCommentPhoto(uid){
         getPhotoURL(uid).then( function (url) {
           if(url === "")
@@ -21,7 +19,6 @@ function Comments(props){
 
         });
     }
-    console.log(props.Body)
 
       return (
         <div className="">
