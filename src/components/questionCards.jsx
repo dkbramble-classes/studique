@@ -14,7 +14,11 @@ function QuestionCards(props) {
   var url = 'require("../images/louieLaker.jpg")'
 
   function Tags(props){
-    return <div className="tags">{props.tagname}</div>
+    if(props.tagname.length !== 0){
+      return <div className="tags">{props.tagname}</div>
+    } else {
+      return null;
+    }
   }
   
   if (typeof(props.tags) !== 'undefined' && props.tags != null) {
