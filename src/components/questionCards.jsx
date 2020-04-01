@@ -7,7 +7,7 @@ import 'firebase/storage';
 import Comments from './comments';
 
 function QuestionCards(props) {
-  console.log("inside question cards");
+  console.log("in q cards props: ", props);
   const [isClicked, updateClick] = useState(false);
   const [isUpVotable, updateUpVotable] = useState(true);
   const [isDownVotable, updateDownVotable] = useState(true);
@@ -162,8 +162,9 @@ function QuestionCards(props) {
   }
   //create comments
   if (isClicked) {
-    //have to do comments 
-    comments = <Comments props={props.Comments}></Comments>;
+    //have to do comments
+    console.log('what im passing: ', props.comments); 
+    comments = <Comments commentContent={props.comments}></Comments>;
   }
   //create hrline
   if (isClicked) {

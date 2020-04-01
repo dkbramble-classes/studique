@@ -1,10 +1,13 @@
 import React, {useState} from "react";
-import getPhotoURL from "../hooks/databaseHooks";
+import {getPhotoURL} from "../hooks/databaseHooks";
 
 function Comments(props){
     const [commentPhoto, updateCommentPhoto] = useState("");
 
-    if(props === undefined) {
+    console.log('props inside comments', props);
+
+    if(props.commentContent === null || props.commentContent === undefined) {
+        console.log('inside comments with null')
         return null
     }
 
@@ -14,7 +17,7 @@ function Comments(props){
         getPhotoURL(uid).then( function (url) {
           if(url === "")
           {
-            updateCommentPhoto(require("../images/louieLaker.jpg"))
+            updateCommentPhoto(require("../images/louieLaker.jpg"));
           }
           else{
             updateCommentPhoto(url);
@@ -40,11 +43,14 @@ function Comments(props){
     //     console.log(error.message);
     //   });
     // }
-    for (let [, value] of Object.entries(props)) {
-      return <div className="qcardCommentsSection">
+
+    for (let [, value] of Object.entries(props.commentContent)) {
+        console.log('value inside entries', value)
+
+      return (<div className="">
         <hr/>
-        <div className="qcardRightContent">
-          <span className="qcardComment">
+        <div className="">
+          <span className="">
             {value.Body}
           </span>
 
@@ -58,7 +64,7 @@ function Comments(props){
             <span>{value.DisplayName}</span>
           </div>
         </div>
-      </div>
+      </div>)
     }
   }
 
