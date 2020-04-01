@@ -11,8 +11,6 @@ function Comments(props){
         return null
     }
 
-    //let comment_url = require("../images/louieLaker.jpg")
-
     function getCommentPhoto(uid){
         getPhotoURL(uid).then( function (url) {
           if(url === "")
@@ -23,49 +21,36 @@ function Comments(props){
             updateCommentPhoto(url);
           }
         }).catch(function(error) {
+          alert("There was an error fetching data. Please refresh and try again.")
           console.log(error.code);
           console.log(error.message);
         });
-      }
-
-
-    // function getCommentPhoto(uid){
-    //   getPhotoURL(uid).then( function (url) {
-    //     if(url === "")
-    //     {
-    //       comment_url = require("../images/louieLaker.jpg")
-    //     }
-    //     else{
-    //       comment_url = url;
-    //     }
-    //   }).catch(function(error) {
-    //     console.log(error.code);
-    //     console.log(error.message);
-    //   });
-    // }
-
-    for (let [, value] of Object.entries(props.commentContent)) {
-        console.log('value inside entries', value)
-
-      return (<div className="">
-        <hr/>
-        <div className="">
-          <span className="">
-            {value.Body}
-          </span>
-
-          <div className="qcardProfile">
-            <img
-                className="qcardProfileLogo"
-                src={commentPhoto}
-                alt="profilePic"
-                onLoad={getCommentPhoto(value.uid)}
-            />
-            <span>{value.DisplayName}</span>
-          </div>
-        </div>
-      </div>)
     }
+
+      return <div>
+         {Object.entries(props.commentContent).map(([key, value])=>{
+           return (<div className="">
+               <hr/>
+               <div className="">
+                 <span className="">
+                   {value.Body}
+                 </span>
+       
+                 <div className="qcardProfile">
+                   <img
+                       className="qcardProfileLogo"
+                       src={commentPhoto}
+                       alt="profilePic"
+                       onLoad={getCommentPhoto(value.uid)}
+                   />
+                   <span>{value.DisplayName}</span>
+                 </div>
+               </div>
+             </div>
+         )})
+         }
+         </div>
+      
   }
 
   export default Comments;

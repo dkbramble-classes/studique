@@ -123,6 +123,7 @@ function QuestionCards(props) {
       addComment(q_id, bodyInput).then(function () {
         console.log("Comment successfully added to question " + q_id);
       }).catch(function(error) {
+        alert("There was an error creating this comment. Please refresh and try again.")
         console.log(error.code);
         console.log(error.message);
       });;
@@ -164,7 +165,11 @@ function QuestionCards(props) {
   if (isClicked) {
     //have to do comments
     console.log('what im passing: ', props.comments); 
-    comments = <Comments commentContent={props.comments}></Comments>;
+    console.log('keys: ', props.comments[0]); 
+    if(props.comments !== undefined) {
+      comments = <Comments commentContent={props.comments}></Comments>;
+    }
+    
   }
   //create hrline
   if (isClicked) {
