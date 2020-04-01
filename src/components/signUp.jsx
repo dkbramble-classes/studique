@@ -16,30 +16,28 @@ function SignUp (props){
         var learn = ev.target.value.includes("@mail.gvsu.edu")
         if (learn){
             setPermission("student");
-            // console.log("student");
         } else if (teach && !learn){
             setPermission("teacher");
-            // console.log("teacher");
+        }
+        else{
+            alert("Please use your Grand Valley State University Email.");
         }
         if(ev.target.value.length < 30){
         setEmail(ev.target.value);
         }
-    //   console.log("TEECH" + teach);
-    //   console.log("LEARN" + learn);
     }
   
     function handlePassword(ev){
         if(ev.target.value.length < 30){
             setPassword(ev.target.value);
+            alert("Your password must be less than 30 characters.");
         }
     }
 
-    // function handlePermission(ev) {
-    //     setPermission(ev.target.value);
-    //   }
     function handleDisplay(ev){
         if(ev.target.value.length < 30){
             setDisplay(ev.target.value);
+            alert("Your name must be less than 30 characters.");
         }
     }
     async function doSignUp(ev) {
@@ -47,6 +45,7 @@ function SignUp (props){
         if (userPassword.length < 6)
         {
             console.log("Password must be 6 characters long.")
+            alert("Password must be atleast 6 characters long. ");
         }
         else if (userEmail.indexOf("@mail.gvsu.edu") !== -1 || userEmail.indexOf("@gvsu.edu") !== -1) {
             signed_up = await signUpFirebase(userEmail, userPassword, userPermission, userDisplay);
