@@ -164,10 +164,10 @@ function QuestionCards(props) {
   //create comments
   if (isClicked) {
     //have to do comments
-    console.log('what im passing: ', props.comments); 
-    console.log('keys: ', props.comments[0]); 
     if(props.comments !== undefined) {
-      comments = <Comments commentContent={props.comments}></Comments>;
+      comments = Object.entries(props.comments).map(([key, value])=>{
+        return <Comments uid={value.uid} DisplayName={value.DisplayName} Body={value.Body}/>
+      });
     }
     
   }

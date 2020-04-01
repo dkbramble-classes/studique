@@ -1,15 +1,15 @@
-import React, {useState} from "react";
+import React, {useState, useEffect} from "react";
 import {getPhotoURL} from "../hooks/databaseHooks";
 
 function Comments(props){
     const [commentPhoto, updateCommentPhoto] = useState("");
 
-    console.log('props inside comments', props);
+    console.log('Inside Comments Again');
 
-    if(props.commentContent === null || props.commentContent === undefined) {
-        console.log('inside comments with null')
-        return null
-    }
+    // if(props.commentContent === null || props.commentContent === undefined) {
+    //     console.log('inside comments with null')
+    //     return null
+    // }
 
     function getCommentPhoto(uid){
         getPhotoURL(uid).then( function (url) {
@@ -27,30 +27,25 @@ function Comments(props){
         });
     }
 
-      return <div>
-         {Object.entries(props.commentContent).map(([key, value])=>{
-           return (<div className="">
+      return (<div className="">
                <hr/>
                <div className="">
                  <span className="">
-                   {value.Body}
+                   {props.Body}
                  </span>
-       
+
                  <div className="qcardProfile">
                    <img
                        className="qcardProfileLogo"
                        src={commentPhoto}
                        alt="profilePic"
-                       onLoad={getCommentPhoto(value.uid)}
+                       onLoad={ getCommentPhoto(props.uid)}
                    />
-                   <span>{value.DisplayName}</span>
+                   <span>{props.DisplayName}</span>
                  </div>
                </div>
-             </div>
-         )})
-         }
-         </div>
-      
+             </div>)
+
   }
 
   export default Comments;
