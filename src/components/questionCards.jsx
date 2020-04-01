@@ -7,6 +7,7 @@ import 'firebase/storage';
 import Comments from './comments';
 
 function QuestionCards(props) {
+  console.log("inside question cards");
   const [isClicked, updateClick] = useState(false);
   const [isUpVotable, updateUpVotable] = useState(true);
   const [isDownVotable, updateDownVotable] = useState(true);

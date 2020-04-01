@@ -7,8 +7,13 @@ function AlgoliaSearch(props) {
   //console.log(props.query);
   function GetCards(){
     var searchString;
-    searchString = window.location.href.split('=')[1] === null ? null : window.location.href.split('=')[1];
-    console.log(searchString);
+
+    if(props.sortOption === "user") {
+      searchString = props.userSearchString;
+    } else {
+      searchString = window.location.href.split('=')[1] === null ? null : window.location.href.split('=')[1];
+    }
+
     const [result, loading] = useAsyncHook(searchString, props.sortOption);
     return (
       <div>
@@ -65,6 +70,9 @@ function useAsyncHook(searchHits, sortOption) {
     var indexName;
     if (sortOption){
       indexName = (sortOption === "rating") ? 'Questions' : 'Questions_Date';
+      if(sortOption === "user"){
+        indexName = "Questions_User";
+      }
     } else {
       indexName = "rating";
     }
@@ -78,7 +86,7 @@ function useAsyncHook(searchHits, sortOption) {
           'Tags', 'UserID', 'objectID', 'UserDisplayName', 'UserPhoto', 'Comments'],
           hitsPerPage: 10,
         }).then(({ hits }) => {
-          console.log('hits', hits)
+          //console.log('hits', hits)
           return hits;
         });
 
