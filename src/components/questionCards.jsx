@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, forceUpdate} from "react";
 import "../css/questionCards.css";
 import { ReactComponent as UpArrow } from "../images/keyboard_arrow_up-24px.svg";
 import { ReactComponent as DownArrow } from "../images/keyboard_arrow_down-24px.svg";
@@ -7,7 +7,6 @@ import 'firebase/storage';
 import Comments from './comments';
 
 function QuestionCards(props) {
-  console.log("in q cards props: ", props);
   const [isClicked, updateClick] = useState(false);
   const [isUpVotable, updateUpVotable] = useState(true);
   const [isDownVotable, updateDownVotable] = useState(true);
@@ -15,7 +14,11 @@ function QuestionCards(props) {
   var url = 'require("../images/louieLaker.jpg")'
 
   function Tags(props){
-    return <div className="tags">{props.tagname}</div>
+    if(props.tagname.length !== 0){
+      return <div className="tags">{props.tagname}</div>
+    } else {
+      return null;
+    }
   }
   
   if (typeof(props.tags) !== 'undefined' && props.tags != null) {
@@ -40,7 +43,6 @@ function QuestionCards(props) {
   const [questionPhoto, updateQuestionPhoto] = useState("");
 
   const q_id = props.objectId;
-  // console.log('props', props);
 
   function handleVoteInitialization() {
     getRatingInfo(q_id).then(function (state) {
@@ -69,7 +71,6 @@ function QuestionCards(props) {
         updateColor(colors[info.Color]);
         updateDownVotable(info.isDown);
       }).catch(function (error) {
-        console.log("Error: " + error.message);
         getRating(q_id).then(function (rating) {
           updateCount(rating);
         })
@@ -116,7 +117,7 @@ function QuestionCards(props) {
   {
     if( bodyInput === "")
     {
-      console.log("You can't post a comment with no content.")
+      alert("You can't post a comment with no content.")
     }
     else
     {
@@ -181,7 +182,7 @@ function QuestionCards(props) {
       <div>
         <h5>Add An Answer</h5>
         <div className="qcardAnswerSection">
-          <form>
+          <form className="qcardCommentForm">
             <textarea
               className="qcardCommentTextBox"
               type="text"
@@ -191,7 +192,7 @@ function QuestionCards(props) {
             />
           </form>
           <form onSubmit={(e) => {postComment(); e.preventDefault();}}>
-            <button type="submit" id={"questionCardCommentButton"} className="text-font qFormButton" >
+            <button type="submit" id={"questionCardCommentButton"} className="text-font qcardSubmitButton" >
               SUBMIT
             </button>
           </form>

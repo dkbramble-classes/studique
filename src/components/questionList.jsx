@@ -7,7 +7,6 @@ import AlgoliaSearch from "./algoliaSearch";
 const options = [
   { value: 'rating', label: 'Rating' },
   { value: 'date', label: 'Date Asked' }
-  // { value: 'usertype', label: 'User Type' }
 ]
 
 function QuestionList(props) {
@@ -15,7 +14,6 @@ function QuestionList(props) {
 
   const handleDropDown = selectedOption => {
     setSort(selectedOption.value);
-    // console.log(`Option selected:`, sortOption);
   };
 
   return (
