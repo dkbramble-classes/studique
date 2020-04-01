@@ -182,7 +182,7 @@ function QuestionCards(props) {
       <div>
         <h5>Add An Answer</h5>
         <div className="qcardAnswerSection">
-          <form>
+          <form className="qcardCommentForm">
             <textarea
               className="qcardCommentTextBox"
               type="text"
@@ -192,7 +192,7 @@ function QuestionCards(props) {
             />
           </form>
           <form onSubmit={(e) => {postComment(); e.preventDefault();}}>
-            <button type="submit" id={"questionCardCommentButton"} className="text-font qFormButton" >
+            <button type="submit" id={"questionCardCommentButton"} className="text-font qcardSubmitButton" >
               SUBMIT
             </button>
           </form>
