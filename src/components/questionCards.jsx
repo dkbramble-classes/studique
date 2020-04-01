@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useState, forceUpdate} from "react";
 import "../css/questionCards.css";
 import { ReactComponent as UpArrow } from "../images/keyboard_arrow_up-24px.svg";
 import { ReactComponent as DownArrow } from "../images/keyboard_arrow_down-24px.svg";
@@ -7,7 +7,6 @@ import 'firebase/storage';
 import Comments from './comments';
 
 function QuestionCards(props) {
-  console.log("in q cards props: ", props);
   const [isClicked, updateClick] = useState(false);
   const [isUpVotable, updateUpVotable] = useState(true);
   const [isDownVotable, updateDownVotable] = useState(true);
@@ -40,7 +39,6 @@ function QuestionCards(props) {
   const [questionPhoto, updateQuestionPhoto] = useState("");
 
   const q_id = props.objectId;
-  // console.log('props', props);
 
   function handleVoteInitialization() {
     getRatingInfo(q_id).then(function (state) {
@@ -69,7 +67,6 @@ function QuestionCards(props) {
         updateColor(colors[info.Color]);
         updateDownVotable(info.isDown);
       }).catch(function (error) {
-        console.log("Error: " + error.message);
         getRating(q_id).then(function (rating) {
           updateCount(rating);
         })
@@ -116,7 +113,7 @@ function QuestionCards(props) {
   {
     if( bodyInput === "")
     {
-      console.log("You can't post a comment with no content.")
+      alert("You can't post a comment with no content.")
     }
     else
     {

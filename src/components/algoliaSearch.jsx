@@ -4,7 +4,7 @@ import QCards from './questionCards';
 
 const client = algoliasearch('2OXOHVVBM2', 'b8769b9a1270565298eb7e51af306c8b');
 function AlgoliaSearch(props) {
-  //console.log(props.query);
+
   function GetCards(){
     var searchString;
 
@@ -33,12 +33,9 @@ function AlgoliaSearch(props) {
   }
 
   function SortCards(props){
-    //console.log(cards);
 
     if (props.sortOption === "rating"){
-      //console.log(props.result);
       props.result.sort(SortCompare);
-      //console.log(props.result);
     }
     var cards = [];
     cards = props.result.map(item => {

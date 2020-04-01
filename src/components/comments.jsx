@@ -20,8 +20,7 @@ function Comments(props){
           }
         }).catch(function(error) {
           alert("There was an error fetching data. Please refresh and try again.")
-          console.log(error.code);
-          console.log(error.message);
+
         });
     }
 
