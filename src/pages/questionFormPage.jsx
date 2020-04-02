@@ -1,24 +1,45 @@
 import React, {useState} from "react";
 import "../css/questionForm.css";
 import {createQuestion} from "../hooks/databaseHooks"
-// import { Link } from "react-router-dom";
+import { Redirect} from "react-router-dom";
 
-function QuestionForm(props)
+function QuestionForm()
 {
   const [titleInput, setTitleInput] = useState("");
+  // const [tmpURL, setURL] = useState('');
   const [bodyInput, setBodyInput] = useState("");
   const [tagsInput, setTagsInput] = useState("");
+  const [isDisabled, setDisabled] = useState(true);
+  const [loadResults, setLoad] = useState(false);
 
   function handleTitleInput(ev) {
-    if(ev.target.value.length < 30){
+    if(ev.target.value.length < 140){
       setTitleInput(ev.target.value);
+      // if(ev.target.value.length > 0){
+      //   var url = ev.target.value.replace(/ /g, '&');
+      //   var urlSlash = url.replace(/\//g, '_slash_');
+      //   setURL(urlSlash);    
+      // }
     }
+
+    if (ev.target.value.length > 0 && bodyInput.length > 0 && isDisabled === true){
+      setDisabled(false);
+    } else if((ev.target.value.length <= 0 || bodyInput.length <= 0) && isDisabled === false){
+      setDisabled(true);
+    }
+    //console.log(isDisabled);
   }
 
   function handleBodyInput(ev) {
     if(ev.target.value.length < 2000){
       setBodyInput(ev.target.value);
     }
+    if (ev.target.value.length > 0 && titleInput.length > 0 && isDisabled === true){
+      setDisabled(false);
+    } else if((ev.target.value.length <= 0 || titleInput.length <= 0) && isDisabled === false){
+      setDisabled(true);
+    }
+    //console.log(isDisabled);
   }
 
   function handleTagsInput(ev) {
@@ -35,12 +56,17 @@ function QuestionForm(props)
       const tagList = tagsInput.split(',');
       createQuestion(titleInput, bodyInput, tagList).then(function () {
         // Sign-out successful.
+        setLoad(true);
         console.log("Q-Card creation successful");
+        
       }).catch(function(error) {
         console.log(error.code);
         console.log(error.message);
       });
     }
+  }
+  if (loadResults === true) {
+    return <Redirect to="/results/search//sort/date"/>
   }
   return (
       <div className="questionFormPage">
@@ -99,7 +125,7 @@ function QuestionForm(props)
         </div>
         
         <form onSubmit={(e) => {createQuestionCard(); e.preventDefault();}}>
-          <button type="submit" id='qFormSubmit' className="text-font qFormButton mb-2" >
+          <button type="submit" id='qFormSubmit' disabled={isDisabled} className="text-font qFormButton mb-2" >
             SUBMIT QUESTION
           </button>
         </form>

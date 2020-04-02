@@ -18,7 +18,7 @@ function FrontPage(props) {
             <div className="my-2">
             Want to help others? 
             </div>
-            <Link to="/results/">
+            <Link to="/results/search//sort/date">
              <input type="submit" className="btn mb-1 btn-primary" value="Share Your Knowledge" />
             </Link>
           </div>

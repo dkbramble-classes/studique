@@ -7,14 +7,33 @@ function AlgoliaSearch(props) {
   //console.log(props.query);
   function GetCards(){
     var searchString;
+    var sortOption;
+    var QuestionsString = "Questions similar to yours";
 
     if(props.sortOption === "user") {
       searchString = props.userSearchString;
+      sortOption = "user";
+      QuestionsString = "Your Asked Questions:"
     } else {
-      searchString = window.location.href.split('=')[1] === null ? null : window.location.href.split('=')[1];
+      searchString = window.location.href.split('/')[5] === null ? null : window.location.href.split('/')[5];
+      if (searchString){
+        searchString = searchString.replace(/_slash_/g, '/');
+      } else {
+        searchString = "";
+      }
+
+      sortOption = window.location.href.split('/sort/')[1] === null ? null : window.location.href.split('/sort/')[1];
+      if (!sortOption){
+        sortOption = "";
+      } else{
+        QuestionsString = "Recently Asked Questions"
+      }
+      console.log(sortOption);
+      console.log(searchString);
+
     }
 
-    const [result, loading] = useAsyncHook(searchString, props.sortOption);
+    const [result, loading] = useAsyncHook(searchString, sortOption);
     return (
       <div>
         {loading === "false" ? (
@@ -23,7 +42,7 @@ function AlgoliaSearch(props) {
           <h3>No results found</h3>
         ) : (
           <div>
-          <h3>Questions similar to yours:</h3>
+          <h3>{QuestionsString}</h3>
           {<SortCards result={result} sortOption={props.sortOption}/>}
           </div>
         )}
@@ -74,13 +93,15 @@ function useAsyncHook(searchHits, sortOption) {
         indexName = "Questions_User";
       }
     } else {
-      indexName = "rating";
+      indexName = "Questions";
     }
     
     async function fetchSearch() {
       try {
 
         setLoading("true");
+        console.log("INDEX", indexName);
+        console.log("Search", searchHits);
         const response = await client.initIndex(indexName).search(searchHits, {
           attributesToRetrieve: ['Body', 'Title', 'Rating', 'CreationDate', 
           'Tags', 'UserID', 'objectID', 'UserDisplayName', 'UserPhoto'],
@@ -102,9 +123,9 @@ function useAsyncHook(searchHits, sortOption) {
       }
     }
 
-    if (searchHits !== "" && searchHits) {
+    if ((searchHits && searchHits !== "") || sortOption === "date" ) {
       fetchSearch();
-    }
+    } 
   }, [searchHits, sortOption]);
 
   return [result, loading];

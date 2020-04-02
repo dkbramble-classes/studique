@@ -22,7 +22,8 @@ function NavSearchText(props) {
       let empty = event.target.value.length > 0;
       if (empty) {
         var url = event.target.value.replace(/ /g, '&');
-        setURL(url);    
+        var urlSlash = url.replace(/\//g, '_slash_');
+        setURL(urlSlash);    
       }
       setEnabled(empty);
     }
@@ -44,7 +45,7 @@ function NavSearchText(props) {
         <input type="text" id="inputMini"  className="form-control search-mini flex-fill d-sm-block d-none" autoComplete="off" placeholder="SEARCH QUESTIONS" value={tmpSearch} onChange={handleTextChange} />
         <div className="mx-auto">
         {/* <BrowserRouter> */}
-        <Link to={"/results/search=" + tmpURL}>
+        <Link to={"/results/search/" + tmpURL}>
           <button id="navSubmit" disabled={!isEnabled} className="btn btn-mini d-sm-block d-none" ><Icon></Icon></button>
         </Link>
         {/* </BrowserRouter> */}
