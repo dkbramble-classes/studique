@@ -50,6 +50,7 @@ function QuestionForm()
     if(titleInput === "" || bodyInput === "")
     {
       console.log("Please Enter a Title and Body for your question")
+      alert("Please Enter a Title and Body for your question");
     }
     else {
       setTagsInput(tagsInput.replace(/\s/g, ''));
@@ -62,6 +63,7 @@ function QuestionForm()
       }).catch(function(error) {
         console.log(error.code);
         console.log(error.message);
+        alert(error.message);
       });
     }
   }

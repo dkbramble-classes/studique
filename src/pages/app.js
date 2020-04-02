@@ -31,30 +31,9 @@ function App () {
     localStorage.setItem('Permissions', userType);
   }, [userType]);
 
-  //Passing current search value
-  //const searchString = window.location.href.split('=')[1] === null ? null : window.location.href.split('=')[1];
-
-
-  //Whether or not the user is logged in
-  // const [urlString, setURL] = useState(
-  //   sessionStorage.getItem('SearchURL') || ''
-  // );
-  // useEffect(() => {
-  //   sessionStorage.setItem('SearchURL', urlString);
-  // }, [urlString]);
-
-  // const [isAuthed, setAuthed] = useSessionStorage('Authenticated', isAuthed, setAuthed );
-  // const [displayName, setName] = useSessionStorage('DisplayName', displayName, setName );
-  // const [userType, setType] = useSessionStorage('Permissions', userType, setType );
-  // const [searchString, setSearch] = useSessionStorage('SearchString',searchString, setSearch );
-
   function handleAuthed(newVal) {
     setAuthed(newVal);
   }
-
-  // function handleSearch(newURL){
-  //   setURL(newURL);
-  // }
 
   function handleName(newName) {
     setName(newName);

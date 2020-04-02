@@ -14,5 +14,7 @@ export async function getUserInfo()
      return await getUserMetadata(user).then(function(permission) {
          user_info["permissions"] = permission;
          return user_info
+     }).catch(function (error){
+         alert("Error when getting user information.");
      });
 }

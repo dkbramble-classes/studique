@@ -43,6 +43,7 @@ function Profile(props) {
     // async magic goes here...
     if (imageAsFile === "") {
       console.error(`not an image, the image file is a ${typeof imageAsFile}`);
+      alert(`Not an image, the image file is a ${typeof imageAsFile}`);
     }
     if (currUser) {
       try {
@@ -65,10 +66,13 @@ function Profile(props) {
           .then(function(snapshot) {
             updatePhotoUrl(snapshot).catch(function(error) {
               console.log("Error: " + error.message);
+            }).catch(function (error){
+              alert(error.message);
             });
           });
       } catch (e) {
         console.log(e);
+        alert(e.message);
       }
     }
   };
@@ -99,6 +103,7 @@ function Profile(props) {
               });
           } catch (e) {
             console.log(e);
+            alert(e.message);
           }
         }
       });
