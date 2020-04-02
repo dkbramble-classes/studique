@@ -30,6 +30,8 @@ function SignUp (props){
     function handlePassword(ev){
         if(ev.target.value.length < 30){
             setPassword(ev.target.value);
+        }
+        else{
             alert("Your password must be less than 30 characters.");
         }
     }
@@ -37,6 +39,8 @@ function SignUp (props){
     function handleDisplay(ev){
         if(ev.target.value.length < 30){
             setDisplay(ev.target.value);
+           
+        }else{
             alert("Your name must be less than 30 characters.");
         }
     }
