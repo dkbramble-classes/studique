@@ -15,6 +15,6 @@ export async function getUserInfo()
          user_info["permissions"] = permission;
          return user_info
      }).catch(function (error){
-         alert(error.message);
+         alert("Error when getting user information.");
      });
 }

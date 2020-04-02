@@ -13,7 +13,7 @@ export async function signInFirebase(email, password, setAuthed, setName, setTyp
     }).catch(function(error) {
         console.log(error.code + ": " + email);
         console.log(error.message);
-        alert(error.message);
+        alert("There was an issue signing you in. Please try again.");
     });
 
     // setAuthed(true);

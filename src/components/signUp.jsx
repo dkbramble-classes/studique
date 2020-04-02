@@ -19,9 +19,6 @@ function SignUp (props){
         } else if (teach && !learn){
             setPermission("teacher");
         }
-        else{
-            alert("Please use your Grand Valley State University Email.");
-        }
         if(ev.target.value.length < 30){
         setEmail(ev.target.value);
         }
@@ -60,6 +57,9 @@ function SignUp (props){
                 props.handleAuthed(true);
                 props.handleType(userPermission);
             }
+        }
+        else{
+            alert("There was an issue. Please make sure you are using a GVSU authorized email and that your password is longer than 6 characters.");
         }
         return signed_up
     }
