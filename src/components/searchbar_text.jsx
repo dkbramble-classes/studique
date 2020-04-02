@@ -27,6 +27,9 @@ function SearchBarText(props) {
       setEnabled(empty);
             
     }
+    else{
+      alert("Question must be less than 140 characters.");
+    }
   }
 
   function subBtn(e){

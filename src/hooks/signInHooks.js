@@ -9,10 +9,11 @@ export async function signInFirebase(email, password, setAuthed, setName, setTyp
         return firebase.auth().currentUser;
     }).then(function(user) {
         current_display_name = user.displayName;
-        return current_display_name;
+        return current_display_name;   
     }).catch(function(error) {
         console.log(error.code + ": " + email);
         console.log(error.message);
+        alert("There was an issue signing you in. Please try again.");
     });
 
     // setAuthed(true);
