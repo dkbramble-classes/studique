@@ -4,7 +4,7 @@ import QCards from './questionCards';
 
 const client = algoliasearch('2OXOHVVBM2', 'b8769b9a1270565298eb7e51af306c8b');
 function AlgoliaSearch(props) {
-  //console.log(props.query);
+
   function GetCards(){
     var searchString;
     var sortOption;
@@ -52,19 +52,16 @@ function AlgoliaSearch(props) {
   }
 
   function SortCards(props){
-    //console.log(cards);
 
     if (props.sortOption === "rating"){
-      //console.log(props.result);
       props.result.sort(SortCompare);
-      //console.log(props.result);
     }
     var cards = [];
     cards = props.result.map(item => {
       return <QCards key={item.objectID} objectId={item.objectID} title={item.Title}
       body={item.Body} rating={item.Rating} creationDate={item.creationDate}
       tags={item.Tags} userId={item.UserID} userDisplayName={item.UserDisplayName}
-      userPhoto={item.UserPhoto}/>
+      userPhoto={item.UserPhoto} comments={item.Comments}/>
     });
 
     return cards;
@@ -104,10 +101,9 @@ function useAsyncHook(searchHits, sortOption) {
         console.log("Search", searchHits);
         const response = await client.initIndex(indexName).search(searchHits, {
           attributesToRetrieve: ['Body', 'Title', 'Rating', 'CreationDate', 
-          'Tags', 'UserID', 'objectID', 'UserDisplayName', 'UserPhoto'],
+          'Tags', 'UserID', 'objectID', 'UserDisplayName', 'UserPhoto', 'Comments'],
           hitsPerPage: 10,
         }).then(({ hits }) => {
-          //console.log('hits', hits)
           return hits;
         });
 

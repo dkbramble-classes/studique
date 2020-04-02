@@ -135,6 +135,7 @@ export function addComment(q_id, body) {
 
     const postData = {
         uid: user.uid,
+        DisplayName: user.displayName,
         Body: body,
         creationDate: Math.round((new Date()).getTime() / 1000),
     };
@@ -260,7 +261,6 @@ export function getRatingInfo(q_id)
 
 export function getRating(q_id)
 {
-    console.log('inseide getrating', q_id);
     return firebase.database().ref("Questions/" + q_id + '/').once('value').then(function(snapshot) {
         return snapshot.val().Rating;
     });
