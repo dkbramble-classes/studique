@@ -28,8 +28,8 @@ function AlgoliaSearch(props) {
       } else{
         QuestionsString = "Recently Asked Questions"
       }
-      console.log(sortOption);
-      console.log(searchString);
+      // console.log(sortOption);
+      // console.log(searchString);
 
     }
 
@@ -52,16 +52,22 @@ function AlgoliaSearch(props) {
   }
 
   function SortCards(props){
-
-    if (props.sortOption === "rating"){
+    const [rateUpdate, setUpdate] = React.useState(false);
+    function handleRateUpdate (newVal) {
+      setUpdate(newVal);
+    }
+    if (props.sortOption === "rating" && rateUpdate){
+      console.log("BEFORE", props.result);
       props.result.sort(SortCompare);
+      console.log("AFTER", props.result);
     }
     var cards = [];
     cards = props.result.map(item => {
-      return <QCards key={item.objectID} objectId={item.objectID} title={item.Title}
-      body={item.Body} rating={item.Rating} creationDate={item.creationDate}
-      tags={item.Tags} userId={item.UserID} userDisplayName={item.UserDisplayName}
-      userPhoto={item.UserPhoto} comments={item.Comments}/>
+      // return <QCards key={item.objectID} objectId={item.objectID} title={item.Title}
+      // body={item.Body} rating={item} creationDate={item.creationDate}
+      // tags={item.Tags} userId={item.UserID} userDisplayName={item.UserDisplayName}
+      // userPhoto={item.UserPhoto} handleRateUpdate={handleRateUpdate} comments={item.Comments}/>
+      return <QCards key={item.objectID}  cardInfo={item} handleRateUpdate={handleRateUpdate} />
     });
 
     return cards;
@@ -97,13 +103,12 @@ function useAsyncHook(searchHits, sortOption) {
       try {
 
         setLoading("true");
-        console.log("INDEX", indexName);
-        console.log("Search", searchHits);
         const response = await client.initIndex(indexName).search(searchHits, {
           attributesToRetrieve: ['Body', 'Title', 'Rating', 'CreationDate', 
           'Tags', 'UserID', 'objectID', 'UserDisplayName', 'UserPhoto', 'Comments'],
           hitsPerPage: 10,
         }).then(({ hits }) => {
+          console.log(hits);
           return hits;
         });
 
