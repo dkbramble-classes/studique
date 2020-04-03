@@ -54,7 +54,7 @@ function App () {
         <Route path="/" exact render={(props) => <FrontPage {...props} />}/>
         <Route path="/results/*" exact render={(props) => <QuestionList {...props} isAuthed={isAuthed} userType={userType}/>}/>
         <Route path="/profile" exact render={(props) => <Profile {...props} handleName={handleName} displayName={displayName} isAuthed={isAuthed} />} />
-        <Route path="/questionForm" exact render={(props) => <QuestionForm {...props} handleName={handleName} displayName={displayName} isAuthed={isAuthed} />} />
+        <Route path="/questionForm" exact render={(props) => <QuestionForm/>} />
       </div>
     </BrowserRouter>
   );
