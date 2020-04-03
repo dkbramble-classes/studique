@@ -9,7 +9,6 @@ function AlgoliaSearch(props) {
     var searchString;
     var sortOption;
     var QuestionsString = "Questions similar to yours";
-
     if(props.sortOption === "user") {
       searchString = props.userSearchString;
       sortOption = "user";
@@ -22,12 +21,14 @@ function AlgoliaSearch(props) {
         searchString = "";
       }
 
-      sortOption = window.location.href.split('/sort/')[1] === null ? null : window.location.href.split('/sort/')[1];
-      if (!sortOption){
-        sortOption = "";
+      var sortOptionURL = window.location.href.split('/sort/')[1] === null ? null : window.location.href.split('/sort/')[1];
+      if (!sortOptionURL){
+        sortOption = props.sortOption;
       } else{
+        sortOption = sortOptionURL;
         QuestionsString = "Recently Asked Questions"
       }
+
       // console.log(sortOption);
       // console.log(searchString);
 
@@ -57,9 +58,9 @@ function AlgoliaSearch(props) {
       setUpdate(newVal);
     }
     if (props.sortOption === "rating" && rateUpdate){
-      console.log("BEFORE", props.result);
+      //console.log("BEFORE", props.result);
       props.result.sort(SortCompare);
-      console.log("AFTER", props.result);
+      //console.log("AFTER", props.result);
     }
     var cards = [];
     cards = props.result.map(item => {
