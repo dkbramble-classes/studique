@@ -21,18 +21,18 @@ function QuestionCards(props) {
     }
   }
   
-  if (typeof(props.tags) !== 'undefined' && props.tags != null) {
-    var myTagList = props.tags;
+  if (typeof(props.cardInfo.Tags) !== 'undefined' && props.cardInfo.Tags != null) {
+    var myTagList = props.cardInfo.Tags;
     tagList = myTagList.map(tag => (
-      <Tags key={props.objectId+"tags"+tag} tagname={tag}/>
+      <Tags key={props.cardInfo.objectID+"tags"+tag} tagname={tag}/>
     ))
   }
 
-  if(props.userPhoto !== null && props.userPhoto !== undefined){
-    url = props.userPhoto;
+  if(props.cardInfo.UserPhoto !== null && props.cardInfo.UserPhoto !== undefined){
+    url = props.cardInfo.UserPhoto;
   }
 
-  const [voteCount, updateCount] = useState(props.rating);
+  const [voteCount, updateCount] = useState(props.cardInfo.Rating);
   const colors = {
     "Neutral": "black",
     "Up": "#3944bc",
@@ -42,18 +42,26 @@ function QuestionCards(props) {
   const [bodyInput, setBodyInput] = useState("");
   const [questionPhoto, updateQuestionPhoto] = useState("");
 
-  const q_id = props.objectId;
+  const q_id = props.cardInfo.objectID;
 
   function handleVoteInitialization() {
     getRatingInfo(q_id).then(function (state) {
-      updateCount(state.Rating);
+
+      if (state.Rating !== props.cardInfo.Rating){
+        updateCount(state.Rating);
+        props.cardInfo.Rating = state.Rating;
+        props.handleRateUpdate(true);
+      }
       updateColor(colors[state.color]);
       updateUpVotable(state.isUp);
       updateDownVotable(state.isDown);
     }).catch(function (error) {
       console.log("Error: " + error.message);
       getRating(q_id).then(function (rating) {
-        updateCount(rating);
+        if (rating !== props.cardInfo.Rating){
+          updateCount(rating);
+          props.handleRateUpdate(true);
+        }
       })
     });
   }
@@ -66,13 +74,20 @@ function QuestionCards(props) {
   function handleUpClick(){
     if (isUpVotable){
       updateRating(q_id, "UpVotes").then(function(info){
-        updateCount(info.Rating);
+        if (info.Rating !== props.cardInfo.Rating){
+          updateCount(info.Rating);
+          props.handleRateUpdate(true);
+        }
+
         updateUpVotable(info.isUp);
         updateColor(colors[info.Color]);
         updateDownVotable(info.isDown);
       }).catch(function (error) {
         getRating(q_id).then(function (rating) {
-          updateCount(rating);
+          if (rating !== props.cardInfo.Rating){
+            updateCount(rating);
+            props.handleRateUpdate(true);
+          }
         })
       });
     }
@@ -81,14 +96,20 @@ function QuestionCards(props) {
   function handleDownClick(){
     if (isDownVotable){
       updateRating( q_id, "DownVotes").then(function(info) {
-        updateCount(info.Rating);
+        if (info.Rating !== props.cardInfo.Rating){
+          updateCount(info.Rating);
+          props.handleRateUpdate(true);
+        }
         updateDownVotable(info.isDown);
         updateColor(colors[info.Color]);
         updateUpVotable(info.isUp);
       }).catch(function (error) {
         console.log("Error: " + error.message);
         getRating(q_id).then(function (rating) {
-          updateCount(rating);
+          if (rating !== props.cardInfo.Rating){
+            updateCount(rating);
+            props.handleRateUpdate(true);
+          }
         })
       });
     }
@@ -158,15 +179,15 @@ function QuestionCards(props) {
   if (isClicked) {
     description = (
       <div className="qcardDescription">
-        {props.body}
+        {props.cardInfo.Body}
       </div>
     );
   }
   //create comments
   if (isClicked) {
     //have to do comments
-    if(props.comments !== undefined) {
-      comments = Object.entries(props.comments).map(([key, value])=>{
+    if(props.cardInfo.Comments !== undefined) {
+      comments = Object.entries(props.cardInfo.Comments).map(([key, value])=>{
         return <Comments uid={value.uid} DisplayName={value.DisplayName} Body={value.Body}/>
       });
     }
@@ -218,13 +239,13 @@ function QuestionCards(props) {
               className="qcardProfileLogo"
               src={questionPhoto}
               alt="profilePic"
-              onLoad={getQuestionPhoto(props.userId)}
+              onLoad={getQuestionPhoto(props.cardInfo.UserID)}
             />
-            <span>{props.userDisplayName}</span>
+            <span>{props.cardInfo.UserDisplayName}</span>
           </div>
 
           <div className="qcardTitle" onClick = {handleClick}>
-            <h5>{props.title}</h5>
+            <h5>{props.cardInfo.Title}</h5>
           </div>
 
           {description}

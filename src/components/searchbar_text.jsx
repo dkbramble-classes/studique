@@ -19,7 +19,7 @@ function SearchBarText(props) {
 
       setSearch(event.target.value);
 
-      let empty = event.target.value.length > 0;
+      let empty = (event.target.value.trim().length > 0);
       if (empty) {
         var url = event.target.value.replace(/ /g, '&');
         var urlSlash = url.replace(/\//g, '_slash_');
