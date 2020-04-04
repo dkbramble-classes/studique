@@ -144,6 +144,7 @@ function QuestionCards(props) {
     {
       addComment(q_id, bodyInput).then(function () {
         console.log("Comment successfully added to question " + q_id);
+        alert("This comment was successfully added. Please refresh page to view.");
       }).catch(function(error) {
         alert("There was an error creating this comment. Please refresh and try again.")
         console.log(error.code);
