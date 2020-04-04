@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import algoliasearch from 'algoliasearch/lite';
 import QCards from './questionCards';
 
@@ -53,9 +53,18 @@ function AlgoliaSearch(props) {
   }
 
   function SortCards(props){
-    const [rateUpdate, setUpdate] = React.useState(false);
+    const [rateUpdate, setUpdate] = useState(false);
+    const [commentUpdate, setCommentUpdate] = useState(0);
+    //var commentUpdate = false;
+
     function handleRateUpdate (newVal) {
       setUpdate(newVal);
+    }
+    function onCommentsChange () {
+      setCommentUpdate(commentUpdate => commentUpdate + 1);
+      //commentUpdate = true;
+      console.log("oncommentschange executed");
+      console.log('comment update', commentUpdate);
     }
     if (props.sortOption === "rating" && rateUpdate){
       //console.log("BEFORE", props.result);
@@ -68,7 +77,8 @@ function AlgoliaSearch(props) {
       // body={item.Body} rating={item} creationDate={item.creationDate}
       // tags={item.Tags} userId={item.UserID} userDisplayName={item.UserDisplayName}
       // userPhoto={item.UserPhoto} handleRateUpdate={handleRateUpdate} comments={item.Comments}/>
-      return <QCards key={item.objectID}  cardInfo={item} handleRateUpdate={handleRateUpdate} />
+      return <QCards key={item.objectID}  cardInfo={item} handleRateUpdate={handleRateUpdate} onCommentsChange={onCommentsChange}
+      commentUpdate={commentUpdate}/>
     });
 
     return cards;

@@ -10,6 +10,8 @@ function QuestionCards(props) {
   const [isClicked, updateClick] = useState(false);
   const [isUpVotable, updateUpVotable] = useState(true);
   const [isDownVotable, updateDownVotable] = useState(true);
+  //const [theComments, setComments] = useState(false);
+  //var refreshCommentList = () => this.setState({refreshCommentList: !this.state.refreshCommentList})
   var tagList = [];
   var url = 'require("../images/louieLaker.jpg")'
 
@@ -144,6 +146,8 @@ function QuestionCards(props) {
     {
       addComment(q_id, bodyInput).then(function () {
         console.log("Comment successfully added to question " + q_id);
+        setTimeout(props.onCommentsChange, 5000);
+      
       }).catch(function(error) {
         alert("There was an error creating this comment. Please refresh and try again.")
         console.log(error.code);
