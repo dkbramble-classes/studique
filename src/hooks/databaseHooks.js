@@ -134,6 +134,10 @@ export function updateQuestion(q_id, title, body, tagList) {
     return firebase.database().ref("Questions/" + q_id + "/").update(postData);
 }
 
+export function deleteQuestion(q_id){
+    return firebase.database.ref("Questions/" + q_id + "/").remove();
+}
+
 export function addComment(q_id, body) {
     const user = firebase.auth().currentUser;
 

@@ -1,4 +1,4 @@
-import React, {useState, forceUpdate} from "react";
+import React, {useState} from "react";
 import "../css/questionCards.css";
 import { ReactComponent as UpArrow } from "../images/keyboard_arrow_up-24px.svg";
 import { ReactComponent as DownArrow } from "../images/keyboard_arrow_down-24px.svg";
@@ -10,8 +10,7 @@ function QuestionCards(props) {
   const [isClicked, updateClick] = useState(false);
   const [isUpVotable, updateUpVotable] = useState(true);
   const [isDownVotable, updateDownVotable] = useState(true);
-  var tagList = [];
-  var url = 'require("../images/louieLaker.jpg")'
+  let tagList = [];
 
   function Tags(props){
     if(props.tagname.length !== 0){
@@ -26,10 +25,6 @@ function QuestionCards(props) {
     tagList = myTagList.map(tag => (
       <Tags key={props.cardInfo.objectID+"tags"+tag} tagname={tag}/>
     ))
-  }
-
-  if(props.cardInfo.UserPhoto !== null && props.cardInfo.UserPhoto !== undefined){
-    url = props.cardInfo.UserPhoto;
   }
 
   const [voteCount, updateCount] = useState(props.cardInfo.Rating);
