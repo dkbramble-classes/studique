@@ -1,5 +1,5 @@
 import React,  {useState}  from 'react';
-import { BrowserRouter, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import alglogo from "../images/algolia-white.svg";
 
 function SearchBarText(props) {
@@ -19,13 +19,17 @@ function SearchBarText(props) {
 
       setSearch(event.target.value);
 
-      let empty = event.target.value.length > 0;
+      let empty = (event.target.value.trim().length > 0);
       if (empty) {
         var url = event.target.value.replace(/ /g, '&');
-        setURL(url);    
+        var urlSlash = url.replace(/\//g, '_slash_');
+        setURL(urlSlash);    
       }
       setEnabled(empty);
             
+    }
+    else{
+      alert("Question must be less than 140 characters.");
     }
   }
 
@@ -45,11 +49,7 @@ function SearchBarText(props) {
         <input type="text" className="form-control flex-fill mr-0 mr-sm-2 mb-3 mb-sm-0 main-search" id="inputText" autoComplete="off" placeholder="ASK A QUESTION" value={tmpSearch} onChange={handleTextChange} />
         <div className="mx-auto">
         {/* <BrowserRouter> */}
-        <Link to={"/results/search=" + tmpURL} onClick={() =>   {
-          if (tmpSearch.length > 0){
-            props.handleSearch(tmpSearch, tmpURL);
-          }}
-          } >
+        <Link to={"/results/search/" + tmpURL} >
           <input type="submit" disabled={!isEnabled} className="btn btn-primary mx-auto" value="Submit" />
         </Link>
         {/* </BrowserRouter> */}

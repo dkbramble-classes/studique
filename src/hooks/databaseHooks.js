@@ -40,7 +40,7 @@ export async function initializeUser(user, permission, displayName)
                 return result["displayName"];
             });
         }).catch(function (error) {
-            console.log(error.message)
+            console.log("Error getting user's name.")
         });
     }
 }
@@ -55,8 +55,30 @@ export async function updateDisplayName(newName)
 
 export async function updatePhotoUrl(newURL) {
     let user = firebase.auth().currentUser;
-    return await user.updateProfile({
-        photoURL: newURL
+    return await firebase.database().ref('users/' + user.uid).update({
+        photoURL: newURL,
+    }).then(function (snapshot) {
+        user.updateProfile({
+            photoURL: newURL
+        })
+    }).catch(function(error) {
+        console.log(error.code);
+        console.log(error.message);
+        alert("Error updating user's photo");
+    });
+}
+
+export function getPhotoURL(uid){
+    return firebase.database().ref('users/' + uid).once('value').then(function (snapshot) {
+        if(snapshot.val().photoURL)
+        {
+            return snapshot.val().photoURL
+        }
+        return "";
+    }).catch(function(error) {
+        console.log(error.code);
+        console.log(error.message);
+        alert("Error getting user's photo.");
     });
 }
 
@@ -68,6 +90,7 @@ export function getUserMetadata(user)
     }).catch(function(error) {
         console.log(error.code);
         console.log(error.message);
+        alert(error.message);
     });
 }
 
@@ -78,6 +101,7 @@ export function signOut(props){
     }).catch(function(error) {
         console.log(error.code);
         console.log(error.message);
+        alert("Error sigining out.");
     });
 }
 
@@ -115,6 +139,7 @@ export function addComment(q_id, body) {
 
     const postData = {
         uid: user.uid,
+        DisplayName: user.displayName,
         Body: body,
         creationDate: Math.round((new Date()).getTime() / 1000),
     };
@@ -130,6 +155,7 @@ export async function updateRating( q_id, voteDir)
     const user = firebase.auth().currentUser;
     return firebase.database().ref("Questions/" + q_id + '/').once('value').then(function(snapshot) {
         if(user === null){
+            alert("You must be signed in to vote on questions");
             throw new Error("You must be signed in to vote on questions");
         }
         let rating = snapshot.val().Rating;
@@ -209,6 +235,7 @@ export async function updateRating( q_id, voteDir)
         }).catch(function (error) {
             console.log(error.code);
             console.log(error.message);
+            alert("Error loading results");
         });
         return {Rating: rating, Color: color, isUp: isUp, isDown: isDown};
     });
@@ -235,14 +262,17 @@ export function getRatingInfo(q_id)
             }
         }
         return {Rating: rating, color: color, isUp: isUp, isDown: isDown};
+    }).catch(function (error) {
+        alert("Error loading rating system.");
     })
 }
 
 export function getRating(q_id)
 {
-    console.log('inseide getrating', q_id);
     return firebase.database().ref("Questions/" + q_id + '/').once('value').then(function(snapshot) {
         return snapshot.val().Rating;
+    }).catch(function (error){
+        alert(error.message);
     });
 }
 

@@ -11,6 +11,13 @@ h4,
 p {
   font-family: "Varela Round";
 }
+h5 {
+  word-wrap: break-word;
+  overflow-wrap:break-word;
+  max-width: 800px;
+}
+
+
 span{display:inline-block;}
 body {
   font-family: Nunito;
@@ -183,6 +190,10 @@ body, html {
 }
 .text-font {
   font-family: "Varela Round";
+}
+
+.text-white {
+  color:rgb(255, 255, 255); 
 }
 
 .text-underline{

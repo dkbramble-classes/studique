@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React, {useState, forceUpdate} from "react";
 import "../css/questionCards.css";
 import { ReactComponent as UpArrow } from "../images/keyboard_arrow_up-24px.svg";
 import { ReactComponent as DownArrow } from "../images/keyboard_arrow_down-24px.svg";
-import {storage, addComment, updateRating, getRatingInfo, getRating} from "../hooks/databaseHooks";
+import { addComment, updateRating, getRatingInfo, getRating, getPhotoURL} from "../hooks/databaseHooks";
 import 'firebase/storage';
+import Comments from './comments';
 
 function QuestionCards(props) {
   const [isClicked, updateClick] = useState(false);
@@ -13,22 +14,25 @@ function QuestionCards(props) {
   var url = 'require("../images/louieLaker.jpg")'
 
   function Tags(props){
-    return <div className="tags">{props.tagname}</div>
+    if(props.tagname.length !== 0){
+      return <div className="tags">{props.tagname}</div>
+    } else {
+      return null;
+    }
   }
   
-  if (typeof(props.tags) !== 'undefined' && props.tags != null) {
-    var myTagList = props.tags;
-
+  if (typeof(props.cardInfo.Tags) !== 'undefined' && props.cardInfo.Tags != null) {
+    var myTagList = props.cardInfo.Tags;
     tagList = myTagList.map(tag => (
-      <Tags tagname={tag}/>
+      <Tags key={props.cardInfo.objectID+"tags"+tag} tagname={tag}/>
     ))
   }
 
-  if(props.userPhoto != null && props.userPhoto !== undefined){
-    url = props.userPhoto;
+  if(props.cardInfo.UserPhoto !== null && props.cardInfo.UserPhoto !== undefined){
+    url = props.cardInfo.UserPhoto;
   }
 
-  const [voteCount, updateCount] = useState(0);
+  const [voteCount, updateCount] = useState(props.cardInfo.Rating);
   const colors = {
     "Neutral": "black",
     "Up": "#3944bc",
@@ -36,21 +40,28 @@ function QuestionCards(props) {
   };
   const [voteColor, updateColor] = useState(colors["Neutral"]);
   const [bodyInput, setBodyInput] = useState("");
+  const [questionPhoto, updateQuestionPhoto] = useState("");
 
-  const q_id = props.objectId;
-  console.log('props', props);
+  const q_id = props.cardInfo.objectID;
 
   function handleVoteInitialization() {
-    console.log('inside handlevoteinitialization', q_id);
     getRatingInfo(q_id).then(function (state) {
-      updateCount(state.Rating);
+
+      if (state.Rating !== props.cardInfo.Rating){
+        updateCount(state.Rating);
+        props.cardInfo.Rating = state.Rating;
+        props.handleRateUpdate(true);
+      }
       updateColor(colors[state.color]);
       updateUpVotable(state.isUp);
       updateDownVotable(state.isDown);
     }).catch(function (error) {
       console.log("Error: " + error.message);
       getRating(q_id).then(function (rating) {
-        updateCount(rating);
+        if (rating !== props.cardInfo.Rating){
+          updateCount(rating);
+          props.handleRateUpdate(true);
+        }
       })
     });
   }
@@ -63,14 +74,20 @@ function QuestionCards(props) {
   function handleUpClick(){
     if (isUpVotable){
       updateRating(q_id, "UpVotes").then(function(info){
-        updateCount(info.Rating);
+        if (info.Rating !== props.cardInfo.Rating){
+          updateCount(info.Rating);
+          props.handleRateUpdate(true);
+        }
+
         updateUpVotable(info.isUp);
         updateColor(colors[info.Color]);
         updateDownVotable(info.isDown);
       }).catch(function (error) {
-        console.log("Error: " + error.message);
         getRating(q_id).then(function (rating) {
-          updateCount(rating);
+          if (rating !== props.cardInfo.Rating){
+            updateCount(rating);
+            props.handleRateUpdate(true);
+          }
         })
       });
     }
@@ -79,17 +96,38 @@ function QuestionCards(props) {
   function handleDownClick(){
     if (isDownVotable){
       updateRating( q_id, "DownVotes").then(function(info) {
-        updateCount(info.Rating);
+        if (info.Rating !== props.cardInfo.Rating){
+          updateCount(info.Rating);
+          props.handleRateUpdate(true);
+        }
         updateDownVotable(info.isDown);
         updateColor(colors[info.Color]);
         updateUpVotable(info.isUp);
       }).catch(function (error) {
         console.log("Error: " + error.message);
         getRating(q_id).then(function (rating) {
-          updateCount(rating);
+          if (rating !== props.cardInfo.Rating){
+            updateCount(rating);
+            props.handleRateUpdate(true);
+          }
         })
       });
     }
+  }
+
+  function getQuestionPhoto(uid){
+    getPhotoURL(uid).then( function (url) {
+      if(url === "")
+      {
+        updateQuestionPhoto(require("../images/louieLaker.jpg"))
+      }
+      else{
+        updateQuestionPhoto(url);
+      }
+    }).catch(function(error) {
+      console.log(error.code);
+      console.log(error.message);
+    });
   }
 
   function handleBodyInput(ev) {
@@ -100,37 +138,19 @@ function QuestionCards(props) {
   {
     if( bodyInput === "")
     {
-      console.log("You can't post a comment with no content.")
+      alert("You can't post a comment with no content.")
     }
     else
     {
       addComment(q_id, bodyInput).then(function () {
         console.log("Comment successfully added to question " + q_id);
+        alert("This comment was successfully added. Please refresh page to view.");
       }).catch(function(error) {
+        alert("There was an error creating this comment. Please refresh and try again.")
         console.log(error.code);
         console.log(error.message);
       });;
     }
-  }
-
-  function Comments(props){
-    return <div className="qcardCommentsSection">
-        <Votes />
-        <div className="qcardRightContent">
-          <span className="qcardComment">
-            this is a fake comment. will need to work on
-          </span>
-  
-          <div className="qcardProfile">
-            <img
-              className="qcardProfileLogo"
-              src={require("../images/louieLaker.jpg")}
-              alt="profilePic"
-            />
-            <span>Professor Peabody</span>
-          </div>
-        </div>
-      </div>
   }
 
   let description;
@@ -160,14 +180,19 @@ function QuestionCards(props) {
   if (isClicked) {
     description = (
       <div className="qcardDescription">
-        {props.description}
+        {props.cardInfo.Body}
       </div>
     );
   }
   //create comments
   if (isClicked) {
-    //have to do comments 
-    comments = Comments(props.comments);
+    //have to do comments
+    if(props.cardInfo.Comments !== undefined) {
+      comments = Object.entries(props.cardInfo.Comments).map(([key, value])=>{
+        return <Comments uid={value.uid} DisplayName={value.DisplayName} Body={value.Body}/>
+      });
+    }
+    
   }
   //create hrline
   if (isClicked) {
@@ -179,13 +204,7 @@ function QuestionCards(props) {
       <div>
         <h5>Add An Answer</h5>
         <div className="qcardAnswerSection">
-          <img
-            className="qcardProfileLogo"
-            src={url}
-            alt="profilePic"
-          />
-
-          <form>
+          <form className="qcardCommentForm">
             <textarea
               className="qcardCommentTextBox"
               type="text"
@@ -195,8 +214,8 @@ function QuestionCards(props) {
             />
           </form>
           <form onSubmit={(e) => {postComment(); e.preventDefault();}}>
-            <button type="submit" id={"questionCardCommentButton"} className="text-font qFormButton" >
-              SUBMIT QUESTION
+            <button type="submit" id={"questionCardCommentButton"} className="text-font qcardSubmitButton" >
+              SUBMIT
             </button>
           </form>
         </div>
@@ -219,14 +238,15 @@ function QuestionCards(props) {
           <div className="qcardProfile">
             <img 
               className="qcardProfileLogo"
-              src="https://firebasestorage.googleapis.com/v0/b/studique.appspot.com/o/images%2Fhancoxk_200x200?alt=media&token=e577b6e9-7a9b-4711-ad8b-1556f1068bf6"
+              src={questionPhoto}
               alt="profilePic"
+              onLoad={getQuestionPhoto(props.cardInfo.UserID)}
             />
-            <span>{props.userDisplayName}</span>
+            <span>{props.cardInfo.UserDisplayName}</span>
           </div>
 
           <div className="qcardTitle" onClick = {handleClick}>
-            <h5>{props.title}</h5>
+            <h5>{props.cardInfo.Title}</h5>
           </div>
 
           {description}
@@ -238,7 +258,6 @@ function QuestionCards(props) {
           {moreLink}
         </div>
       </div>
-      {hrline}
       {comments}
       {hrline}
       {answerSection}

@@ -17,20 +17,25 @@ function SignIn(props){
         if(ev.target.value.length < 30){
             setPassword(ev.target.value);
         }
+        else{
+            alert("Password must be less than 30 characters.");
+        }
     }
 
     async function doSignIn() {
         return await signInFirebase(userEmail, userPassword, props.handleAuthed, props.handleName, props.handleType).then(
             function(displayName) {
-                if (displayName !== null){
-                    props.handleName(displayName);
-                    props.handleAuthed(true);
-                    //ALSO NEED USER PERMISSION
-                    //props.handleType(userPermission);
+                if(displayName){
+                    if (displayName !== ""){
+                        props.handleName(displayName);
+                        props.handleAuthed(true);
+                    }
                 }
                 return displayName;
             }
-        );
+        ).catch(function (error){
+            alert(error.message);
+        });
     }
 
     return (
