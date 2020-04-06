@@ -44,7 +44,7 @@ function AlgoliaSearch(props) {
         ) : (
           <div>
           <h3>{QuestionsString}</h3>
-          {<SortCards result={result} sortOption={props.sortOption}/>}
+          {<SortCards result={result} isAuthed={props.isAuthed} sortOption={props.sortOption}/>}
           </div>
         )}
       </div>
@@ -68,7 +68,7 @@ function AlgoliaSearch(props) {
       // body={item.Body} rating={item} creationDate={item.creationDate}
       // tags={item.Tags} userId={item.UserID} userDisplayName={item.UserDisplayName}
       // userPhoto={item.UserPhoto} handleRateUpdate={handleRateUpdate} comments={item.Comments}/>
-      return <QCards key={item.objectID}  cardInfo={item} handleRateUpdate={handleRateUpdate} />
+      return <QCards key={item.objectID}  isAuthed={props.isAuthed} cardInfo={item} handleRateUpdate={handleRateUpdate} />
     });
 
     return cards;
