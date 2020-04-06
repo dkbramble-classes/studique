@@ -11,7 +11,7 @@ function QuestionCards(props) {
   const [isUpVotable, updateUpVotable] = useState(true);
   const [isDownVotable, updateDownVotable] = useState(true);
   let tagList = [];
-
+  console.log(props.isAuthed);
   function Tags(props){
     if(props.tagname.length !== 0){
       return <div className="tags">{props.tagname}</div>
@@ -158,7 +158,7 @@ function QuestionCards(props) {
   const Votes = () => (
     <div className="qcardVotes ">
       <div>
-        <button className="btn btn-vote ml-1" onClick={handleUpClick}><UpArrow /></button>
+        <button className="btn btn-vote ml-1" disabled={!props.isAuthed} onClick={handleUpClick}><UpArrow /></button>
       </div>
   
       <div>
@@ -166,7 +166,7 @@ function QuestionCards(props) {
       </div>
   
       <div>
-        <button className="btn btn-vote ml-1" onClick={handleDownClick}><DownArrow /></button>
+        <button className="btn btn-vote ml-1" disabled={!props.isAuthed} onClick={handleDownClick}><DownArrow /></button>
       </div>
     </div>
   );

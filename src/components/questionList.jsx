@@ -39,7 +39,7 @@ function QuestionList(props) {
 
       <div className="qlistList">
         <DropDown/>
-        <AlgoliaSearch sortOption={sortOption}/>
+        <AlgoliaSearch sortOption={sortOption} isAuthed={props.isAuthed}/>
 
         <br/>
         <h4>Didn't find what you're looking for?</h4>
