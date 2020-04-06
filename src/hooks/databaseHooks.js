@@ -266,9 +266,7 @@ export function getRatingInfo(q_id)
             }
         }
         return {Rating: rating, color: color, isUp: isUp, isDown: isDown};
-    }).catch(function (error) {
-        alert("Error loading rating system.");
-    })
+     })
 }
 
 export function getRating(q_id)
