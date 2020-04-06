@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import "../css/questionCards.css";
 import { ReactComponent as UpArrow } from "../images/keyboard_arrow_up-24px.svg";
 import { ReactComponent as DownArrow } from "../images/keyboard_arrow_down-24px.svg";
+import { ReactComponent as DeleteButton } from "../images/clear-24px.svg";
 import { addComment, updateRating, getRatingInfo, getRating, getPhotoURL} from "../hooks/databaseHooks";
 import 'firebase/storage';
 import Comments from './comments';
@@ -11,6 +12,7 @@ function QuestionCards(props) {
   const [isUpVotable, updateUpVotable] = useState(true);
   const [isDownVotable, updateDownVotable] = useState(true);
   let tagList = [];
+  var deleteButton = null;
 
   function Tags(props){
     if(props.tagname.length !== 0){
@@ -26,6 +28,11 @@ function QuestionCards(props) {
       <Tags key={props.cardInfo.objectID+"tags"+tag} tagname={tag}/>
     ))
   }
+
+  if(props.showDelete){
+    deleteButton = <button className="btn btn-vote ml-1 qcardDeleteButton"><DeleteButton /></button>
+  }
+  
 
   const [voteCount, updateCount] = useState(props.cardInfo.Rating);
   const colors = {
@@ -226,6 +233,7 @@ function QuestionCards(props) {
 
   return (
     <div className="qcard">
+      {deleteButton}
       <div className="qcardTop">
         <Votes />
 
