@@ -3,7 +3,7 @@ import "../css/questionCards.css";
 import { ReactComponent as UpArrow } from "../images/keyboard_arrow_up-24px.svg";
 import { ReactComponent as DownArrow } from "../images/keyboard_arrow_down-24px.svg";
 import { ReactComponent as DeleteButton } from "../images/clear-24px.svg";
-import { addComment, updateRating, getRatingInfo, getRating, getPhotoURL} from "../hooks/databaseHooks";
+import { addComment, updateRating, getRatingInfo, getRating, getPhotoURL, deleteQuestion} from "../hooks/databaseHooks";
 import 'firebase/storage';
 import Comments from './comments';
 
@@ -14,7 +14,6 @@ function QuestionCards(props) {
   let tagList = [];
   var deleteButton = null;
 
-  console.log(props.isAuthed);
   function Tags(props){
     if(props.tagname.length !== 0){
       return <div className="tags">{props.tagname}</div>
@@ -31,7 +30,7 @@ function QuestionCards(props) {
   }
 
   if(props.showDelete){
-    deleteButton = <button className="btn btn-vote ml-1 qcardDeleteButton"><DeleteButton /></button>
+    deleteButton = <button className="btn btn-vote ml-1 qcardDeleteButton" onClick={removeQuestion}><DeleteButton /></button>
   }
   
 
@@ -116,6 +115,11 @@ function QuestionCards(props) {
         })
       });
     }
+  }
+
+  function removeQuestion()
+  {
+    deleteQuestion(q_id);
   }
 
   function getQuestionPhoto(uid){
