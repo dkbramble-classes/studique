@@ -119,7 +119,9 @@ function QuestionCards(props) {
 
   function removeQuestion()
   {
-    deleteQuestion(q_id);
+    deleteQuestion(q_id).catch(function(error) {
+      alert("Error with deleting question: " + error.message);
+    });
   }
 
   function getQuestionPhoto(uid){
