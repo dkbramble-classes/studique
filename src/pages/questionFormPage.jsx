@@ -56,10 +56,11 @@ function QuestionForm()
       setTagsInput(tagsInput.replace(/\s/g, ''));
       const tagList = tagsInput.split(',');
       createQuestion(titleInput, bodyInput, tagList).then(function () {
-        // Sign-out successful.
         setLoad(true);
         console.log("Q-Card creation successful");
-        
+        setTimeout(() => {
+          window.location.reload(false)
+        }, 2500);
       }).catch(function(error) {
         console.log(error.code);
         console.log(error.message);
@@ -127,9 +128,6 @@ function QuestionForm()
         </div>
         
         <form onSubmit={(e) => {createQuestionCard(); e.preventDefault();
-          setTimeout(() => {
-            window.location.reload(false)
-          }, 1500);
         }}>
           <button type="submit" id='qFormSubmit' disabled={isDisabled} className="text-font qFormButton mb-2" >
             SUBMIT QUESTION

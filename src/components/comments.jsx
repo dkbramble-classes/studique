@@ -27,7 +27,7 @@ function Comments(props){
         deleteComment(props.qid, props.cid).then(function() {
             setTimeout(() => {
                 window.location.reload(false)
-            }, 1500);
+            }, 2500);
         }).catch(function(error) {
             alert("Error with deleting comment: " + error.message);
         });

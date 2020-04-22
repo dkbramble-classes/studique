@@ -122,7 +122,7 @@ function QuestionCards(props) {
     deleteQuestion(q_id).then(function() {
       setTimeout(() => {
         window.location.reload(false)
-      }, 1500);
+      }, 2500);
     }).catch(function(error) {
       alert("Error with deleting question: " + error.message);
     });
@@ -157,6 +157,9 @@ function QuestionCards(props) {
     {
       addComment(q_id, bodyInput).then(function () {
         console.log("Comment successfully added to question " + q_id);
+        setTimeout(() => {
+          window.location.reload(false)
+        }, 2500);
       }).catch(function(error) {
         alert("There was an error creating this comment. Please refresh and try again.")
         console.log(error.code);
@@ -226,10 +229,7 @@ function QuestionCards(props) {
               onChange={handleBodyInput}
             />
           </form>
-          <form onSubmit={(e) => {e.preventDefault(); postComment();
-            setTimeout(() => {
-              window.location.reload(false)
-            }, 1500);}}>
+          <form onSubmit={(e) => {e.preventDefault(); postComment();}}>
             <button type="submit" id={"questionCardCommentButton"} className="text-font qcardSubmitButton" >
               SUBMIT
             </button>
