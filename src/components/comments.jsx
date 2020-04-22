@@ -1,9 +1,11 @@
 import React, {useState} from "react";
-import {getPhotoURL} from "../hooks/databaseHooks";
+import {deleteComment, getPhotoURL, getUser} from "../hooks/databaseHooks";
+import { ReactComponent as DeleteButton } from "../images/clear-24px.svg";
 import "../css/comments.css";
 
 function Comments(props){
     const [commentPhoto, updateCommentPhoto] = useState("");
+    let deleteButton = null;
 
     function getCommentPhoto(uid){
         getPhotoURL(uid).then( function (url) {
@@ -20,10 +22,24 @@ function Comments(props){
         });
     }
 
+    function removeComment()
+    {
+        deleteComment(props.qid, props.cid).then(function() {
+            alert("Comment deleted, please refresh page.");
+        }).catch(function(error) {
+            alert("Error with deleting comment: " + error.message);
+        });
+    }
+
+    if(props.uid == getUser().uid && props.showDelete){
+        deleteButton = <button className="btn btn-vote ml-1 commentDeleteButton" onClick={removeComment}><DeleteButton /></button>
+    }
+
       return (
         <div className="">
           <hr/>
           <div className="commentMaterial">
+              {deleteButton}
             <span className="">
                 {props.Body}
             </span>

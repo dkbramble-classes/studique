@@ -53,6 +53,10 @@ export async function updateDisplayName(newName)
     })
 }
 
+export function getUser(){
+    return firebase.auth().currentUser;
+}
+
 export async function updatePhotoUrl(newURL) {
     let user = firebase.auth().currentUser;
     return await firebase.database().ref('users/' + user.uid).update({
@@ -136,6 +140,11 @@ export function updateQuestion(q_id, title, body, tagList) {
 
 export function deleteQuestion(q_id){
     return firebase.database().ref("Questions/" + q_id + "/").remove();
+}
+
+export function deleteComment(q_id, c_id){
+    console.log("Questions/" + q_id + "/" + c_id + "/");
+    return firebase.database().ref("Questions/" + q_id + "/Comments/" + c_id + "/").remove();
 }
 
 export function addComment(q_id, body) {

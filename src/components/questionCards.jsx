@@ -200,7 +200,8 @@ function QuestionCards(props) {
     //have to do comments
     if(props.cardInfo.Comments !== undefined) {
       comments = Object.entries(props.cardInfo.Comments).map(([key, value])=>{
-        return <Comments uid={value.uid} DisplayName={value.DisplayName} Body={value.Body}/>
+        return <Comments uid={value.uid} DisplayName={value.DisplayName} Body={value.Body}
+                         qid={props.cardInfo.objectID} cid={key} showDelete={props.showDelete}/>
       });
     }
     
