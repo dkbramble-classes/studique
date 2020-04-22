@@ -64,7 +64,11 @@ function Profile(props) {
           .child(mySubString)
           .getDownloadURL()
           .then(function(snapshot) {
-            updatePhotoUrl(snapshot).catch(function(error) {
+            updatePhotoUrl(snapshot).then(function() {
+              setTimeout(() => {
+                window.location.reload(false)
+              }, 2500);
+            }).catch(function(error) {
               console.log("Error: " + error.message);
             }).catch(function (error){
               alert(error.message);
