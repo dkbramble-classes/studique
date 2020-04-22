@@ -49,20 +49,21 @@ function QuestionForm()
   function createQuestionCard(){
     if(titleInput === "" || bodyInput === "")
     {
-      console.log("Please Enter a Title and Body for your question")
+      //console.log("Please Enter a Title and Body for your question")
       alert("Please Enter a Title and Body for your question");
     }
     else {
       setTagsInput(tagsInput.replace(/\s/g, ''));
       const tagList = tagsInput.split(',');
       createQuestion(titleInput, bodyInput, tagList).then(function () {
-        // Sign-out successful.
         setLoad(true);
-        console.log("Q-Card creation successful");
-        
+        //console.log("Q-Card creation successful");
+        setTimeout(() => {
+          window.location.reload(false)
+        }, 2500);
       }).catch(function(error) {
-        console.log(error.code);
-        console.log(error.message);
+        //console.log(error.code);
+        //console.log(error.message);
         alert(error.message);
       });
     }
@@ -126,7 +127,8 @@ function QuestionForm()
           </div>
         </div>
         
-        <form onSubmit={(e) => {createQuestionCard(); e.preventDefault();}}>
+        <form onSubmit={(e) => {createQuestionCard(); e.preventDefault();
+        }}>
           <button type="submit" id='qFormSubmit' disabled={isDisabled} className="text-font qFormButton mb-2" >
             SUBMIT QUESTION
           </button>

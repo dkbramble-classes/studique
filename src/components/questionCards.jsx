@@ -1,8 +1,9 @@
-import React, {useState, forceUpdate} from "react";
+import React, {useState} from "react";
 import "../css/questionCards.css";
 import { ReactComponent as UpArrow } from "../images/keyboard_arrow_up-24px.svg";
 import { ReactComponent as DownArrow } from "../images/keyboard_arrow_down-24px.svg";
-import { addComment, updateRating, getRatingInfo, getRating, getPhotoURL} from "../hooks/databaseHooks";
+import { ReactComponent as DeleteButton } from "../images/clear-24px.svg";
+import { addComment, updateRating, getRatingInfo, getRating, getPhotoURL, deleteQuestion} from "../hooks/databaseHooks";
 import 'firebase/storage';
 import Comments from './comments';
 
@@ -10,8 +11,8 @@ function QuestionCards(props) {
   const [isClicked, updateClick] = useState(false);
   const [isUpVotable, updateUpVotable] = useState(true);
   const [isDownVotable, updateDownVotable] = useState(true);
-  var tagList = [];
-  var url = 'require("../images/louieLaker.jpg")'
+  let tagList = [];
+  var deleteButton = null;
 
   function Tags(props){
     if(props.tagname.length !== 0){
@@ -28,9 +29,10 @@ function QuestionCards(props) {
     ))
   }
 
-  if(props.cardInfo.UserPhoto !== null && props.cardInfo.UserPhoto !== undefined){
-    url = props.cardInfo.UserPhoto;
+  if(props.showDelete){
+    deleteButton = <button className="btn btn-vote ml-1 qcardDeleteButton" onClick={removeQuestion}><DeleteButton /></button>
   }
+  
 
   const [voteCount, updateCount] = useState(props.cardInfo.Rating);
   const colors = {
@@ -115,6 +117,17 @@ function QuestionCards(props) {
     }
   }
 
+  function removeQuestion()
+  {
+    deleteQuestion(q_id).then(function() {
+      setTimeout(() => {
+        window.location.reload(false)
+      }, 2500);
+    }).catch(function(error) {
+      alert("Error with deleting question: " + error.message);
+    });
+  }
+
   function getQuestionPhoto(uid){
     getPhotoURL(uid).then( function (url) {
       if(url === "")
@@ -143,8 +156,10 @@ function QuestionCards(props) {
     else
     {
       addComment(q_id, bodyInput).then(function () {
-        console.log("Comment successfully added to question " + q_id);
-        alert("This comment was successfully added. Please refresh page to view.");
+        //console.log("Comment successfully added to question " + q_id);
+        setTimeout(() => {
+          window.location.reload(false)
+        }, 2500);
       }).catch(function(error) {
         alert("There was an error creating this comment. Please refresh and try again.")
         console.log(error.code);
@@ -163,7 +178,7 @@ function QuestionCards(props) {
   const Votes = () => (
     <div className="qcardVotes ">
       <div>
-        <button className="btn btn-vote ml-1" onClick={handleUpClick}><UpArrow /></button>
+        <button className="btn btn-vote ml-1" disabled={!props.isAuthed} onClick={handleUpClick}><UpArrow /></button>
       </div>
   
       <div>
@@ -171,7 +186,7 @@ function QuestionCards(props) {
       </div>
   
       <div>
-        <button className="btn btn-vote ml-1" onClick={handleDownClick}><DownArrow /></button>
+        <button className="btn btn-vote ml-1" disabled={!props.isAuthed} onClick={handleDownClick}><DownArrow /></button>
       </div>
     </div>
   );
@@ -189,7 +204,8 @@ function QuestionCards(props) {
     //have to do comments
     if(props.cardInfo.Comments !== undefined) {
       comments = Object.entries(props.cardInfo.Comments).map(([key, value])=>{
-        return <Comments uid={value.uid} DisplayName={value.DisplayName} Body={value.Body}/>
+        return <Comments uid={value.uid} DisplayName={value.DisplayName} Body={value.Body}
+                         qid={props.cardInfo.objectID} cid={key} showDelete={props.showDelete}/>
       });
     }
     
@@ -213,7 +229,7 @@ function QuestionCards(props) {
               onChange={handleBodyInput}
             />
           </form>
-          <form onSubmit={(e) => {postComment(); e.preventDefault();}}>
+          <form onSubmit={(e) => {e.preventDefault(); postComment();}}>
             <button type="submit" id={"questionCardCommentButton"} className="text-font qcardSubmitButton" >
               SUBMIT
             </button>
@@ -231,6 +247,7 @@ function QuestionCards(props) {
 
   return (
     <div className="qcard">
+      {deleteButton}
       <div className="qcardTop">
         <Votes />
 

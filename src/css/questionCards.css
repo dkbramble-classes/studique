@@ -4,8 +4,8 @@
     padding: 10px;
     margin: 10px 0px;
     background-color: white;
+    position: relative;
     
-
     white-space: pre-wrap;      /* CSS3 */   
     white-space: -moz-pre-wrap; /* Firefox */    
     white-space: -pre-wrap;     /* Opera <7 */   
@@ -27,6 +27,11 @@
 }
 .qcardRightContent {
     float: right;
+}
+.qcardDeleteButton{
+    position: absolute;
+    right: 5px;
+    top: 5px;
 }
 .tags {
     display: inline;

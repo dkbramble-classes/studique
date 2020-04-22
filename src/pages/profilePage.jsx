@@ -39,10 +39,10 @@ function Profile(props) {
     let currUser = firebase.auth().currentUser;
 
     e.preventDefault();
-    console.log("start of upload");
+    //console.log("start of upload");
     // async magic goes here...
     if (imageAsFile === "") {
-      console.error(`not an image, the image file is a ${typeof imageAsFile}`);
+      //console.error(`not an image, the image file is a ${typeof imageAsFile}`);
       alert(`Not an image, the image file is a ${typeof imageAsFile}`);
     }
     if (currUser) {
@@ -64,14 +64,18 @@ function Profile(props) {
           .child(mySubString)
           .getDownloadURL()
           .then(function(snapshot) {
-            updatePhotoUrl(snapshot).catch(function(error) {
+            updatePhotoUrl(snapshot).then(function() {
+              setTimeout(() => {
+                window.location.reload(false)
+              }, 2500);
+            }).catch(function(error) {
               console.log("Error: " + error.message);
             }).catch(function (error){
               alert(error.message);
             });
           });
       } catch (e) {
-        console.log(e);
+        //console.log(e);
         alert(e.message);
       }
     }
@@ -98,11 +102,11 @@ function Profile(props) {
                   setProfileImageURL(fireBaseUrl);
                 }
                 updatePhotoUrl(fireBaseUrl).catch(function(error) {
-                  console.log("Error: " + error.message);
+                console.log("Error: " + error.message);
                 });
               });
           } catch (e) {
-            console.log(e);
+            //console.log(e);
             alert(e.message);
           }
         }

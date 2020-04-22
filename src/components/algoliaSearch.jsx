@@ -9,8 +9,10 @@ function AlgoliaSearch(props) {
     var searchString;
     var sortOption;
     var QuestionsString = "Questions similar to yours";
+    var showDelete = false;
     if(props.sortOption === "user") {
       searchString = props.userSearchString;
+      showDelete = true;
       sortOption = "user";
       QuestionsString = "Your Asked Questions:"
     } else {
@@ -44,7 +46,7 @@ function AlgoliaSearch(props) {
         ) : (
           <div>
           <h3>{QuestionsString}</h3>
-          {<SortCards result={result} sortOption={props.sortOption}/>}
+          {<SortCards result={result} isAuthed={props.isAuthed} sortOption={props.sortOption} showDelete={showDelete}/>}
           </div>
         )}
       </div>
@@ -68,7 +70,8 @@ function AlgoliaSearch(props) {
       // body={item.Body} rating={item} creationDate={item.creationDate}
       // tags={item.Tags} userId={item.UserID} userDisplayName={item.UserDisplayName}
       // userPhoto={item.UserPhoto} handleRateUpdate={handleRateUpdate} comments={item.Comments}/>
-      return <QCards key={item.objectID}  cardInfo={item} handleRateUpdate={handleRateUpdate} />
+      return <QCards key={item.objectID}  isAuthed={props.isAuthed} cardInfo={item} handleRateUpdate={handleRateUpdate} 
+      showDelete={props.showDelete}/>
     });
 
     return cards;
@@ -109,7 +112,7 @@ function useAsyncHook(searchHits, sortOption) {
           'Tags', 'UserID', 'objectID', 'UserDisplayName', 'UserPhoto', 'Comments'],
           hitsPerPage: 10,
         }).then(({ hits }) => {
-          console.log(hits);
+          //console.log(hits);
           return hits;
         });
 

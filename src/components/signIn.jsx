@@ -42,7 +42,7 @@ function SignIn(props){
         <div className="container mx-auto text-center pop-up">
             <link href="https://fonts.googleapis.com/css?family=Varela+Round&display=swap" rel="stylesheet"></link>
             <h2 className="title">Sign-In</h2>
-            <form onSubmit={ (e) => {doSignIn().then(function(display) {console.log("Signed in with name: " + display)}); e.preventDefault();}}>
+            <form onSubmit={ (e) => {doSignIn().then(function(display) {}); e.preventDefault();}}>
                 <div className="form-group row">
                     <input className="form-control input-medium"
                         id="inputEmailIn"

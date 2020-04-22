@@ -36,7 +36,7 @@ export async function initializeUser(user, permission, displayName)
             });
         }).then(function() {
             return getUserInfo().then(function (result) {
-                console.log(result);
+                //console.log(result);
                 return result["displayName"];
             });
         }).catch(function (error) {
@@ -53,6 +53,10 @@ export async function updateDisplayName(newName)
     })
 }
 
+export function getUser(){
+    return firebase.auth().currentUser;
+}
+
 export async function updatePhotoUrl(newURL) {
     let user = firebase.auth().currentUser;
     return await firebase.database().ref('users/' + user.uid).update({
@@ -62,8 +66,8 @@ export async function updatePhotoUrl(newURL) {
             photoURL: newURL
         })
     }).catch(function(error) {
-        console.log(error.code);
-        console.log(error.message);
+        //console.log(error.code);
+        //console.log(error.message);
         alert("Error updating user's photo");
     });
 }
@@ -76,8 +80,8 @@ export function getPhotoURL(uid){
         }
         return "";
     }).catch(function(error) {
-        console.log(error.code);
-        console.log(error.message);
+        //console.log(error.code);
+        //console.log(error.message);
         alert("Error getting user's photo.");
     });
 }
@@ -88,8 +92,8 @@ export function getUserMetadata(user)
         let info = snapshot.val();
         return info.permissions;
     }).catch(function(error) {
-        console.log(error.code);
-        console.log(error.message);
+        //console.log(error.code);
+        //console.log(error.message);
         alert(error.message);
     });
 }
@@ -99,8 +103,8 @@ export function signOut(props){
         // Sign-out successful.
         props.handleAuthed('');
     }).catch(function(error) {
-        console.log(error.code);
-        console.log(error.message);
+        //console.log(error.code);
+        //console.log(error.message);
         alert("Error sigining out.");
     });
 }
@@ -134,6 +138,15 @@ export function updateQuestion(q_id, title, body, tagList) {
     return firebase.database().ref("Questions/" + q_id + "/").update(postData);
 }
 
+export function deleteQuestion(q_id){
+    return firebase.database().ref("Questions/" + q_id + "/").remove();
+}
+
+export function deleteComment(q_id, c_id){
+    //console.log("Questions/" + q_id + "/" + c_id + "/");
+    return firebase.database().ref("Questions/" + q_id + "/Comments/" + c_id + "/").remove();
+}
+
 export function addComment(q_id, body) {
     const user = firebase.auth().currentUser;
 
@@ -143,7 +156,7 @@ export function addComment(q_id, body) {
         Body: body,
         creationDate: Math.round((new Date()).getTime() / 1000),
     };
-    console.log(postData);
+    //console.log(postData);
 
     const newPostKey = firebase.database().ref().child('Questions/' + q_id + '/Comments/').push().key;
 
@@ -233,8 +246,8 @@ export async function updateRating( q_id, voteDir)
             UpVotes: current_upvotes_list,
             DownVotes: current_downvotes_list,
         }).catch(function (error) {
-            console.log(error.code);
-            console.log(error.message);
+            //console.log(error.code);
+            //console.log(error.message);
             alert("Error loading results");
         });
         return {Rating: rating, Color: color, isUp: isUp, isDown: isDown};
@@ -262,9 +275,7 @@ export function getRatingInfo(q_id)
             }
         }
         return {Rating: rating, color: color, isUp: isUp, isDown: isDown};
-    }).catch(function (error) {
-        alert("Error loading rating system.");
-    })
+     })
 }
 
 export function getRating(q_id)
