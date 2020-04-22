@@ -119,7 +119,9 @@ function QuestionCards(props) {
 
   function removeQuestion()
   {
-    deleteQuestion(q_id).catch(function(error) {
+    deleteQuestion(q_id).then(function() {
+      alert("Question deleted, please refresh page.");
+    }).catch(function(error) {
       alert("Error with deleting question: " + error.message);
     });
   }
