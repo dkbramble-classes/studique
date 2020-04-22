@@ -45,7 +45,7 @@ function SignUp (props){
         let signed_up = Promise.resolve(null);
         if (userPassword.length < 6)
         {
-            console.log("Password must be 6 characters long.")
+            //console.log("Password must be 6 characters long.")
             alert("Password must be atleast 6 characters long. ");
         }
         else if (userEmail.indexOf("@mail.gvsu.edu") !== -1 || userEmail.indexOf("@gvsu.edu") !== -1) {
@@ -66,7 +66,7 @@ function SignUp (props){
         return (
             <div className="container mx-auto text-center pop-up">
                 <h2 className="title">Sign-Up</h2>
-                <form onSubmit={(e) => {doSignUp().then(function(display) {console.log("Signed in with name: " + display)}); e.preventDefault();}}>
+                <form onSubmit={(e) => {doSignUp().then(function(display) {}); e.preventDefault();}}>
                     <div className="form-group row">
                         <input className="form-control input-medium" id="inputDisplayUp" type="text"
                             value={

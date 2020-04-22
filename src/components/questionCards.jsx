@@ -156,7 +156,7 @@ function QuestionCards(props) {
     else
     {
       addComment(q_id, bodyInput).then(function () {
-        console.log("Comment successfully added to question " + q_id);
+        //console.log("Comment successfully added to question " + q_id);
         setTimeout(() => {
           window.location.reload(false)
         }, 2500);

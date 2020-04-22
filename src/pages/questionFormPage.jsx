@@ -49,7 +49,7 @@ function QuestionForm()
   function createQuestionCard(){
     if(titleInput === "" || bodyInput === "")
     {
-      console.log("Please Enter a Title and Body for your question")
+      //console.log("Please Enter a Title and Body for your question")
       alert("Please Enter a Title and Body for your question");
     }
     else {
@@ -57,13 +57,13 @@ function QuestionForm()
       const tagList = tagsInput.split(',');
       createQuestion(titleInput, bodyInput, tagList).then(function () {
         setLoad(true);
-        console.log("Q-Card creation successful");
+        //console.log("Q-Card creation successful");
         setTimeout(() => {
           window.location.reload(false)
         }, 2500);
       }).catch(function(error) {
-        console.log(error.code);
-        console.log(error.message);
+        //console.log(error.code);
+        //console.log(error.message);
         alert(error.message);
       });
     }

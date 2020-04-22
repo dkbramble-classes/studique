@@ -17,7 +17,7 @@ const algoliaClient = algoliasearch('2OXOHVVBM2', 'b8769b9a1270565298eb7e51af306
 const searchClient = {
   search(requests) {
     const newRequests = requests.map((request)=>{
-      console.log(request);
+      //console.log(request);
       // test for empty string and change request parameter: analytics
       if(!request.params.query || request.params.query.length===0) {
         request.params.analytics=false
