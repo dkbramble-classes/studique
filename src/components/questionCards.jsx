@@ -155,7 +155,6 @@ function QuestionCards(props) {
     {
       addComment(q_id, bodyInput).then(function () {
         console.log("Comment successfully added to question " + q_id);
-        alert("This comment was successfully added. Please refresh page to view.");
       }).catch(function(error) {
         alert("There was an error creating this comment. Please refresh and try again.")
         console.log(error.code);
@@ -201,7 +200,7 @@ function QuestionCards(props) {
     if(props.cardInfo.Comments !== undefined) {
       comments = Object.entries(props.cardInfo.Comments).map(([key, value])=>{
         return <Comments uid={value.uid} DisplayName={value.DisplayName} Body={value.Body}
-                         qid={props.cardInfo.objectID} cid={key} showDelete={props.showDelete}/>
+                         qid={props.cardInfo.objectID} key={key} showDelete={props.showDelete}/>
       });
     }
     
@@ -225,7 +224,10 @@ function QuestionCards(props) {
               onChange={handleBodyInput}
             />
           </form>
-          <form onSubmit={(e) => {postComment(); e.preventDefault();}}>
+          <form onSubmit={(e) => {e.preventDefault(); postComment();
+            setTimeout(() => {
+              window.location.reload(false)
+            }, 3500);}}>
             <button type="submit" id={"questionCardCommentButton"} className="text-font qcardSubmitButton" >
               SUBMIT
             </button>

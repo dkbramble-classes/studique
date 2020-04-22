@@ -24,7 +24,7 @@ function Comments(props){
 
     function removeComment()
     {
-        deleteComment(props.qid, props.cid).then(function() {
+        deleteComment(props.qid, props.key).then(function() {
             alert("Comment deleted, please refresh page.");
         }).catch(function(error) {
             alert("Error with deleting comment: " + error.message);
