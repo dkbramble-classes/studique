@@ -129,7 +129,8 @@ function QuestionForm()
         <form onSubmit={(e) => {createQuestionCard(); e.preventDefault();
           setTimeout(() => {
             window.location.reload(false)
-          }, 3500);}}>
+          }, 1500);
+        }}>
           <button type="submit" id='qFormSubmit' disabled={isDisabled} className="text-font qFormButton mb-2" >
             SUBMIT QUESTION
           </button>

@@ -227,7 +227,7 @@ function QuestionCards(props) {
           <form onSubmit={(e) => {e.preventDefault(); postComment();
             setTimeout(() => {
               window.location.reload(false)
-            }, 3500);}}>
+            }, 1500);}}>
             <button type="submit" id={"questionCardCommentButton"} className="text-font qcardSubmitButton" >
               SUBMIT
             </button>
