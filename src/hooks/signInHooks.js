@@ -11,8 +11,8 @@ export async function signInFirebase(email, password, setAuthed, setName, setTyp
         current_display_name = user.displayName;
         return current_display_name;   
     }).catch(function(error) {
-        console.log(error.code + ": " + email);
-        console.log(error.message);
+        //console.log(error.code + ": " + email);
+        //console.log(error.message);
         alert("There was an issue signing you in. Please try again.");
     });
 

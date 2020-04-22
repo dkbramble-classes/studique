@@ -33,7 +33,7 @@ function Comments(props){
         });
     }
 
-    if(props.uid == getUser().uid && props.showDelete){
+    if(props.uid === getUser().uid && props.showDelete){
         deleteButton = <button className="btn btn-vote ml-1 commentDeleteButton" onClick={removeComment}><DeleteButton /></button>
     }
 

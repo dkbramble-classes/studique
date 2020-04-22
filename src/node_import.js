@@ -40,10 +40,10 @@ database.ref('/Questions').once('value', contacts => {
   index
     .saveObjects(records)
     .then(() => {
-      console.log('Questions imported into Algolia');
+      //console.log('Questions imported into Algolia');
     })
     .catch(error => {
-      console.error('Error when importing Questions into Algolia', error);
+      //console.error('Error when importing Questions into Algolia', error);
       process.exit(1);
     });
 });
