@@ -120,7 +120,9 @@ function QuestionCards(props) {
   function removeQuestion()
   {
     deleteQuestion(q_id).then(function() {
-      alert("Question deleted, please refresh page.");
+      setTimeout(() => {
+        window.location.reload(false)
+      }, 1500);
     }).catch(function(error) {
       alert("Error with deleting question: " + error.message);
     });
@@ -200,7 +202,7 @@ function QuestionCards(props) {
     if(props.cardInfo.Comments !== undefined) {
       comments = Object.entries(props.cardInfo.Comments).map(([key, value])=>{
         return <Comments uid={value.uid} DisplayName={value.DisplayName} Body={value.Body}
-                         qid={props.cardInfo.objectID} key={key} showDelete={props.showDelete}/>
+                         qid={props.cardInfo.objectID} cid={key} showDelete={props.showDelete}/>
       });
     }
     
