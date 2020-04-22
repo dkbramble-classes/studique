@@ -40,7 +40,7 @@ export async function initializeUser(user, permission, displayName)
                 return result["displayName"];
             });
         }).catch(function (error) {
-            //console.log("Error getting user's name.")
+            console.log("Error getting user's name.")
         });
     }
 }

@@ -58,7 +58,7 @@ function QuestionCards(props) {
       updateUpVotable(state.isUp);
       updateDownVotable(state.isDown);
     }).catch(function (error) {
-      //console.log("Error: " + error.message);
+      console.log("Error: " + error.message);
       getRating(q_id).then(function (rating) {
         if (rating !== props.cardInfo.Rating){
           updateCount(rating);
@@ -106,7 +106,7 @@ function QuestionCards(props) {
         updateColor(colors[info.Color]);
         updateUpVotable(info.isUp);
       }).catch(function (error) {
-       // console.log("Error: " + error.message);
+        console.log("Error: " + error.message);
         getRating(q_id).then(function (rating) {
           if (rating !== props.cardInfo.Rating){
             updateCount(rating);
@@ -138,8 +138,8 @@ function QuestionCards(props) {
         updateQuestionPhoto(url);
       }
     }).catch(function(error) {
-      //console.log(error.code);
-      //console.log(error.message);
+      console.log(error.code);
+      console.log(error.message);
     });
   }
 
@@ -162,8 +162,8 @@ function QuestionCards(props) {
         }, 2500);
       }).catch(function(error) {
         alert("There was an error creating this comment. Please refresh and try again.")
-        //console.log(error.code);
-        //console.log(error.message);
+        console.log(error.code);
+        console.log(error.message);
       });;
     }
   }

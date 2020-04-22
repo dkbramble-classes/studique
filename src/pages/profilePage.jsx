@@ -69,7 +69,7 @@ function Profile(props) {
                 window.location.reload(false)
               }, 2500);
             }).catch(function(error) {
-              //console.log("Error: " + error.message);
+              console.log("Error: " + error.message);
             }).catch(function (error){
               alert(error.message);
             });
@@ -102,7 +102,7 @@ function Profile(props) {
                   setProfileImageURL(fireBaseUrl);
                 }
                 updatePhotoUrl(fireBaseUrl).catch(function(error) {
-                  //console.log("Error: " + error.message);
+                console.log("Error: " + error.message);
                 });
               });
           } catch (e) {
