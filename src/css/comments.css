@@ -5,3 +5,10 @@
 .commentProfile {
     padding-top: 10px;
 }
+
+.commentDeleteButton{
+    float: right;
+    position: relative;
+    padding-right: 100px;
+    top: 0px;
+}

@@ -119,7 +119,11 @@ function QuestionCards(props) {
 
   function removeQuestion()
   {
-    deleteQuestion(q_id).catch(function(error) {
+    deleteQuestion(q_id).then(function() {
+      setTimeout(() => {
+        window.location.reload(false)
+      }, 2500);
+    }).catch(function(error) {
       alert("Error with deleting question: " + error.message);
     });
   }
@@ -153,7 +157,9 @@ function QuestionCards(props) {
     {
       addComment(q_id, bodyInput).then(function () {
         console.log("Comment successfully added to question " + q_id);
-        alert("This comment was successfully added. Please refresh page to view.");
+        setTimeout(() => {
+          window.location.reload(false)
+        }, 2500);
       }).catch(function(error) {
         alert("There was an error creating this comment. Please refresh and try again.")
         console.log(error.code);
@@ -198,7 +204,8 @@ function QuestionCards(props) {
     //have to do comments
     if(props.cardInfo.Comments !== undefined) {
       comments = Object.entries(props.cardInfo.Comments).map(([key, value])=>{
-        return <Comments uid={value.uid} DisplayName={value.DisplayName} Body={value.Body}/>
+        return <Comments uid={value.uid} DisplayName={value.DisplayName} Body={value.Body}
+                         qid={props.cardInfo.objectID} cid={key} showDelete={props.showDelete}/>
       });
     }
     
@@ -222,7 +229,7 @@ function QuestionCards(props) {
               onChange={handleBodyInput}
             />
           </form>
-          <form onSubmit={(e) => {postComment(); e.preventDefault();}}>
+          <form onSubmit={(e) => {e.preventDefault(); postComment();}}>
             <button type="submit" id={"questionCardCommentButton"} className="text-font qcardSubmitButton" >
               SUBMIT
             </button>
